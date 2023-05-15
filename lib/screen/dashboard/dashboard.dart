@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print, empty_catches, use_build_context_synchronously, depend_on_referenced_packages
 
 import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/screen/dashboard/tabs/category/category_tab.dart';
+import 'package:abico_warehouse/screen/dashboard/tabs/category_tab.dart';
 import 'package:abico_warehouse/screen/dashboard/tabs/settings_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -16,7 +16,7 @@ class ApiUtility {
   /* ============================================================================ */
   /* ============================================================================ */
   static Future<AuthResponseDto> getToken(
-      {String login, String db, String password, String ip}) async {
+      {String login, String password, String ip}) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
     String url = 'http://$ip/api/auth/get_tokens';

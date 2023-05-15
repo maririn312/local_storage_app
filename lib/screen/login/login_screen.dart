@@ -239,17 +239,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.w700)),
                 ),
                 onPressed: () async => {
-                      if (_validateForm())
-                        {
-                          _authBloc.add(AuthUser(
-                              ip: _ipController.text,
-                              login: _nameController.text,
-                              password: _passwordController.text)),
-                          await DBProvider.db.newUserDetail(UserDetailEntity(
-                              ip: _ipController.text,
-                              username: _nameController.text,
-                              password: _passwordController.text))
-                        },
+                      // if (_validateForm())
+                      //   {
+                      _authBloc.add(AuthUser(
+                          ip: _ipController.text,
+                          login: _nameController.text,
+                          password: _passwordController.text)),
+                      // await DBProvider.db.newUserDetail(UserDetailEntity(
+                      //     ip: _ipController.text,
+                      //     username: _nameController.text,
+                      //     password: _passwordController.text))
+                      // },
                       _saveCredentials()
                     })),
       ]),
@@ -259,16 +259,16 @@ class _LoginScreenState extends State<LoginScreen> {
   /* ================================================================================== */
   /* ================================================================================== */
 
-  bool _validateForm() {
-    if (TengerUtility.nameRegExp != null) {
-      setState(() {
-        _ipError = null;
-      });
-    } else {
-      setState(() {
-        _ipError = Language.ERROR_IP;
-      });
-    }
-    return false;
-  }
+  // bool _validateForm() {
+  //   if (TengerUtility.nameRegExp != null) {
+  //     setState(() {
+  //       _ipError = null;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       _ipError = Language.ERROR_IP;
+  //     });
+  //   }
+  //   return false;
+  // }
 }

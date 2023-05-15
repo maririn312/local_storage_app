@@ -14,7 +14,7 @@ class AuthApiClient {
   /* ============================================================================ */
   /* ============================================================================ */
   Future<AuthResponseDto> confirm(
-      {String login, String db, String password, String ip}) async {
+      {String login, String password, String ip}) async {
     http.Response response;
 
     String url = 'http://$ip/api/auth/get_tokens';
