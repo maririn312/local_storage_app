@@ -15,14 +15,10 @@ import 'package:abico_warehouse/models/dto/category/category_response_dto.dart';
 abstract class CategoryEvent extends Equatable {}
 
 class CategoryList extends CategoryEvent {
-  final String ip;
-
-  CategoryList({this.ip});
+  CategoryList();
 
   @override
-  List<Object> get props => [
-        ip,
-      ];
+  List<Object> get props => [];
 }
 
 class CategoryParentId extends CategoryEvent {
@@ -78,7 +74,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       yield CategoryListLoading();
       try {
         CategoryResponseDto responseDto =
-            await categoryRepository.getCategoryList(event.ip);
+            await categoryRepository.getCategoryList();
         yield CategoryListLoaded(categoryResult: responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

@@ -108,10 +108,8 @@ class _SettingsTabState extends State<SettingsTab> {
     setState(() {
       ip = '203.91.116.148';
     });
-    _categoryBloc.add(CategoryList(
-      ip: ip,
-    ));
-    _subCategoryBloc.add(SubCategoryList(ip: ip));
+    _categoryBloc.add(CategoryList());
+    _subCategoryBloc.add(SubCategoryList());
   }
 
   downloadStockPicking() {

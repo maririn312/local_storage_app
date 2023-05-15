@@ -3,13 +3,20 @@
 import 'dart:convert';
 
 import 'package:abico_warehouse/app_types.dart';
+import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
+import 'package:abico_warehouse/data/blocs/category/category_bloc.dart';
+import 'package:abico_warehouse/data/blocs/category/sub_category_bloc.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
+import 'package:abico_warehouse/models/dto/category/category_response_dto.dart';
+import 'package:abico_warehouse/models/dto/category/sub_category_response_dto.dart';
 import 'package:abico_warehouse/models/entity/category_entity/sub_category_entity.dart';
 import 'package:abico_warehouse/models/screen%20args/product_product_args.dart';
 import 'package:abico_warehouse/models/screen%20args/sub_category_args.dart';
 import 'package:abico_warehouse/utils/tenger_global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../models/entity/category_entity/category_entity.dart';
 
 class CategoryTab extends StatefulWidget {
   @override
@@ -19,14 +26,16 @@ class CategoryTab extends StatefulWidget {
 }
 
 class _CategoryTabState extends State<CategoryTab> {
-  List<SubCategoryEntity> subCategoryData = [];
-  List<SubCategoryEntity> category = [];
+  List<CategoryResult> categories = [];
+  List<SubCategoryResult> subCategories = [];
+  final CategoryBloc _categoryBloc = CategoryBloc();
+  final SubCategoryBloc _subCategoryBloc = SubCategoryBloc();
 
   /* ================================================================================== */
   /* ================================================================================== */
   @override
   void initState() {
-    getSubCategory();
+    getCategories();
   }
 
   /* ================================================================================== */
@@ -37,12 +46,17 @@ class _CategoryTabState extends State<CategoryTab> {
   }
 
 //sub category medeelel tatj bga hesg db gees
-  getSubCategory() async {
-    List<SubCategoryEntity> subCategories =
-        await DBProvider.db.getSubCategories();
-    setState(() {
-      subCategoryData.addAll(subCategories);
-    });
+  // getSubCategory() async {
+  //   List<SubCategoryEntity> subCategories =
+  //       await DBProvider.db.getSubCategories();
+  //   setState(() {
+  //     subCategoryData.addAll(subCategories);
+  //   });
+  // }
+
+  getCategories() async {
+    _categoryBloc.add(CategoryList());
+    _subCategoryBloc.add(SubCategoryList());
   }
 
   /* ================================================================================== */
@@ -68,41 +82,132 @@ class _CategoryTabState extends State<CategoryTab> {
 
 //ui icon text hargdj bga funtion
   Widget _buildCategories() {
-    final SubCategoryArg subCategArg =
-        ModalRoute.of(context).settings.arguments;
-    if (category.isEmpty) {
-      for (int i = 0; i < subCategoryData.length; i++) {
-        if (subCategArg.categoryEntity.id == subCategoryData[i].parentId) {
-          category.add(subCategoryData[i]);
-        }
-      }
-    } else {}
+    // final SubCategoryArg subCategArg =
+    //     ModalRoute.of(context).settings.arguments;
+    // if (category.isEmpty) {
+    //   for (int i = 0; i < subCategoryData.length; i++) {
+    //     // if (subCategArg.categoryEntity.id == subCategoryData[i].parentId) {
+    //     //   category.add(subCategoryData[i]);
+    //     // }
+    //   }
+    // } else {}
+    // return Container(
+    //   height: MediaQuery.of(context).size.height,
+    //   child: BlocListener<CategoryBloc, CategoryState>(
+    //     bloc: _categoryBloc,
+    //     listener: (context, state) {
+    //       if (state is CategoryListEmpty) {
+    //         // Handle CategoryListEmpty state
+    //       } else if (state is CategoryListLoading) {
+    //         // Handle CategoryListLoading state
+    //       } else if (state is CategoryListLoaded) {
+    //         final categoryResults = state.categoryResult;
+    //         final categories = categoryResults
+    //             .map((result) =>
+    //                 CategoryEntity.fromMap(result as Map<String, dynamic>))
+    //             .toList();
+
+    //         // Handle CategoryListLoaded state
+    //       }
+    //     },
+    //     child: BlocListener<SubCategoryBloc, SubCategoryState>(
+    //       bloc: _subCategoryBloc,
+    //       listener: (context, state) {
+    //         if (state is SubCategoryListEmpty) {
+    //           // Handle SubCategoryListEmpty state
+    //         } else if (state is SubCategoryListLoading) {
+    //           // Handle SubCategoryListLoading state
+    //         } else if (state is SubCategoryListLoaded) {
+    //           final subCategoryResults = state.subCategoryResult;
+    //           final subCategories = subCategoryResults
+    //               .map((result) =>
+    //                   SubCategoryEntity.fromMap(result as Map<String, dynamic>))
+    //               .toList();
+
+    //           // Handle SubCategoryListLoaded state
+    //         }
+    //       },
+    //       child: GridView.builder(
+    //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    //           crossAxisCount: 1,
+    //           childAspectRatio: 1.9 / 0.5,
+    //         ),
+    //         itemCount: categories.length,
+    //         itemBuilder: (_, index) {
+    //           final category = categories[index];
+    //           final subCategory = subCategories[index];
+    //           return _buildFeaturedCard(
+    //             title: category.name,
+    //             image: category.icon,
+    //             subCategoryEntity: subCategories,
+    //           );
+    //         },
+    //       ),
+    //     ),
+    //   ),
+    // );
+
     return Container(
-      height: MediaQuery.of(context).size.height,
-      child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1, childAspectRatio: 1.9 / 0.5),
-          itemCount: category.length,
-          itemBuilder: (_, index) {
-            print('end urt irnee ${category.length}');
-            return _buildFeaturedCard(
-                title: category[index].name.toString(),
-                image:
-                    category[index].icon == false ? '' : category[index].icon,
-                subCategoryEntity: category[index]);
-          }),
-    );
+        height: MediaQuery.of(context).size.height,
+        child: BlocListener<CategoryBloc, CategoryState>(
+          bloc: _categoryBloc,
+          listener: (context, state) {
+            if (state is CategoryListEmpty) {
+              // Handle CategoryListEmpty state
+            } else if (state is CategoryListLoading) {
+              // Handle CategoryListLoading state
+            } else if (state is CategoryListLoaded) {
+              categories.add(state.categoryResult as CategoryResult);
+
+              // Handle CategoryListLoaded state
+            }
+          },
+          child: BlocListener<SubCategoryBloc, SubCategoryState>(
+            bloc: _subCategoryBloc,
+            listener: (context, state) {
+              if (state is SubCategoryListEmpty) {
+                // Handle SubCategoryListEmpty state
+              } else if (state is SubCategoryListLoading) {
+                // Handle SubCategoryListLoading state
+              } else if (state is SubCategoryListLoaded) {
+                subCategories.add(state.subCategoryResult as SubCategoryResult);
+                // Handle SubCategoryListLoaded state
+              }
+            },
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                childAspectRatio: 1.9 / 0.5,
+              ),
+              itemCount: categories
+                  .length, // Replace with the actual category result list length
+              itemBuilder: (_, index) {
+                final category = categories[
+                    index]; // Replace with the actual category object
+                // Use the category and subcategory data as needed
+                final sub = subCategories[index];
+                return _buildFeaturedCard(
+                  title: category.name,
+                  image: category.icon,
+                );
+              },
+            ),
+          ),
+        ));
   }
 
   /* ================================================================================== */
   /* ================================================================================== */
   //class name n tengerglobal tai tengtsuu bvl tuhain screen ruu oruulj bga function
-  Widget _buildFeaturedCard(
-      {String title, String image, SubCategoryEntity subCategoryEntity}) {
+  Widget _buildFeaturedCard({
+    String title,
+    String image,
+    SubCategoryEntity subCategoryEntity,
+  }) {
     double size = MediaQuery.of(context).size.height / 11.5; //5;
 
-    final SubCategoryArg subCategoryArg =
-        ModalRoute.of(context).settings.arguments;
+    // final SubCategoryArg subCategoryArg =
+    //     ModalRoute.of(context).settings.arguments;
     return GestureDetector(
       onTap: () {
         if (subCategoryEntity.className == TengerGlobal.LABEL_STOCK_PICKING) {
@@ -115,8 +220,8 @@ class _CategoryTabState extends State<CategoryTab> {
           print(
               ' subCategory ${subCategoryEntity.className} : ${TengerGlobal.LABEL_PRODUCT_PRODUCT}');
 
-          Navigator.pushNamed(context, AppTypes.SCREEN_PRODUCT_REGISTER,
-              arguments: ProductProductArgs(subCategoryArg.ip));
+          // Navigator.pushNamed(context, AppTypes.SCREEN_PRODUCT_REGISTER,
+          //     arguments: ProductProductArgs(subCategoryEntit.ip));
         }
         if (subCategoryEntity.className == TengerGlobal.LABEL_STOCK_INVENTORY) {
           print(

@@ -12,16 +12,10 @@ import 'package:abico_warehouse/models/dto/category/sub_category_response_dto.da
 abstract class SubCategoryEvent extends Equatable {}
 
 class SubCategoryList extends SubCategoryEvent {
-  final String ip;
-
-  SubCategoryList({
-    this.ip,
-  });
+  SubCategoryList();
 
   @override
-  List<Object> get props => [
-        ip,
-      ];
+  List<Object> get props => [];
 }
 
 // ====================== SUB CATEGORY STATE ========================= //
@@ -68,9 +62,7 @@ class SubCategoryBloc extends Bloc<SubCategoryEvent, SubCategoryState> {
       yield SubCategoryListLoading();
       try {
         SubCategoryResponseDto responseDto =
-            await subCategoryRepository.getSubCategoryList(
-          ip: event.ip,
-        );
+            await subCategoryRepository.getSubCategoryList();
         yield SubCategoryListLoaded(subCategoryResult: responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);
