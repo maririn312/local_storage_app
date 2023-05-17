@@ -23,7 +23,7 @@ class HrApiClient {
 
     int a = int.parse(uid);
     String url =
-        'http://${userDetailEntity.ip}/api/hr.employee?filters=[["user_id","=", $a]]';
+        'http://${user.ip}/api/hr.employee?filters=[["user_id","=", ${user.uid}]]';
 
     print('uid hed irj bn hary $uid');
     print(' url :  $url ');

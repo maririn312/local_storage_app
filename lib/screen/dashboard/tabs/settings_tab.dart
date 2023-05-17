@@ -35,26 +35,7 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  final CategoryBloc _categoryBloc = CategoryBloc();
-  final SubCategoryBloc _subCategoryBloc = SubCategoryBloc();
-
-  final StockPickingListBloc _stockPickingBloc = StockPickingListBloc();
-  final StockPickingLineListBloc _stockPickingLineBloc =
-      StockPickingLineListBloc();
-  final StockMoveLineListBloc _stockMoveLineBloc = StockMoveLineListBloc();
   final HrListBloc _hrListBloc = HrListBloc();
-  final StockPickingTypeListBloc _stockPickingTypeBloc =
-      StockPickingTypeListBloc();
-  final PartnerBloc _partnerBloc = PartnerBloc();
-  final StockLocationBloc _stockLocationBloc = StockLocationBloc();
-  final StockProductRegisterListBloc _productRegisterListBloc =
-      StockProductRegisterListBloc();
-  final StockMeasureBloc _stockMeasureBloc = StockMeasureBloc();
-  final ResUserBloc _resUserBloc = ResUserBloc();
-  final StockInventoryListBloc _inventoryListBloc = StockInventoryListBloc();
-  final StockInventoryLineListBloc _inventoryLineListBloc =
-      StockInventoryLineListBloc();
-  final ResCompanyListBloc _resCompanyListBloc = ResCompanyListBloc();
   String ip;
   String _sessionId;
   int _patentId;
@@ -68,7 +49,6 @@ class _SettingsTabState extends State<SettingsTab> {
   // ignore: must_call_super
   void initState() {
     _getHr();
-    getUser();
   }
 
   /* ================================================================================== */
@@ -88,76 +68,6 @@ class _SettingsTabState extends State<SettingsTab> {
         uid: user.uid.toString(),
       ));
     });
-  }
-
-  getUser() async {
-    UserEntity user = await DBProvider.db.getUser();
-    setState(() {
-      UserData = user;
-    });
-  }
-
-  Future<String> getCompanyName(int id) async {
-    final DBProvider databaseService = DBProvider();
-    final company = await databaseService.companyName(id);
-    return company.name;
-  }
-
-  downloadCategory() {
-    // final AuthArgs authArg = ModalRoute.of(context).settings.arguments;
-    setState(() {
-      ip = '203.91.116.148';
-    });
-    _categoryBloc.add(CategoryList());
-    _subCategoryBloc.add(SubCategoryList());
-  }
-
-  downloadStockPicking() {
-    _stockPickingBloc.add(StockPicking(ip: ip));
-  }
-
-  downloadStockPickingLine() {
-    _stockPickingLineBloc.add(StockPickingLine(ip: ip));
-  }
-
-  downloadStockMoveingLine() {
-    _stockMoveLineBloc.add(StockMoveLine(ip: ip));
-  }
-
-  downloadStockPickingType() {
-    _stockPickingTypeBloc.add(StockPickingType(ip: ip));
-  }
-
-  downloadpartner() {
-    _partnerBloc.add(PartnerList(ip: ip));
-  }
-
-  downloadStockLocation() {
-    _stockLocationBloc.add(StockLocation(ip: ip));
-  }
-
-  downloadProduct() {
-    _productRegisterListBloc.add(StockProductRegister(ip: ip));
-  }
-
-  downloadMeasure() {
-    _stockMeasureBloc.add(StockMeasure(ip: ip));
-  }
-
-  downloadUser() {
-    _resUserBloc.add(ResUserList(ip: ip));
-  }
-
-  downloadInventory() {
-    _inventoryListBloc.add(StockInventory(ip: ip));
-  }
-
-  downloadInventoryLine() {
-    _inventoryLineListBloc.add(StockInventoryLine(ip: ip));
-  }
-
-  downloadResCompany() {
-    _resCompanyListBloc.add(ResCompany(ip: ip));
   }
 
   /* ================================================================================== */
@@ -249,17 +159,16 @@ class _SettingsTabState extends State<SettingsTab> {
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              _buildContainer(
-                                Icons.add_home_work,
-                                const Text(
-                                  'Компани',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                _buildLeftRelacion(getCompanyName(
-                                    state.resultHr.first.companyId ?? 'null')),
-                              ),
+                              // _buildContainer(
+                              //   Icons.add_home_work,
+                              //   const Text(
+                              //     'Компани',
+                              //     style: TextStyle(
+                              //         fontSize: 16,
+                              //         fontWeight: FontWeight.bold),
+                              //   ),
+                              //   _buildLeftRelacion(),
+                              // ),
                               _buildContainer(
                                 Icons.phone,
                                 const Text(
@@ -318,7 +227,6 @@ class _SettingsTabState extends State<SettingsTab> {
                 );
               },
             ),
-            _buildAccountSettings(),
           ],
         ),
       ),
@@ -378,250 +286,6 @@ class _SettingsTabState extends State<SettingsTab> {
 
   /* ================================================================================== */
   /* ================================================================================== */
-
-  Widget _buildAccountSettings() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          color: Theme.of(context).colorScheme.surface,
-          border: Border.all(color: const Color(0xffefeff4), width: 1)),
-      // margin: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: [
-          //_eleveted(),
-          _buildButton()
-        ],
-      ),
-    );
-  }
-
-  /* ================================================================================== */
-  /* ================================================================================== */
-
-  Widget _buildButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(228, 4, 38, 150),
-                  Color.fromARGB(206, 9, 104, 160),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () async {
-              await downloadCategory();
-              await downloadStockPicking();
-              await downloadStockPickingLine();
-              await downloadStockMoveingLine();
-              await downloadStockPickingType();
-              await downloadpartner();
-              await downloadStockLocation();
-              await downloadProduct();
-              await downloadMeasure();
-              await downloadUser();
-              await downloadInventory();
-              await downloadResCompany();
-              await downloadInventoryLine();
-              ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                    duration: Duration(minutes: 4),
-                    content: Text(
-                      'Өгөгдөл татаж байна',
-                      textAlign: TextAlign.center,
-                    )));
-            },
-            child: const Text(
-              'Өгөгдөл татах',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(228, 4, 38, 150),
-                  Color.fromARGB(206, 9, 104, 160),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {
-              downloadStockPicking();
-              downloadStockPickingLine();
-              downloadStockMoveingLine();
-              downloadStockPickingType();
-              ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                    duration: Duration(minutes: 1),
-                    content: Text(
-                      'Өгөгдөл татаж байна',
-                      textAlign: TextAlign.center,
-                    )));
-            },
-            child: const Text(
-              'Агуулах',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(228, 4, 38, 150),
-                  Color.fromARGB(206, 9, 104, 160),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {
-              downloadInventory();
-              downloadResCompany();
-              downloadInventoryLine();
-              ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                    duration: Duration(minutes: 1),
-                    content: Text(
-                      'Өгөгдөл татаж байна',
-                      textAlign: TextAlign.center,
-                    )));
-            },
-            child: const Text(
-              'Тооллого',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _eleveted() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(228, 4, 38, 150),
-                  Color.fromARGB(206, 9, 104, 160),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            child: const Text('Өгөгдөл татах'),
-            onPressed: () async {
-              // bool allSuccessful = true;
-              await downloadCategory();
-              await downloadStockPicking();
-              await downloadStockPickingLine();
-              await downloadStockMoveingLine();
-              await downloadStockPickingType();
-              await downloadpartner();
-              await downloadStockLocation();
-              await downloadProduct();
-              await downloadMeasure();
-              await downloadUser();
-              await downloadInventory();
-              await downloadResCompany();
-              await downloadInventoryLine();
-              ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                    duration: Duration(minutes: 4),
-                    content: Text(
-                      'Өгөгдөл татаж байна',
-                      textAlign: TextAlign.center,
-                    )));
-            },
-          ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color.fromARGB(228, 4, 38, 150),
-                    Color.fromARGB(206, 9, 104, 160),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(10)),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-              ),
-              child: const Text('Агуулахын хөдөлгөөн татах'),
-              onPressed: () {
-                downloadStockPicking();
-                downloadStockPickingLine();
-                downloadStockMoveingLine();
-                downloadStockPickingType();
-                ScaffoldMessenger.of(context)
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(const SnackBar(
-                      duration: Duration(minutes: 1),
-                      content: Text(
-                        'Өгөгдөл татаж байна',
-                        textAlign: TextAlign.center,
-                      )));
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildContainer(IconData icon, Widget defualtText, Widget state) {
     return Row(
       children: [
