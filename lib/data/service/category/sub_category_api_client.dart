@@ -20,9 +20,8 @@ class SubCategoryApiClient {
   ) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    String url = 'http://${userDetailEntity.ip}/api/mobile.sync.config';
+    String url = 'http://${user.ip}/api/mobile.sync.config';
 
     // String url =
     //     'http://49.0.129.18:9393/api/mobile.sync.config?filters=[["id","=",15]]';

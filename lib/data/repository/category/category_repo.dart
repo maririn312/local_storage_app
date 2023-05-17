@@ -12,7 +12,6 @@ class CategoryRepository {
     print('Category');
     try {
       return categoryApiClient.getCategoryList();
-      // ignore: empty_catches
     } catch (e) {}
   }
 }

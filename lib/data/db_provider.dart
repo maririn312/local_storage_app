@@ -77,7 +77,7 @@ class DBProvider {
 
   Future<void> createUserTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_user (id INTEGER PRIMARY KEY, db TEXT, username TEXT, password TEXT, access_token TEXT, refresh_token TEXT,  uid INTEGER, ip TEXT)
+        CREATE TABLE tenger_user (id INTEGER PRIMARY KEY, db TEXT, ip TEXT , username TEXT, password TEXT, access_token TEXT, refresh_token TEXT,  uid INTEGER, ip TEXT)
     ''');
   }
 

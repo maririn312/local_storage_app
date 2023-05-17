@@ -21,12 +21,9 @@ class CategoryApiClient {
   }) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    // String url =
-    //     'http://${ip}/api/mobile.sync.config?session_id=${AppConst.SESSION}&query=${AppQuery.category_query}';
     String url =
-        'http://${userDetailEntity.ip}/api/mobile.sync.config?filters=[["parent_id", "=", False]]';
+        'http://${user.ip}/api/mobile.sync.config?filters=[["parent_id", "=", False]]';
     print('url category giin  ${url}');
     try {
       response = await http.get(Uri.parse(url), headers: {

@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'exceptions/exception_manager.dart';
+import 'screen/dashboard/tabs/sub_category_screen.dart';
 import 'screen/stock_inventory/stock_inventory_detail_screen.dart';
 import 'screen/stock_inventory/stock_inventory_screen.dart';
 
@@ -89,6 +90,7 @@ class StockInventoryApp extends StatelessWidget {
             routes: {
               AppTypes.SCREEN_HOME: (context) => const DashboardScreen(),
               AppTypes.SCREEN_LOGIN: (context) => const LoginScreen(),
+              AppTypes.SCREEN_SUB: (context) => SubCategoryScreen(),
               AppTypes.SCREEN_STOCK_PICKING: (context) =>
                   const StockPickingScreen(),
               AppTypes.SCREEN_STOCK_PICKING_LINE: (context) =>

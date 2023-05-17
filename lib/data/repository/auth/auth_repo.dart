@@ -26,6 +26,7 @@ class AuthRepository {
       await DBProvider.db.newUser(UserEntity(
         id: 0,
         uid: tokenDto.uid,
+        ip: ip,
         access_token: tokenDto.accessToken,
         refresh_token: tokenDto.refreshToken,
       ));
