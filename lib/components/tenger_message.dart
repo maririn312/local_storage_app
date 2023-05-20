@@ -1,6 +1,3 @@
-// import 'package:abox_mobile/components/component_interfaces/rain_message_interface.dart';
-// ignore_for_file: prefer_if_null_operators, duplicate_ignore
-
 import 'package:abico_warehouse/components/component_interfaces/tenger_message_interface.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +6,14 @@ class TengerMessage extends TengerMessageInterface {
   final double iconSize;
   final EdgeInsets padding;
 
-  // ignore: use_key_in_widget_constructors
   const TengerMessage({
+    Key key,
     this.fontSize = 15,
     this.iconSize = 28,
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-    type = TengerMessageType.warning,
-    @required message,
-  }) : super(type: type, message: message);
+    TengerMessageType type = TengerMessageType.warning,
+    @required String message,
+  }) : super(key: key, type: type, message: message);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +26,7 @@ class TengerMessage extends TengerMessageInterface {
       accentColor = const Color(0xffe6a700);
       iconData = Icons.warning_amber;
     } else if (type == TengerMessageType.success) {
-      // ignore: prefer_const_constructors
-      bgColor = Color(0xffe6f6e6);
+      bgColor = const Color(0xffe6f6e6);
       accentColor = const Color(0xff009400);
       iconData = Icons.check_circle_outline;
     } else if (type == TengerMessageType.error) {
@@ -48,11 +44,9 @@ class TengerMessage extends TengerMessageInterface {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           stops: const [0.015, 0.015],
-          // ignore: duplicate_ignore
           colors: [
             accentColor,
-            // ignore: prefer_if_null_operators
-            backgroundColor == null ? bgColor : backgroundColor
+            backgroundColor ?? bgColor,
           ],
         ),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -62,20 +56,21 @@ class TengerMessage extends TengerMessageInterface {
         children: [
           const SizedBox(width: 4),
           Icon(
-            icon == null ? iconData : icon,
-            color: textColor == null ? accentColor : textColor,
+            icon ?? iconData,
+            color: textColor ?? accentColor,
             size: iconSize,
           ),
           const SizedBox(width: 8),
           Flexible(
-              child: Text(
-            message,
-            style: TextStyle(
-              color: textColor == null ? accentColor : textColor,
-              fontWeight: FontWeight.w500,
-              fontSize: fontSize,
+            child: Text(
+              message,
+              style: TextStyle(
+                color: textColor ?? accentColor,
+                fontWeight: FontWeight.w500,
+                fontSize: fontSize,
+              ),
             ),
-          ))
+          ),
         ],
       ),
     );

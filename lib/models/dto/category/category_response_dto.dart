@@ -5,13 +5,13 @@
 import 'dart:convert';
 
 class CategoryResponseDto {
+  int count;
+  List<CategoryResult> results;
+
   CategoryResponseDto({
     this.count,
     this.results,
   });
-
-  int count;
-  List<CategoryResult> results;
 
   factory CategoryResponseDto.fromRawJson(String str) =>
       CategoryResponseDto.fromJson(json.decode(str));
@@ -21,21 +21,29 @@ class CategoryResponseDto {
   factory CategoryResponseDto.fromJson(Map<String, dynamic> json) =>
       CategoryResponseDto(
         count: json["count"],
-        results: json["results"] == null
-            ? null
-            : List<CategoryResult>.from(
-                json["results"].map((x) => CategoryResult.fromJson(x))),
+        results: List<CategoryResult>.from(
+            json["results"].map((x) => CategoryResult.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "count": count,
-        "results": results == null
-            ? null
-            : List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
       };
 }
 
 class CategoryResult {
+  int companyId;
+  String name;
+  int id;
+  int parentId;
+  String className;
+  String icon;
+  int sequence;
+  String isSendData;
+  bool active;
+  bool isSale;
+  bool isWarehouse;
+
   CategoryResult({
     this.companyId,
     this.name,
@@ -45,16 +53,10 @@ class CategoryResult {
     this.icon,
     this.sequence,
     this.isSendData,
+    this.active,
+    this.isSale,
+    this.isWarehouse,
   });
-
-  int companyId;
-  String name;
-  int id;
-  int parentId;
-  String className;
-  String icon;
-  int sequence;
-  String isSendData;
 
   factory CategoryResult.fromRawJson(String str) =>
       CategoryResult.fromJson(json.decode(str));
@@ -70,6 +72,9 @@ class CategoryResult {
         icon: json["icon"],
         sequence: json["sequence"],
         isSendData: json["is_send_data"],
+        active: json["active"],
+        isSale: json["is_sale"],
+        isWarehouse: json["is_warehouse"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,5 +86,8 @@ class CategoryResult {
         "icon": icon,
         "sequence": sequence,
         "is_send_data": isSendData,
+        "active": active,
+        "is_sale": isSale,
+        "is_warehouse": isWarehouse,
       };
 }

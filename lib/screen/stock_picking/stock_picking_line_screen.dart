@@ -306,7 +306,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   // ignore: missing_return
                   builder: (_, state) {
                     if (state is StockPickingIsActivePutLoading) {
-                      return Center(
+                      return const Center(
                           child: SizedBox(
                               height: 70,
                               width: 70,

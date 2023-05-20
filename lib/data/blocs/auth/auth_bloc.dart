@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, unused_local_variable, depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,18 +14,11 @@ class AuthUser extends AuthEvent {
   final String login;
   final String ip;
   final String password;
-  final String access_token;
-  final String refresh_token;
 
-  AuthUser(
-      {this.ip,
-      this.login,
-      this.password,
-      this.access_token,
-      this.refresh_token});
+  AuthUser({this.ip, this.login, this.password});
 
   @override
-  List<Object> get props => [ip, login, password, access_token, refresh_token];
+  List<Object> get props => [ip, login, password];
 }
 
 // ====================== AUTH STATE ========================= //
@@ -45,6 +38,7 @@ class AuthUserLoaded extends AuthState {
   final AuthResponseDto responseDto;
 
   AuthUserLoaded(this.responseDto);
+
   @override
   List<Object> get props => [responseDto];
 }
@@ -65,21 +59,32 @@ class AuthUserLogOut extends AuthState {
 
 // ====================== AUTH BLOC ========================= //
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository =
-      AuthRepository(authApiClient: AuthApiClient());
+  final AuthRepository authRepository;
 
-  AuthBloc() : super(AuthEmpty());
+  AuthBloc({AuthRepository authRepository})
+      : authRepository =
+            authRepository ?? AuthRepository(authApiClient: AuthApiClient()),
+        super(AuthEmpty());
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is AuthUser) {
       yield AuthUserLoading();
       try {
-        bool login = await authRepository.login(
-            ip: event.ip, login: event.login, password: event.password);
-        AuthResponseDto responseDto;
+        bool success = await authRepository.login(
+          ip: event.ip,
+          login: event.login,
+          password: event.password,
+        );
+        if (success) {
+          AuthResponseDto responseDto =
+              AuthResponseDto(); // Update with your actual response
 
-        yield AuthUserLoaded(responseDto);
+          yield AuthUserLoaded(responseDto);
+        } else {
+          yield AuthUserError(
+              'Login failed'); // Update with appropriate error message
+        }
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);
         yield AuthUserError(ex.toString());

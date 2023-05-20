@@ -331,7 +331,7 @@ class _StockInventoryDetailScreenState
             builder: (_, state) {
               if (state is StockInventoryLineLoading) {
                 return // const Text('loading ');
-                    Center(
+                    const Center(
                         child: SizedBox(
                             height: 70,
                             width: 70,

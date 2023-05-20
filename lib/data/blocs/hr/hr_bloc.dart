@@ -1,43 +1,45 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:equatable/equatable.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:abico_warehouse/data/repository/hr/hr_repo.dart';
 import 'package:abico_warehouse/data/service/hr/hr_api_client.dart';
-
-import '../../../exceptions/exception_manager.dart';
-import '../../../models/dto/hr/hr_response_dto.dart';
-
-abstract class HrEvent extends Equatable {}
+import 'package:abico_warehouse/exceptions/exception_manager.dart';
+import 'package:abico_warehouse/models/dto/hr/hr_response_dto.dart';
 
 // ====================== HR LIST EVENT ========================= //
-class Hr extends HrEvent {
-  final String ip;
-  final String uid;
-  Hr({this.ip, this.uid});
+class HrEvent extends Equatable {
+  const HrEvent();
 
   @override
-  List<Object> get props => [ip, uid];
+  List<Object> get props => [];
+}
+
+class Hr extends HrEvent {
+  final String uid;
+
+  const Hr({this.uid});
+
+  @override
+  List<Object> get props => [uid];
 }
 
 // ====================== HR LIST STATE ========================= //
-abstract class HrState extends Equatable {}
+class HrState extends Equatable {
+  const HrState();
 
-class HrEmpty extends HrState {
   @override
   List<Object> get props => [];
 }
 
-class HrLoading extends HrState {
-  @override
-  List<Object> get props => [];
-}
+class HrEmpty extends HrState {}
+
+class HrLoading extends HrState {}
 
 class HrLoaded extends HrState {
   final List<HrResult> resultHr;
 
-  HrLoaded(this.resultHr);
+  const HrLoaded(this.resultHr);
 
   @override
   List<Object> get props => [resultHr];
@@ -46,7 +48,7 @@ class HrLoaded extends HrState {
 class HrError extends HrState {
   final String error;
 
-  HrError(this.error);
+  const HrError(this.error);
 
   @override
   List<Object> get props => [error];
@@ -54,9 +56,11 @@ class HrError extends HrState {
 
 // ====================== HR LIST BLOC ========================= //
 class HrListBloc extends Bloc<HrEvent, HrState> {
-  final HrRepository hrRepository = HrRepository(hrApiClient: HrApiClient());
+  final HrRepository hrRepository;
 
-  HrListBloc() : super(HrEmpty());
+  HrListBloc({HrRepository hrRepository})
+      : hrRepository = hrRepository ?? HrRepository(hrApiClient: HrApiClient()),
+        super(HrEmpty());
 
   @override
   Stream<HrState> mapEventToState(HrEvent event) async* {
@@ -64,7 +68,6 @@ class HrListBloc extends Bloc<HrEvent, HrState> {
       yield HrLoading();
       try {
         HrResponseDto responseDto = await hrRepository.getHrList(
-          ip: event.ip,
           uid: event.uid,
         );
         yield HrLoaded(responseDto.results);

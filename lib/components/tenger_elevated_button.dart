@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_if_null_operators, unnecessary_this, avoid_unnecessary_containers
-
 import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +7,7 @@ class TengerElevatedButton extends TengerButtonInterface {
   final EdgeInsets padding;
 
   const TengerElevatedButton({
+    Key key,
     @required child,
     @required onPressed,
     color,
@@ -16,6 +15,7 @@ class TengerElevatedButton extends TengerButtonInterface {
     this.padding,
     bool isLoading,
   }) : super(
+          key: key,
           child: child,
           onPressed: onPressed,
           color: color,
@@ -24,37 +24,35 @@ class TengerElevatedButton extends TengerButtonInterface {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadius tmpRadius = BorderRadius.circular(8);
-    if (shape is RoundedRectangleBorder) {
-      tmpRadius = (shape as RoundedRectangleBorder).borderRadius;
-    }
+    final buttonShape = shape ??
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        );
+
+    final buttonDecoration = BoxDecoration(
+      color: color,
+      borderRadius: buttonShape is RoundedRectangleBorder
+          ? buttonShape.borderRadius
+          : null,
+    );
 
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color == null ? null : color,
-        borderRadius: shape == null ? BorderRadius.circular(8) : tmpRadius,
-      ),
+      decoration: buttonDecoration,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: this.padding,
+          padding: padding,
           backgroundColor: Theme.of(context).colorScheme.surface,
-          elevation: 0,
           disabledForegroundColor:
               Theme.of(context).colorScheme.surface.withOpacity(0.38),
           disabledBackgroundColor:
               Theme.of(context).colorScheme.surface.withOpacity(0.12),
+          elevation: 0,
           shadowColor: Theme.of(context).colorScheme.surface,
-          shape: shape,
+          shape: buttonShape,
         ),
         onPressed: isLoading ? () {} : onPressed,
-        child: Container(
-          child: Center(
-            child: isLoading
-                ? SizedBox(
-                    child: TengerLoadingIndicator(),
-                  )
-                : child,
-          ),
+        child: Center(
+          child: isLoading ? const TengerLoadingIndicator() : child,
         ),
       ),
     );

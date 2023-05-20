@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, empty_catches
 
 import 'package:flutter/cupertino.dart';
 import 'package:abico_warehouse/data/service/category/category_api_client.dart';

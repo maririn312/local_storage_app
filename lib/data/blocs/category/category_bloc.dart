@@ -1,6 +1,4 @@
-// ignore_for_file: unused_import, unused_local_variable, avoid_print, unrelated_type_equality_checks, depend_on_referenced_packages
-
-import 'dart:typed_data';
+// ignore_for_file: depend_on_referenced_packages
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +13,6 @@ import 'package:abico_warehouse/models/dto/category/category_response_dto.dart';
 abstract class CategoryEvent extends Equatable {}
 
 class CategoryList extends CategoryEvent {
-  CategoryList();
-
   @override
   List<Object> get props => [];
 }
@@ -63,10 +59,12 @@ class CategoryListError extends CategoryState {
 
 // ====================== GIFT BLOC ========================= //
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final CategoryRepository categoryRepository =
-      CategoryRepository(categoryApiClient: CategoryApiClient());
+  final CategoryRepository categoryRepository;
 
-  CategoryBloc() : super(CategoryListEmpty());
+  CategoryBloc()
+      : categoryRepository =
+            CategoryRepository(categoryApiClient: CategoryApiClient()),
+        super(CategoryListEmpty());
 
   @override
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {

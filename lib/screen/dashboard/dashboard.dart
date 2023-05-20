@@ -66,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2);
-    _navPages = [
+    _navPages = const [
       CategoryTab(),
       SettingsTab(),
     ];

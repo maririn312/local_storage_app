@@ -10,23 +10,11 @@ class HrRepository {
   HrRepository({@required this.hrApiClient});
 
   Future<HrResponseDto> getHrList({
-    String ip,
     String uid,
   }) async {
-    HrResponseDto hrDto = await hrApiClient.getHrList(ip, uid);
+    HrResponseDto hrDto = await hrApiClient.getHrList(uid);
 
-    // await DBProvider.db.deleteHr();
-    // if (hrDto != null) {
-    //   await DBProvider.db.deleteHr();
-    //   for (int i = 0; i < hrDto.count; i++) {
-    //     await DBProvider.db.newHr(HrEntity(
-    //         id: hrDto.result[i].id,
-    //         userId: hrDto.result[i].userId,
-    //         name: hrDto.result[i].name));
-    //   }
-    // }
     return hrApiClient.getHrList(
-      ip,
       uid,
     );
   }

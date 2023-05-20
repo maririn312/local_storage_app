@@ -1,13 +1,14 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 
 import 'package:abico_warehouse/app_types.dart';
 import 'package:abico_warehouse/components/tenger_error.dart';
 import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
 import 'package:abico_warehouse/data/blocs/category/category_bloc.dart';
+import 'package:abico_warehouse/utils/tenger_global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../models/screen args/sub_category_args.dart';
 
 class CategoryTab extends StatefulWidget {
   const CategoryTab({Key key}) : super(key: key);
@@ -19,22 +20,19 @@ class CategoryTab extends StatefulWidget {
 }
 
 class _CategoryTabState extends State<CategoryTab> {
-  final CategoryBloc _categoryBloc = CategoryBloc();
+  CategoryBloc _categoryBloc;
 
   @override
   void initState() {
-    getCategory();
     super.initState();
+    _categoryBloc = CategoryBloc();
+    _categoryBloc.add(CategoryList());
   }
 
   @override
   void dispose() {
     _categoryBloc.close();
     super.dispose();
-  }
-
-  getCategory() async {
-    _categoryBloc.add(CategoryList());
   }
 
   @override
@@ -49,9 +47,9 @@ class _CategoryTabState extends State<CategoryTab> {
   Widget _buildAppBar() {
     return AppBar(
       backgroundColor: Colors.transparent,
-      foregroundColor: Colors.black,
       elevation: 0,
       centerTitle: false,
+      iconTheme: const IconThemeData(color: Colors.black), // Set the icon color
     );
   }
 
@@ -59,53 +57,52 @@ class _CategoryTabState extends State<CategoryTab> {
     return BlocBuilder<CategoryBloc, CategoryState>(
       bloc: _categoryBloc,
       builder: (context, state) {
-        if (state is CategoryListLoading) {
-          return TengerLoadingIndicator();
-        } else if (state is CategoryListLoaded) {
-          return ListView.builder(
-            itemCount:
-                state.categoryResult.length, // Show only the first element
-            itemBuilder: (_, index) {
-              final categoryId = state.categoryResult[index].id;
-              final category = state.categoryResult.firstWhere(
-                (category) => category.id == categoryId,
-                orElse: () => null,
-              );
-
-              if (category.companyId == categoryId) {
-                final title = category.name;
-                final image = category.icon;
-                final id = category.id;
+        switch (state.runtimeType) {
+          case CategoryListLoading:
+            return const TengerLoadingIndicator();
+          case CategoryListLoaded:
+            final loadedState = state as CategoryListLoaded;
+            return ListView.builder(
+              key:
+                  const Key('categoryList'), // Add a key to improve performance
+              itemCount: loadedState.categoryResult.length -
+                  1, // Exclude the first item
+              itemBuilder: (_, index) {
+                final category = loadedState.categoryResult[index + 1];
                 return _buildFeaturedCard(
-                  title: title,
-                  image: image,
-                  catId: id,
+                  title: category.name, // Add "+ 1" to adjust the index
+                  image: category.icon,
+                  className:
+                      category.className, // Add "+ 1" to adjust the index
                 );
-              } else {
-                return Container();
-              }
-            },
-          );
-        } else if (state is CategoryListError) {
-          return TengerError(error: state.error);
+              },
+            );
+          case CategoryListError:
+            final errorState = state as CategoryListError;
+            return TengerError(error: errorState.error);
+          default:
+            return Container();
         }
-        return Container();
       },
     );
   }
 
-  Widget _buildFeaturedCard({String title, String image, int catId}) {
+  Widget _buildFeaturedCard({String title, String image, String className}) {
     final double size = MediaQuery.of(context).size.height / 11.5;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          AppTypes.SCREEN_SUB,
-          arguments: SubCategoryArg(
-            id: catId,
-          ),
-        );
+        switch (className) {
+          case TengerGlobal.LABEL_STOCK_PICKING:
+            Navigator.pushNamed(context, AppTypes.SCREEN_STOCK_PICKING);
+            break;
+          case TengerGlobal.LABEL_PRODUCT_PRODUCT:
+            Navigator.pushNamed(context, AppTypes.SCREEN_PRODUCT_REGISTER);
+            break;
+          case TengerGlobal.LABEL_STOCK_INVENTORY:
+            Navigator.pushNamed(context, AppTypes.SCREEN_INVENTORY);
+            break;
+        }
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
@@ -120,47 +117,52 @@ class _CategoryTabState extends State<CategoryTab> {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
-                    height: size / 0.9,
-                    width: size / 1.2,
-                    margin: const EdgeInsets.symmetric(horizontal: 40),
-                    decoration: image == null
-                        ? BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(8),
-                          )
-                        : BoxDecoration(
-                            color: const Color.fromRGBO(104, 26, 81, 0.9),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: MemoryImage(base64Decode(image)),
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 50),
-                    child: Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildFeaturedImage(size, image),
+              const SizedBox(width: 16),
+              _buildFeaturedText(title),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeaturedImage(double size, String image) {
+    return Container(
+      height: size / 1.2,
+      width: size / 1.2,
+      decoration: image == null
+          ? BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(8),
+            )
+          : BoxDecoration(
+              color: const Color.fromRGBO(104, 26, 81, 0.9),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: MemoryImage(base64Decode(image)),
+              ),
+              borderRadius: BorderRadius.circular(8),
             ),
-          ],
+    );
+  }
+
+  Widget _buildFeaturedText(String title) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
