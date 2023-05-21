@@ -67,7 +67,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         ModalRoute.of(context).settings.arguments;
     if (stockMoveLine.isEmpty) {
       for (int i = 0; i < stockMoveLineData.length; i++) {
-        if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
+        if (stockpickingArg.result[i].id == stockMoveLineData[i].pickingId) {
           setState(() {
             stockMoveLine.add(stockMoveLineData[i]);
             searchMoveLine = List.from(stockMoveLine);
@@ -77,7 +77,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
     } else {
       stockMoveLine.clear();
       for (int i = 0; i < stockMoveLineData.length; i++) {
-        if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
+        if (stockpickingArg.result[i].id == stockMoveLineData[i].pickingId) {
           setState(() {
             stockMoveLine.add(stockMoveLineData[i]);
           });
@@ -243,13 +243,15 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildRow(_buildText('Хүргэлтийн нэр'),
-                      _buildResult(stockpickingArg.result.name.toString())),
+                  _buildRow(
+                      _buildText('Хүргэлтийн нэр'),
+                      _buildResult(
+                          stockpickingArg.result.first.name.toString())),
                   _buildRow(
                     _buildText('Агуулахын баримтын төрөл'),
                     FutureBuilder<String>(
                       future: getPickingTypeName(
-                          stockpickingArg.result.pickingTypeId),
+                          stockpickingArg.result.first.pickingTypeId),
                       builder: (context, pickingTypeName) {
                         return _buildResult(pickingTypeName.data ?? 'Хоосон');
                       },
@@ -258,8 +260,8 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   _buildRow(
                     _buildText('Эх байрлал'),
                     FutureBuilder<String>(
-                      future:
-                          getLocationName(stockpickingArg.result.locationId),
+                      future: getLocationName(
+                          stockpickingArg.result.first.locationId),
                       builder: (context, locationName) {
                         return _buildResult(locationName.data ?? 'Хоосон');
                       },
@@ -267,11 +269,11 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   ),
                   _buildRow(
                       _buildText('Товлосон огноо'),
-                      _buildResult(stockpickingArg.result.scheduledDate
+                      _buildResult(stockpickingArg.result.first.scheduledDate
                           .toString()
                           .substring(0, 10))),
                   _buildRow(_buildText('Эх баримт'),
-                      _buildResult(stockpickingArg.result.origin)),
+                      _buildResult(stockpickingArg.result.first.origin)),
                 ],
               ),
             ),
@@ -294,7 +296,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   ModalRoute.of(context).settings.arguments;
               _stockPickingPutBloc.add(
                 StockPickingIsActivePut(
-                  id: stockpickingArg.result.id.toString(),
+                  id: stockpickingArg.result.first.id.toString(),
                 ),
               );
             });
@@ -502,7 +504,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         ModalRoute.of(context).settings.arguments;
     if (stockMoveLine.isEmpty) {
       for (int i = 0; i < stockMoveLineData.length; i++) {
-        if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
+        if (stockpickingArg.result.first.id == stockMoveLineData[i].pickingId) {
           setState(() {
             stockMoveLine.add(stockMoveLineData[i]);
             searchMoveLine = List.from(stockMoveLine);
@@ -515,7 +517,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
     } else {
       stockMoveLine.clear();
       for (int i = 0; i < stockMoveLineData.length; i++) {
-        if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
+        if (stockpickingArg.result.first.id == stockMoveLineData[i].pickingId) {
           setState(() {
             stockMoveLine.add(stockMoveLineData[i]);
             for (int s = 0; s < stockMoveLine.length; s++) {
@@ -704,14 +706,14 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         ModalRoute.of(context).settings.arguments;
 
     await DBProvider.db.updateStockPicking(StockPickingEntity(
-        id: stockpickingArg.result.id,
-        name: stockpickingArg.result.name,
-        partnerId: stockpickingArg.result.partnerId,
-        pickingTypeId: stockpickingArg.result.pickingTypeId,
-        locationId: stockpickingArg.result.locationId,
-        origin: stockpickingArg.result.origin,
-        scheduledDate: stockpickingArg.result.scheduledDate,
-        state: stockpickingArg.result.state,
+        id: stockpickingArg.result.first.id,
+        name: stockpickingArg.result.first.name,
+        partnerId: stockpickingArg.result.first.partnerId,
+        pickingTypeId: stockpickingArg.result.first.pickingTypeId,
+        locationId: stockpickingArg.result.first.locationId,
+        origin: stockpickingArg.result.first.origin,
+        scheduledDate: stockpickingArg.result.first.scheduledDate,
+        state: stockpickingArg.result.first.state,
         isChecked: stateUtgaAvn));
     print('state utga irn$stateUtgaAvn');
   }
@@ -722,14 +724,14 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         ModalRoute.of(context).settings.arguments;
 
     await DBProvider.db.deliteStockPicking(StockPickingEntity(
-        id: stockpickingArg.result.id,
-        name: stockpickingArg.result.name,
-        partnerId: stockpickingArg.result.partnerId,
-        pickingTypeId: stockpickingArg.result.pickingTypeId,
-        locationId: stockpickingArg.result.locationId,
-        origin: stockpickingArg.result.origin,
-        scheduledDate: stockpickingArg.result.scheduledDate,
-        state: stockpickingArg.result.state,
+        id: stockpickingArg.result.first.id,
+        name: stockpickingArg.result.first.name,
+        partnerId: stockpickingArg.result.first.partnerId,
+        pickingTypeId: stockpickingArg.result.first.pickingTypeId,
+        locationId: stockpickingArg.result.first.locationId,
+        origin: stockpickingArg.result.first.origin,
+        scheduledDate: stockpickingArg.result.first.scheduledDate,
+        state: stockpickingArg.result.first.state,
         isChecked: stateUtgaAvn));
     print('state utga irn$stateUtgaAvn');
   }

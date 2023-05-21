@@ -4,9 +4,11 @@ import 'dart:convert';
 
 import 'package:abico_warehouse/app_types.dart';
 import 'package:abico_warehouse/components/search_widget.dart';
+import 'package:abico_warehouse/data/blocs/product/stock_product_register_bloc.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
+import 'package:abico_warehouse/models/screen%20args/product_product_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -21,6 +23,8 @@ class ProductRegisterScreen extends StatefulWidget {
 }
 
 class _ProductRegisterScreenState extends State<ProductRegisterScreen> {
+  StockProductRegisterListBloc _stockProductRegisterListBloc =
+      StockProductRegisterListBloc();
   String query = '';
   List<StockProductRegisterEntity> productRegisterData = [];
 
@@ -37,6 +41,10 @@ class _ProductRegisterScreenState extends State<ProductRegisterScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void getProduct() {
+    _stockProductRegisterListBloc.add(StockProductRegister());
   }
 
 //db gees baraani medeelel tatj bgan oo

@@ -14,15 +14,12 @@ import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dar
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
 
 class StockInventoryApiClient {
-  Future<StockInventoryResponseDto> getStockInventoryList(
-    String ip,
-  ) async {
+  Future<StockInventoryResponseDto> getStockInventory() async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
     String url =
-        'http://${userDetailEntity.ip}/api/stock.inventory?filters=[["state", "=", "confirm"]]';
+        'http://${user.ip}/api/stock.inventory?filters=[["state", "=", "confirm"]]';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

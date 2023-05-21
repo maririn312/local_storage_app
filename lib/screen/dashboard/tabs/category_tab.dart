@@ -7,6 +7,7 @@ import 'package:abico_warehouse/components/tenger_error.dart';
 import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
 import 'package:abico_warehouse/data/blocs/category/category_bloc.dart';
 import 'package:abico_warehouse/utils/tenger_global.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,12 +95,21 @@ class _CategoryTabState extends State<CategoryTab> {
       onTap: () {
         switch (className) {
           case TengerGlobal.LABEL_STOCK_PICKING:
+            if (kDebugMode) {
+              print('Агуулахын хөдөлгөөн');
+            }
             Navigator.pushNamed(context, AppTypes.SCREEN_STOCK_PICKING);
             break;
           case TengerGlobal.LABEL_PRODUCT_PRODUCT:
+            if (kDebugMode) {
+              print('Барааны бүртгэл');
+            }
             Navigator.pushNamed(context, AppTypes.SCREEN_PRODUCT_REGISTER);
             break;
           case TengerGlobal.LABEL_STOCK_INVENTORY:
+            if (kDebugMode) {
+              print('Тооллого бүртгэл');
+            }
             Navigator.pushNamed(context, AppTypes.SCREEN_INVENTORY);
             break;
         }

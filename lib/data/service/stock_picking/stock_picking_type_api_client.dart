@@ -19,9 +19,8 @@ class StockPickingTypeApiClient {
   ) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    String url = 'http://${userDetailEntity.ip}/api/stock.picking.type';
+    String url = 'http://${user.ip}/api/stock.picking.type';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

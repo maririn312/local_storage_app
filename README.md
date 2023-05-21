@@ -84,4 +84,4 @@
 2. Toollogiin Burtgel     Belen bga delgetsiig saijiruulah
 3. Baraanii burtgel       Belen bga delgetsiig saijiruulah
 4. Bar Code unshih        Belen bga delgetsiig saijiruulah
-5. Hr delgets             Hr Reqquest iig shalgah
+5. Hr delgets             Hr Reqquest iig shalgah Hr Delgets data nuud zuragdsan.

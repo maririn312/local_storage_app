@@ -11,11 +11,10 @@ abstract class StockPickingTypeEvent extends Equatable {}
 
 // ====================== StockPickingType LIST EVENT ========================= //
 class StockPickingType extends StockPickingTypeEvent {
-  final String ip;
-  StockPickingType({this.ip});
+  StockPickingType();
 
   @override
-  List<Object> get props => [ip];
+  List<Object> get props => [];
 }
 
 // ====================== StockPickingLine LIST STATE ========================= //
@@ -65,9 +64,7 @@ class StockPickingTypeListBloc
       yield StockPickingTypeLoading();
       try {
         StockPickingTypeResponseDto responseDto =
-            await stockPickingTypeRepository.getStockPickingTypeList(
-          ip: event.ip,
-        );
+            await stockPickingTypeRepository.getStockPickingTypeList();
         yield StockPickingTypeLoaded(responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

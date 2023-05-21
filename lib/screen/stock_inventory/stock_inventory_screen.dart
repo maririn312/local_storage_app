@@ -6,6 +6,7 @@ import 'package:abico_warehouse/data/blocs/inventory/stock_inventory_bloc.dart';
 import 'package:abico_warehouse/data/blocs/inventory/stock_inventory_line_bloc.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/language.dart';
+import 'package:abico_warehouse/models/dto/inventory/stock_inventory_response_dto.dart';
 import 'package:abico_warehouse/models/entity/company_entity/company_entity.dart';
 import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_entity.dart';
 import 'package:abico_warehouse/models/entity/stock_entity/stock_location_entity.dart';
@@ -22,12 +23,13 @@ class StockInventoryScreen extends StatefulWidget {
 }
 
 class _StockInventoryScreenState extends State<StockInventoryScreen> {
-  List<StockInventoryEntity> inventoryData = [];
-  List<CompanyEntity> companyData = [];
-  List<StockLocationEntity> locationData = [];
-  final StockInventoryListBloc _inventoryListBloc = StockInventoryListBloc();
-  final StockInventoryLineListBloc _inventoryLineListBloc =
-      StockInventoryLineListBloc();
+  // List<StockInventoryEntity> inventoryData = [];
+  // List<CompanyEntity> companyData = [];
+  // List<StockLocationEntity> locationData = [];
+  final StockInventoryBloc _inventoryBloc = StockInventoryBloc();
+  // final StockInventoryLineListBloc _inventoryLineListBloc =
+  //     StockInventoryLineListBloc();
+  List<StockInventoryResult> inventory = [];
   bool isLoading = false;
 
   String query = '';
@@ -38,9 +40,9 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
   @override
   void initState() {
     getInventory();
-    getCompany();
-    refreshNotes();
-    getLocation();
+    // getCompany();
+    // refreshNotes();
+    // getLocation();
     super.initState();
   }
 
@@ -53,75 +55,76 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
 
 //db deerees ene ogogdluudiig tatah uyd ashgilnoo
   getInventory() async {
-    List<StockInventoryEntity> inventory = await DBProvider.db.getInventory();
-    setState(() {
-      inventoryData.addAll(inventory);
-    });
+    _inventoryBloc.add(StockInventory());
+    // List<StockInventoryEntity> inventory = await DBProvider.db.getInventory();
+    // setState(() {
+    //   inventoryData.addAll(inventory);
+    // });
   }
 
-  getCompany() async {
-    List<CompanyEntity> company = await DBProvider.db.getCompany();
-    setState(() {
-      companyData.addAll(company);
-    });
-  }
+  // getCompany() async {
+  //   List<CompanyEntity> company = await DBProvider.db.getCompany();
+  //   setState(() {
+  //     companyData.addAll(company);
+  //   });
+  // }
 
-  getLocation() async {
-    List<StockLocationEntity> location = await DBProvider.db.getStockLocation();
-    setState(() {
-      locationData.addAll(location);
-    });
-  }
+  // getLocation() async {
+  //   List<StockLocationEntity> location = await DBProvider.db.getStockLocation();
+  //   setState(() {
+  //     locationData.addAll(location);
+  //   });
+  // }
 
 //db gees ner duudj bga function
-  Future<String> getStockLoaction(int id) async {
-    final DBProvider databaseService = DBProvider();
-    final measure = await databaseService.stockLoacationName(id);
-    return measure.completeName;
-  }
+  // Future<String> getStockLoaction(int id) async {
+  //   final DBProvider databaseService = DBProvider();
+  //   final measure = await databaseService.stockLoacationName(id);
+  //   return measure.completeName;
+  // }
 
-  Future<String> getCompanyName(int id) async {
-    final DBProvider databaseService = DBProvider();
-    final breed = await databaseService.companyName(id);
-    return breed.name;
-  }
+  // Future<String> getCompanyName(int id) async {
+  //   final DBProvider databaseService = DBProvider();
+  //   final breed = await databaseService.companyName(id);
+  //   return breed.name;
+  // }
 
-  downloadInventory() async {
-    _inventoryListBloc.add(StockInventory(ip: '49.0.129.29'));
-  }
+  // downloadInventory() async {
+  //   _inventoryListBloc.add(StockInventory(ip: '49.0.129.29'));
+  // }
 
-  downloadInventoryLine() async {
-    _inventoryLineListBloc.add(StockInventoryLine(ip: "ip"));
-  }
+  // downloadInventoryLine() async {
+  //   _inventoryLineListBloc.add(StockInventoryLine(ip: "ip"));
+  // }
 
 //
-  Future refreshNotes() async {
-    setState(() => isLoading = true);
+  // Future refreshNotes() async {
+  //   setState(() => isLoading = true);
 
-    inventoryData = await DBProvider.db.getInventory();
-    final StockInventoryDetailArg stockInventoryArg =
-        ModalRoute.of(context).settings.arguments;
+  //   inventoryData = await DBProvider.db.getInventory();
+  //   final StockInventoryDetailArg stockInventoryArg =
+  //       ModalRoute.of(context).settings.arguments;
 
-    // if (inventoryLine.isEmpty) {
-    //   for (int i = 0; i < inventoryLineData.length; i++) {
-    //     if (stockInventoryArg.result.id == inventoryLineData[i].inventoryId) {
-    //       setState(() {
-    //         inventoryLine.add(inventoryLineData[i]);
-    //       });
-    //     }
-    //   }
-    // } else {
-    //   inventoryLine.clear();
-    //   for (int i = 0; i < inventoryLineData.length; i++) {
-    //     if (stockInventoryArg.result.id == inventoryLineData[i].inventoryId) {
-    //       setState(() {
-    //         inventoryLine.add(inventoryLineData[i]);
-    //       });
-    //     }
-    //   }
-    // }
-    setState(() => isLoading = false);
-  }
+  //   // if (inventoryLine.isEmpty) {
+  //   //   for (int i = 0; i < inventoryLineData.length; i++) {
+  //   //     if (stockInventoryArg.result.id == inventoryLineData[i].inventoryId) {
+  //   //       setState(() {
+  //   //         inventoryLine.add(inventoryLineData[i]);
+  //   //       });
+  //   //     }
+  //   //   }
+  //   // } else {
+  //   //   inventoryLine.clear();
+  //   //   for (int i = 0; i < inventoryLineData.length; i++) {
+  //   //     if (stockInventoryArg.result.id == inventoryLineData[i].inventoryId) {
+  //   //       setState(() {
+  //   //         inventoryLine.add(inventoryLineData[i]);
+  //   //       });
+  //   //     }
+  //   //   }
+  //   // }
+  //   setState(() => isLoading = false);
+  // }
 
   /* ================================================================================== */
   /* ================================================================================== */
@@ -132,7 +135,19 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
         appBar: _buildAppBar(),
         body: SingleChildScrollView(
           child: Column(
-            children: [_buildSearch(), _buildListBoxGroup()],
+            children: [
+              // _buildSearch(),
+              MultiBlocListener(listeners: [
+                BlocListener(
+                    bloc: _inventoryBloc,
+                    listener: (_, state) {
+                      if (state is StockInventoryLoaded) {
+                        inventory.addAll(state.resultStockInventory);
+                      }
+                    })
+              ], child: Container()),
+              _buildListBoxGroup()
+            ],
           ),
         ));
   }
@@ -146,54 +161,31 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
       foregroundColor: Colors.black,
       elevation: 0,
       centerTitle: false,
-      title: SizedBox(
-        height: 41,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            // ElevatedButton(
-            //     onPressed: () {
-            //       downloadInventory();
-            //       downloadInventoryLine();
-
-            //       setState(() {
-            //         refreshNotes();
-            //       });
-            //     },
-            //     child: const Text('Татах'))
-          ],
-        ),
-      ),
     );
-    // ElevatedButton(
-    //     onPressed: () {
-    //       downloadInventory();
-    //     },
-    //     child: const Text('Татах'))
   }
 
 //db ashgilj search hiij bga function
-  void searchData(String query) async {
-    List<StockInventoryEntity> saleOrder = await DBProvider.db.getInventory();
-    final data = saleOrder.where((datas) {
-      final titleLower = datas.name.toLowerCase();
-      final searchLower = query.toLowerCase();
+  // void searchData(String query) async {
+  //   List<StockInventoryEntity> saleOrder = await DBProvider.db.getInventory();
+  //   final data = saleOrder.where((datas) {
+  //     final titleLower = datas.name.toLowerCase();
+  //     final searchLower = query.toLowerCase();
 
-      return titleLower.contains(searchLower);
-    }).toList();
+  //     return titleLower.contains(searchLower);
+  //   }).toList();
 
-    setState(() {
-      this.query = query;
-      this.inventoryData = data;
-    });
-  }
+  //   setState(() {
+  //     this.query = query;
+  //     this.inventoryData = data;
+  //   });
+  // }
 
 //belen search widget ashgilj bgan onpress deer n deer bichsen function duudaj bn
-  Widget _buildSearch() => SearchWidget(
-        text: query,
-        hintText: Language.LABEL_SEARCH,
-        onChanged: searchData,
-      );
+  // Widget _buildSearch() => SearchWidget(
+  //       text: query,
+  //       hintText: Language.LABEL_SEARCH,
+  //       onChanged: searchData,
+  //     );
 
   /* ================================================================================== */
   /* ================================================================================== */
@@ -209,15 +201,23 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
 
 //form haruulj bga function end db gees duudj bga
   Widget _buildScreen() {
+    // return BlocBuilder(
+    //     bloc: _inventoryBloc,
+    //     builder: (_, state) {
+    //       if (state is StockInventoryLoaded) {
+    //         return Text(state.resultStockInventory.first.name);
+    //       }
+    //       return Container();
+    //     });
     return ListView.builder(
-      itemCount: inventoryData.length,
+      itemCount: inventory.length,
       itemBuilder: (_, index) {
-        for (int i = 0; i < inventoryData.length; i++) {}
-        if (inventoryData[index].locationIds.length > 1) {}
+        // for (int i = 0; i < inventoryData.length; i++) {}
+        // if (inventoryData[index].locationIds.length > 1) {}
         return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, AppTypes.SCREEN_INVENTORY_DETAIL,
-                arguments: StockInventoryDetailArg(inventoryData[index]));
+            // Navigator.pushNamed(context, AppTypes.SCREEN_INVENTORY_DETAIL,
+            //     arguments: StockInventoryDetailArg(inventoryData[index]));
           },
           child: Column(
             children: [
@@ -241,24 +241,18 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
                   children: [
                     _buildRowColumn(
                       Language.LABEL_Census_Code,
-                      _buildText(inventoryData[index].name),
+                      _buildText(inventory[index].name),
                     ),
-                    _buildRowColumn(
-                        Language.LABEL_Financial_Date,
-                        _buildText(inventoryData[index].accountingDate != 'null'
-                            ? inventoryData[index]
-                                .accountingDate
-                                .substring(0, 10)
-                            : 'Хоосон')),
-                    _buildRowColumn(
-                      Language.LABEL_Claim_Company,
-                      FutureBuilder<String>(
-                        future: getCompanyName(inventoryData[index].companyId),
-                        builder: (context, partnerName) {
-                          return _buildText('${partnerName.data},' ?? 'null');
-                        },
-                      ),
-                    ),
+                    _buildRowColumn(Language.LABEL_Financial_Date,
+                        _buildText(inventory[index].accountingDate.toString())),
+                    _buildRowColumn(Language.LABEL_Claim_Company, _buildText('')
+                        // FutureBuilder<String>(
+                        //   future: getCompanyName(inventoryData[index].companyId),
+                        //   builder: (context, partnerName) {
+                        //     return _buildText('${partnerName.data},' ?? 'null');
+                        //   },
+                        // ),
+                        ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,53 +265,53 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
                             textAlign: TextAlign.start,
                           ),
                         ),
-                        for (int zaa = 0;
-                            zaa < inventoryData[index].locationIds.length;
-                            zaa++)
-                          FutureBuilder<String>(
-                            future: getStockLoaction(
-                                inventoryData[index].locationIds[zaa]),
-                            builder: (context, partnerName) {
-                              return _buildText(
-                                  '${partnerName.data},' ?? 'null');
-                            },
-                          ),
+                        // for (int zaa = 0;
+                        //     zaa < inventoryData[index].locationIds.length;
+                        //     zaa++)
+                        //   FutureBuilder<String>(
+                        //     future: getStockLoaction(
+                        //         inventoryData[index].locationIds[zaa]),
+                        //     builder: (context, partnerName) {
+                        //       return _buildText(
+                        //           '${partnerName.data},' ?? 'null');
+                        //     },
+                        //   ),
                       ],
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: (inventoryData[index].state == 'draft')
-                              ? Colors.grey
-                              : (inventoryData[index].state) == 'confirm'
-                                  ? Colors.blue
-                                  : (inventoryData[index].state) == 'done'
-                                      ? Colors.green
-                                      : Colors.red,
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                inventoryData[index].state == 'draft'
-                                    ? 'Ноорог'
-                                    : inventoryData[index].state == 'confirm'
-                                        ? 'Явагдаж буй'
-                                        : inventoryData[index].state == 'done'
-                                            ? 'Батлагдсан'
-                                            : 'Цуцлагдсан',
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       color: (inventoryData[index].state == 'draft')
+                    //           ? Colors.grey
+                    //           : (inventoryData[index].state) == 'confirm'
+                    //               ? Colors.blue
+                    //               : (inventoryData[index].state) == 'done'
+                    //                   ? Colors.green
+                    //                   : Colors.red,
+                    //       borderRadius: const BorderRadius.only(
+                    //           bottomLeft: Radius.circular(10),
+                    //           bottomRight: Radius.circular(10))),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           const SizedBox(
+                    //             width: 10,
+                    //           ),
+                    //           Text(
+                    //             inventoryData[index].state == 'draft'
+                    //                 ? 'Ноорог'
+                    //                 : inventoryData[index].state == 'confirm'
+                    //                     ? 'Явагдаж буй'
+                    //                     : inventoryData[index].state == 'done'
+                    //                         ? 'Батлагдсан'
+                    //                         : 'Цуцлагдсан',
+                    //             style: const TextStyle(color: Colors.white),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

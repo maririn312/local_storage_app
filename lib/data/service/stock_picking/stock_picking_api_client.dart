@@ -19,10 +19,9 @@ class StockPickingApiClient {
     http.Response response;
 
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
     String url =
-        'http://${userDetailEntity.ip}/api/stock.picking?filters=[["state", "=", "assigned"],["is_checked","!=","checked"],["partner_id","!=",False]]';
+        'http://${user.ip}/api/stock.picking?filters=[["state", "=", "assigned"],["is_checked","!=","checked"],["partner_id","!=",False]]';
 
     // String url =
     //     'http://${userDetailEntity.ip}/api/stock.picking?filters=[["state", "=", "assigned"],["is_checked","!=","checked"],["picking_type_id","=",2]]';

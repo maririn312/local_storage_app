@@ -1,91 +1,3 @@
-// import 'package:equatable/equatable.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:abico_warehouse/data/repository/product/stock_product_register_repo.dart';
-// import 'package:abico_warehouse/data/service/product/stock_product_register_api_client.dart';
-// import 'package:abico_warehouse/exceptions/exception_manager.dart';
-// import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-// import 'package:abico_warehouse/language.dart';
-// import 'package:abico_warehouse/models/dto/product/stock_product_register_response_dto.dart';
-
-// abstract class StockProductRegisterListEvent extends Equatable {}
-
-// // ====================== STOCK PRODUCT REGISTER LIST EVENT ========================= //
-// class StockProductRegisterList extends StockProductRegisterListEvent {
-//   final String ip;
-//   final String sessionId;
-//   StockProductRegisterList({this.ip, this.sessionId});
-
-//   @override
-//   List<Object> get props => [ip, sessionId];
-// }
-
-// // ====================== STOCK PRODUCT REGISTER LIST STATE ========================= //
-// abstract class StockProductRegisterListState extends Equatable {}
-
-// class StockProductRegisterListEmpty extends StockProductRegisterListState {
-//   @override
-//   List<Object> get props => [];
-// }
-
-// class StockProductRegisterListLoading extends StockProductRegisterListState {
-//   @override
-//   List<Object> get props => [];
-// }
-
-// class StockProductRegisterListLoaded extends StockProductRegisterListState {
-//   final List<ProductResult> stockProductRegisterListResult;
-
-//   StockProductRegisterListLoaded({this.stockProductRegisterListResult});
-
-//   @override
-//   List<Object> get props => [stockProductRegisterListResult];
-// }
-
-// class StockProductRegisterListError extends StockProductRegisterListState {
-//   final String error;
-
-//   StockProductRegisterListError(this.error);
-
-//   @override
-//   List<Object> get props => [error];
-// }
-
-// // ====================== STOCK PRODUCT REGISTER LIST BLOC ========================= //
-// class StockProductRegisterListBloc
-//     extends Bloc<StockProductRegisterListEvent, StockProductRegisterListState> {
-//   final StockProductRegisterListRepository stockProductRegisterListRepository =
-//       StockProductRegisterListRepository(
-//           stockProductRegisterListApiClient:
-//               StockProductRegisterListApiClient());
-
-//   StockProductRegisterListBloc() : super(StockProductRegisterListEmpty());
-
-//   @override
-//   Stream<StockProductRegisterListState> mapEventToState(
-//       StockProductRegisterListEvent event) async* {
-//     if (event is StockProductRegisterList) {
-//       yield StockProductRegisterListLoading();
-//       try {
-//         StockProductRegisterResponseDto responseDto =
-//             await stockProductRegisterListRepository
-//                 .getStockProductRegisterList(
-//                     ip: event.ip, sessionId: event.sessionId);
-//         yield StockProductRegisterListLoaded(
-//             stockProductRegisterListResult: responseDto.results);
-//       } catch (ex, stacktrace) {
-//         ExceptionManager.xMan.captureException(ex, stacktrace);
-//         if (ex is RequestTimeoutException) {
-//           yield StockProductRegisterListError(ex.toString());
-//         } else {
-//           yield StockProductRegisterListError(Language.EXCEPTION_BAD_RESPONSE);
-//         }
-//       }
-//     }
-//   }
-// }
-
-// ignore_for_file: non_constant_identifier_names, depend_on_referenced_packages
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:abico_warehouse/data/repository/product/stock_product_register_repo.dart';
@@ -97,11 +9,10 @@ abstract class StockProductRegisterEvent extends Equatable {}
 
 // ====================== StockProductRegister LIST EVENT ========================= //
 class StockProductRegister extends StockProductRegisterEvent {
-  final String ip;
-  StockProductRegister({this.ip});
+  StockProductRegister();
 
   @override
-  List<Object> get props => [ip];
+  List<Object> get props => [];
 }
 
 // ====================== StockProductRegister LIST STATE ========================= //
@@ -151,8 +62,7 @@ class StockProductRegisterListBloc
       yield StockProductRegisterLoading();
       try {
         StockProductRegisterResponseDto responseDto =
-            await stockProductRegisterRepository.getStockProductRegisterList(
-                ip: event.ip);
+            await stockProductRegisterRepository.getStockProductRegisterList();
         yield StockProductRegisterLoaded(responseDto);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

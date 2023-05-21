@@ -19,7 +19,7 @@ class ApiUtility {
       {String login, String password, String ip}) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    String url = 'http://$ip/api/auth/get_tokens';
+    String url = 'http://${user.ip}/api/auth/get_tokens';
     print('ip bn uu $url');
 
     try {
@@ -45,7 +45,7 @@ class ApiUtility {
       try {
         response = await http.post(
           Uri.parse(
-              'http://49.0.129.18:9393/api/auth/refresh_token?refresh_token=${user.refresh_token}'),
+              'http://${user.ip}/api/auth/refresh_token?refresh_token=${user.refresh_token}'),
         );
       } on SocketException {
         throw RequestTimeoutException(url);

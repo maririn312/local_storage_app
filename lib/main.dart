@@ -89,6 +89,7 @@ class StockInventoryApp extends StatelessWidget {
             routes: {
               AppTypes.SCREEN_HOME: (context) => const DashboardScreen(),
               AppTypes.SCREEN_LOGIN: (context) => const LoginScreen(),
+              // Агуулахын хөдөлгөөн
               AppTypes.SCREEN_STOCK_PICKING: (context) =>
                   const StockPickingScreen(),
               AppTypes.SCREEN_STOCK_PICKING_LINE: (context) =>
@@ -97,11 +98,13 @@ class StockInventoryApp extends StatelessWidget {
                   const StockPickingDialog(),
               AppTypes.SCREEN_PRODUCT_REGISTER_DETAIL: (context) =>
                   ProductRegisterDetailScreen(),
+              // Барааны бүртгэл
               AppTypes.SCREEN_PRODUCT_REGISTER: (context) =>
                   ProductRegisterScreen(),
               AppTypes.SCREEN_BAR_DETAIL: (context) => BarcodeDetailScreen(),
               AppTypes.SCREEN_INVENTORY_DETAIL: (context) =>
                   StockInventoryDetailScreen(),
+              // Тооллого бүртгэл
               AppTypes.SCREEN_INVENTORY: (context) => StockInventoryScreen(),
               AppTypes.SCREEN_INVENTORY_PRODUCTQTY: (context) =>
                   const InventoryProductqtyDialog(),
