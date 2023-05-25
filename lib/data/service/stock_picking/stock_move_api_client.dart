@@ -21,7 +21,7 @@ class StockMoveLineApiClient {
     UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
     String url =
-        'http://${userDetailEntity.ip}/api/stock.move?filters=[["picking_id", "!=", False],["state", "not in", ["cancel","done"]]]';
+        'http://${user.ip}/api/stock.move?filters=[["picking_id", "!=", False],["state", "not in", ["cancel","done"]]]';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

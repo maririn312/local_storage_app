@@ -24,7 +24,7 @@ class StockInventoryLineApiClient {
     // String url =
     //     'http://${userDetailEntity.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"]]';
     String url =
-        'http://${userDetailEntity.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"]]';
+        'http://${user.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"]]';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

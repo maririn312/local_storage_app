@@ -50,13 +50,13 @@ class StockPickingLineError extends StockPickingLineState {
 }
 
 // ====================== StockPickingLine LIST BLOC ========================= //
-class StockPickingLineListBloc
+class StockPickingLineBloc
     extends Bloc<StockPickingLineEvent, StockPickingLineState> {
   final StockPickingLineRepository stockPickingLineRepository =
       StockPickingLineRepository(
           stockPickingLineApiClient: StockPickingLineApiClient());
 
-  StockPickingLineListBloc() : super(StockPickingLineEmpty());
+  StockPickingLineBloc() : super(StockPickingLineEmpty());
 
   @override
   Stream<StockPickingLineState> mapEventToState(

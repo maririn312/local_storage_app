@@ -25,8 +25,7 @@ class StockInventoryLineHistoryPostApiClient {
     UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
     int lineId = int.parse(ip);
     int qty = int.parse(time);
-    String url =
-        'http://${userDetailEntity.ip}/api/stock.inventory.line.history';
+    String url = 'http://${user.ip}/api/stock.inventory.line.history';
     print('end url irnee $url');
     try {
       response = await http.post(Uri.parse(url), headers: {

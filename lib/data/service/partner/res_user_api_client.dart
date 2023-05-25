@@ -9,7 +9,6 @@ import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
 import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
 import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/dto/partner/res_user_dto.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
 
 class ResUserApiClient {
@@ -18,9 +17,8 @@ class ResUserApiClient {
   Future<ResUserResponseDto> getResUserList(String ip, String sessionId) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    String url = 'http://${userDetailEntity.ip}/api/res.users';
+    String url = 'http://${user.ip}/api/res.users';
     print(url);
     try {
       response = await http.get(Uri.parse(url), headers: {

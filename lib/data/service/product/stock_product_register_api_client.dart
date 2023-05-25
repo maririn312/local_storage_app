@@ -20,9 +20,8 @@ class StockProductRegisterApiClient {
     http.Response response;
 
     UserEntity user = await DBProvider.db.getUser();
-    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    String url = 'http://${userDetailEntity.ip}/api/product.product';
+    String url = 'http://${user.ip}/api/product.product';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

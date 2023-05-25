@@ -27,7 +27,7 @@ class StockPickingGetApiClient {
 
     // String url = 'http://${userDetailEntity.ip}/api/stock.picking/$form_id';
     String url =
-        'http://${userDetailEntity.ip}/api/stock.picking/$form_id/action_check_user_id?pick_id=$form_id&user_id=${user.uid}';
+        'http://${user.ip}/api/stock.picking/$form_id/action_check_user_id?pick_id=$form_id&user_id=${user.uid}';
     print('end url irnee $url');
     try {
       response = await http.put(

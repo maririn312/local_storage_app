@@ -259,6 +259,41 @@ class StockPickingScreenState extends State<StockPickingScreen> {
                           _buildResult(stockPicking.origin),
                         ),
                         const SizedBox(height: 10),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: (stockPicking.isChecked == 'not_checked')
+                                  ? Colors.grey
+                                  : (stockPicking.isChecked) == 'half_checked'
+                                      ? Colors.blue
+                                      : (stockPicking.state) == 'done'
+                                          ? Colors.green
+                                          : Colors.green,
+                              borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10))),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    stockPicking.isChecked == 'not_checked'
+                                        ? 'Шалгаагүй'
+                                        : stockPicking.isChecked ==
+                                                'half_checked'
+                                            ? 'Хагас шалгасан'
+                                            : stockPicking.state == 'done'
+                                                ? 'Батлагдсан'
+                                                : 'Бүрэн шалгасан',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -339,6 +374,40 @@ class StockPickingScreenState extends State<StockPickingScreen> {
                   _buildResult(stockPicking.origin),
                 ),
                 const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                      color: (stockPicking.isChecked == 'not_checked')
+                          ? Colors.grey
+                          : (stockPicking.isChecked) == 'half_checked'
+                              ? Colors.blue
+                              : (stockPicking.state) == 'done'
+                                  ? Colors.green
+                                  : Colors.green,
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            stockPicking.isChecked == 'not_checked'
+                                ? 'Шалгаагүй'
+                                : stockPicking.isChecked == 'half_checked'
+                                    ? 'Хагас шалгасан'
+                                    : stockPicking.state == 'done'
+                                        ? 'Батлагдсан'
+                                        : 'Бүрэн шалгасан',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
