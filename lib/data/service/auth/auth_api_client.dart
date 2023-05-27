@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars, avoid_print, missing_return, unused_local_variable, unused_import, non_constant_identifier_names, deprecated_member_use, depend_on_referenced_packages
+// ignore_for_file: lines_longer_than_80_chars, avoid_print, missing_return, unused_local_variable, unused_import, non_constant_identifier_names, deprecated_member_use
 
 import 'dart:async';
 import 'dart:convert';
@@ -14,7 +14,7 @@ class AuthApiClient {
   /* ============================================================================ */
   /* ============================================================================ */
   Future<AuthResponseDto> confirm(
-      {String login, String password, String ip}) async {
+      {String login, String db, String password, String ip}) async {
     http.Response response;
 
     String url = 'http://$ip/api/auth/get_tokens';

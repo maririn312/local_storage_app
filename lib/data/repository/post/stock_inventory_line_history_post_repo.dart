@@ -17,10 +17,6 @@ class StockInventoryLineHistoryPostRepository {
     String id,
     String time,
   }) async {
-    // await DBProvider.db.deleteUserAttendOff();
-    // await DBProvider.db.newUserAttendOff(
-    //     UserAttendOffEntity(id: 0, sendTime: DateTime.now().toString()));
-
     return stockInventoryLineHistoryPostApiClient
         .getStockInventoryLineHistoryPostList(ip, id, time);
   }

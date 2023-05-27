@@ -1,6 +1,6 @@
 {
-    "name": "abico_warehouse",
-    "short_name": "abico_warehouse",
+    "name": "tenger_delivery_orders",
+    "short_name": "tenger_delivery_orders",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

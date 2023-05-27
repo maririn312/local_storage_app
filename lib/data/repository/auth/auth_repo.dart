@@ -15,18 +15,18 @@ class AuthRepository {
   /* ============================================================================ */
   Future<bool> login({
     String login,
+    String db,
     String password,
     String ip,
   }) async {
-    AuthResponseDto tokenDto =
-        await ApiUtility.getToken(ip: ip, login: login, password: password);
+    AuthResponseDto tokenDto = await ApiUtility.getToken(
+        ip: ip, db: db, login: login, password: password);
 
     if (tokenDto != null) {
       await DBProvider.db.deleteUsers();
       await DBProvider.db.newUser(UserEntity(
         id: 0,
         uid: tokenDto.uid,
-        ip: ip,
         access_token: tokenDto.accessToken,
         refresh_token: tokenDto.refreshToken,
       ));

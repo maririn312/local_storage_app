@@ -1,4 +1,4 @@
-# Abico Warehouse App
+# Abico Delivery Order Mobile App 
 
 <p align="center">
     <img src="https://img.shields.io/badge/Platform-Android%20|%20iOS?logo=flutter" alt="Platform"/>
@@ -76,12 +76,3 @@
 - ### Хэрвээ gradle version зөрж байвал  
 
          cd android && .gradlew wrapper 
-
-
-# To Do Tasks
-
-1.  Aguulahiin hudulguun  belen bga delgetsiin saijiruulah
-2. Toollogiin Burtgel     Belen bga delgetsiig saijiruulah
-3. Baraanii burtgel       Belen bga delgetsiig saijiruulah
-4. Bar Code unshih        Belen bga delgetsiig saijiruulah
-5. Hr delgets             Hr Reqquest iig shalgah Hr Delgets data nuud zuragdsan.

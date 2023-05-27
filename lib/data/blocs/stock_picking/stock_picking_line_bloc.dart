@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, depend_on_referenced_packages
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,13 +50,13 @@ class StockPickingLineError extends StockPickingLineState {
 }
 
 // ====================== StockPickingLine LIST BLOC ========================= //
-class StockPickingLineBloc
+class StockPickingLineListBloc
     extends Bloc<StockPickingLineEvent, StockPickingLineState> {
   final StockPickingLineRepository stockPickingLineRepository =
       StockPickingLineRepository(
           stockPickingLineApiClient: StockPickingLineApiClient());
 
-  StockPickingLineBloc() : super(StockPickingLineEmpty());
+  StockPickingLineListBloc() : super(StockPickingLineEmpty());
 
   @override
   Stream<StockPickingLineState> mapEventToState(

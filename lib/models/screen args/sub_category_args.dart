@@ -1,5 +1,7 @@
-class SubCategoryArg {
-  final int id;
+import 'package:abico_warehouse/models/entity/category_entity/category_entity.dart';
 
-  SubCategoryArg({this.id});
+class SubCategoryArg {
+  final String ip;
+  final CategoryEntity categoryEntity;
+  SubCategoryArg(this.categoryEntity, this.ip);
 }

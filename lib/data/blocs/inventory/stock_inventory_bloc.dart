@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, depend_on_referenced_packages
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,13 +49,13 @@ class StockInventoryError extends StockInventoryState {
 }
 
 // ====================== StockInventory LIST BLOC ========================= //
-class StockInventoryBloc
+class StockInventoryListBloc
     extends Bloc<StockInventoryEvent, StockInventoryState> {
   final StockInventoryRepository stockInventoryRepository =
       StockInventoryRepository(
           stockInventoryApiClient: StockInventoryApiClient());
 
-  StockInventoryBloc() : super(StockInventoryEmpty());
+  StockInventoryListBloc() : super(StockInventoryEmpty());
 
   @override
   Stream<StockInventoryState> mapEventToState(
@@ -64,7 +64,7 @@ class StockInventoryBloc
       yield StockInventoryLoading();
       try {
         StockInventoryResponseDto responseDto =
-            await stockInventoryRepository.getStockInventory();
+            await stockInventoryRepository.getStockInventoryList();
         yield StockInventoryLoaded(responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

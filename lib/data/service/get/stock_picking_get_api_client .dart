@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names
 
 import 'dart:async';
 import 'dart:convert';
@@ -27,7 +27,7 @@ class StockPickingGetApiClient {
 
     // String url = 'http://${userDetailEntity.ip}/api/stock.picking/$form_id';
     String url =
-        'http://${user.ip}/api/stock.picking/$form_id/action_check_user_id?pick_id=$form_id&user_id=${user.uid}';
+        'http://${userDetailEntity.ip}/api/stock.picking/$form_id/action_check_user_id?pick_id=$form_id&user_id=${user.uid}';
     print('end url irnee $url');
     try {
       response = await http.put(

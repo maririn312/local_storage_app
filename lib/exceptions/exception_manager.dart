@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_setters_without_getters, depend_on_referenced_packages
+// ignore_for_file: avoid_setters_without_getters
 
 import 'package:logger/logger.dart';
 import 'package:sentry/sentry.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, depend_on_referenced_packages
+// ignore_for_file: avoid_print
 
 import 'dart:async';
 import 'dart:io';
@@ -8,6 +8,7 @@ import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
 import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
 import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/dto/stock_picking/stock_location_response_dto.dart';
+import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
 
 class StockLocationApiClient {
@@ -18,11 +19,11 @@ class StockLocationApiClient {
     http.Response response;
 
     UserEntity user = await DBProvider.db.getUser();
-    // UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
+    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
     // String url =
     //     'http://$ip/api/stock.location?session_id=${AppConst.SESSION}&query=${AppQuery.stock_location_query}';
-    String url = 'http://${user.ip}/api/stock.location';
+    String url = 'http://${userDetailEntity.ip}/api/stock.location';
     print(url);
     try {
       response = await http.get(Uri.parse(url), headers: {

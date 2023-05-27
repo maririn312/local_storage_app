@@ -1,5 +1,5 @@
 // ignore: file_names
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names, duplicate_ignore, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names, duplicate_ignore
 
 import 'dart:async';
 import 'dart:convert';
@@ -25,7 +25,8 @@ class StockInventoryLineHistoryPostApiClient {
     UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
     int lineId = int.parse(ip);
     int qty = int.parse(time);
-    String url = 'http://${user.ip}/api/stock.inventory.line.history';
+    String url =
+        'http://${userDetailEntity.ip}/api/stock.inventory.line.history';
     print('end url irnee $url');
     try {
       response = await http.post(Uri.parse(url), headers: {

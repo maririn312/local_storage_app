@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:io';

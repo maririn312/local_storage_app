@@ -1,26 +1,24 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print,, depend_on_referenced_packages
+// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print,
 
 import 'dart:io';
 
-import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
-import 'package:abico_warehouse/models/entity/category_entity/category_entity.dart';
-import 'package:abico_warehouse/models/entity/company_entity/company_entity.dart';
-import 'package:abico_warehouse/models/entity/partner_entity/partner_entity.dart';
-import 'package:abico_warehouse/models/entity/res_entity/res_user_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_location_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_move_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_type_entity.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../models/entity/category_entity/sub_category_entity.dart';
+import '../models/entity/auth_entity/user_detail_entity.dart';
+import '../models/entity/company_entity/company_entity.dart';
+import '../models/entity/partner_entity/partner_entity.dart';
+import '../models/entity/res_entity/res_user_entity.dart';
+import '../models/entity/stock_entity/inventory/stock_inventory_entity.dart';
+import '../models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
+import '../models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
+import '../models/entity/stock_entity/stock_location_entity.dart';
 import '../models/entity/stock_entity/stock_measure_entity.dart';
+import '../models/entity/stock_entity/stock_picking_entity/stock_move_entity.dart';
+import '../models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
+import '../models/entity/stock_entity/stock_picking_entity/stock_picking_type_entity.dart';
 
 class DBProvider {
   DBProvider._();
@@ -59,10 +57,8 @@ class DBProvider {
   Future<void> createTables(Database db) async {
     await createUserTable(db);
     await createUserDetailTable(db);
-    await createCategoryTable(db);
-    await createSubCategoryTable(db);
     await createPartnerTable(db);
-    await createProductRegiterTable(db);
+    await createProductRegisterTable(db);
     await createStockLocationTable(db);
     await createStockMeasureTable(db);
     await createResCompanyTable(db);
@@ -77,7 +73,7 @@ class DBProvider {
 
   Future<void> createUserTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_user (id INTEGER PRIMARY KEY, db TEXT, ip TEXT , username TEXT, password TEXT, access_token TEXT, refresh_token TEXT,  uid INTEGER)
+        CREATE TABLE tenger_user (id INTEGER PRIMARY KEY, db TEXT, username TEXT, password TEXT, access_token TEXT, refresh_token TEXT,  uid INTEGER, ip TEXT)
     ''');
   }
 
@@ -87,40 +83,69 @@ class DBProvider {
     ''');
   }
 
-////torliig n sain medehgu bga
-  Future<void> createCategoryTable(Database db) async {
-    await db.execute('''
-        CREATE TABLE tenger_category (id INTEGER PRIMARY KEY, name TEXT,  icon BLOB, sequence INTEGER, is_send_data TEXT, company_id INTEGER)
-    ''');
-  }
-
-  Future<void> createSubCategoryTable(Database db) async {
-    await db.execute('''
-        CREATE TABLE tenger_subcategory (id INTEGER PRIMARY KEY, name TEXT, parent_id INTEGER, class_name TEXT, icon BLOB, sequence INTEGER, is_send_data TEXT, company_id INTEGER)
-    ''');
-  }
-
   Future<void> createPartnerTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_partner (id INTEGER PRIMARY KEY, name TEXT,company_id INTEGER, vat TEXT,email TEXT,phone TEXT, street TEXT, mobile TEXT,website TEXT,user_id INTEGER, property_product_pricelist INTEGER,property_payment_term_id INTEGER,company_type TEXT,function TEXT,category_id INTEGER)
+      CREATE TABLE tenger_partner (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        company_id INTEGER,
+        vat TEXT,
+        email TEXT,
+        phone TEXT,
+        street TEXT,
+        mobile TEXT,
+        website TEXT,
+        user_id INTEGER,
+        property_product_pricelist INTEGER,
+        property_payment_term_id INTEGER,
+        company_type TEXT,
+        function TEXT,
+        category_id INTEGER
+      )
     ''');
   }
 
-  Future<void> createProductRegiterTable(Database db) async {
+  Future<void> createProductRegisterTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_product_register (id INTEGER PRIMARY KEY, responsible_id INTEGER, name TEXT, barcode TEXT, categ_id INEGER, default_code TEXT, list_price REAL, type TEXT, weight REAL, volume REAL, uom_id INTEGER, company_id INTEGER, is_send_data TEXT, image_128 TEXT)
+      CREATE TABLE tenger_product_register (
+        id INTEGER PRIMARY KEY,
+        responsible_id INTEGER,
+        name TEXT,
+        barcode TEXT,
+        categ_id INTEGER,
+        default_code TEXT,
+        list_price REAL,
+        type TEXT,
+        weight REAL,
+        volume REAL,
+        uom_id INTEGER,
+        company_id INTEGER,
+        is_send_data TEXT,
+        image_128 TEXT
+      )
     ''');
   }
 
   Future<void> createStockLocationTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_stock_location (id INTEGER PRIMARY KEY, name TEXT, location_id INTEGER, usage TEXT, company_id INTEGER, complete_name TEXT)
+      CREATE TABLE tenger_stock_location (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        location_id INTEGER,
+        usage TEXT,
+        company_id INTEGER,
+        complete_name TEXT
+      )
     ''');
   }
 
   Future<void> createStockMeasureTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_stock_measure (id INTEGER PRIMARY KEY, rounding REAL, name TEXT)
+      CREATE TABLE tenger_stock_measure (
+        id INTEGER PRIMARY KEY,
+        rounding REAL,
+        name TEXT
+      )
     ''');
   }
 
@@ -132,37 +157,82 @@ class DBProvider {
 
   Future<void> createResUserTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_res_user (id INTEGER PRIMARY KEY, name TEXT)
+      CREATE TABLE tenger_res_user (
+        id INTEGER PRIMARY KEY,
+        name TEXT
+      )
     ''');
   }
 
   Future<void> createStockPickingTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_stock_picking (id INTEGER PRIMARY KEY ,name TEXT, partner_id INTEGER, picking_type_id INTEGER, location_id INTEGER, scheduled_date TEXT, origin TEXT, state TEXT,is_checked TEXT)
+      CREATE TABLE tenger_stock_picking (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        partner_id INTEGER,
+        picking_type_id INTEGER,
+        location_id INTEGER,
+        scheduled_date TEXT,
+        origin TEXT,
+        state TEXT,
+        is_checked TEXT
+      )
     ''');
   }
 
   Future<void> createStockMoveLineTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_stock_move_line (id INTEGER PRIMARY KEY , product_id INTEGER, description_picking TEXT,date_expected TEXT, quantity_done REAL, product_uom INTEGER, picking_id INTEGER, check_qty REAL, diff_qty REAL,product_uom_qty REAL, barcode TEXT,product_name TEXT)
+      CREATE TABLE tenger_stock_move_line (
+        id INTEGER PRIMARY KEY,
+        product_id INTEGER,
+        description_picking TEXT,
+        date_expected TEXT,
+        quantity_done REAL,
+        product_uom INTEGER,
+        picking_id INTEGER,
+        check_qty REAL,
+        diff_qty REAL,
+        product_uom_qty REAL,
+        barcode TEXT,
+        product_name TEXT
+      )
     ''');
   }
 
   Future<void> createStockPickingTypeTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_stock_picking_type (id INTEGER PRIMARY KEY , name TEXT, code TEXT)
+      CREATE TABLE tenger_stock_picking_type (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        code TEXT
+      )
     ''');
   }
 
   Future<void> createInventoryTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_inventory (id INTEGER , name TEXT,accounting_date TEXT, company_id INTEGER, is_send_data TEXT,location_ids INTEGER,state TEXT,product_ids TEXT)
+      CREATE TABLE tenger_inventory (
+        id INTEGER,
+        name TEXT,
+        accounting_date TEXT,
+        company_id INTEGER,
+        is_send_data TEXT,
+        location_ids INTEGER,
+        state TEXT,
+        product_ids TEXT
+      )
     ''');
   }
 
   Future<void> createInventoryLineTable(Database db) async {
     await db.execute('''
-        CREATE TABLE tenger_inventory_line (id INTEGER PRIMARY KEY, theoretical_qty REAL, product_qty REAL, barcode TEXT, product_name TEXT)
+      CREATE TABLE tenger_inventory_line (
+        id INTEGER PRIMARY KEY,
+        theoretical_qty REAL,
+        product_qty REAL,
+        barcode TEXT,
+        product_name TEXT
+      )
     ''');
   }
 
@@ -261,80 +331,6 @@ class DBProvider {
     db.delete('tenger_user_detail');
   }
 
-  // ====================== CATEGORY =========================
-
-  Future<List<CategoryEntity>> getCategories() async {
-    final db = await database;
-    var res = await db.query('tenger_category', orderBy: "name ASC");
-    List<CategoryEntity> items = res.isNotEmpty
-        ? res
-            .map((categoryItem) => CategoryEntity.fromMap(categoryItem))
-            .toList()
-        : [];
-    var batch = db.batch();
-    // batch.rawInsert('tenger_category');
-    await batch.commit(noResult: true);
-    // return null;
-    return items;
-  }
-
-  newCategory(CategoryEntity category) async {
-    final db = await database;
-    var res = await db.insert('tenger_category', category.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    return res;
-  }
-
-  updateCategory(CategoryEntity category) async {
-    final db = await database;
-    var res = await db.update('tenger_category', category.toMap(),
-        where: 'id = ?', whereArgs: [category.id]);
-    return res;
-  }
-
-  deleteCategories() async {
-    final db = await database;
-    db.delete('tenger_category');
-  }
-
-  // ====================== SUB CATEGORY =========================
-
-  Future<List<SubCategoryEntity>> getSubCategories() async {
-    final db = await database;
-    var res = await db.query('tenger_subcategory', orderBy: "name ASC");
-    List<SubCategoryEntity> subItem = res.isNotEmpty
-        ? res
-            .map((subCategoryitems) =>
-                SubCategoryEntity.fromMap(subCategoryitems))
-            .toList()
-        : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    // return null;
-    return subItem;
-  }
-
-  newSubCategory(SubCategoryEntity subCategory) async {
-    final db = await database;
-    var res = await db.insert('tenger_subcategory', subCategory.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    return res;
-  }
-
-  updateSubCategory(SubCategoryEntity subCategoryEntity) async {
-    final db = await database;
-    var res = await db.update('tenger_subcategory', subCategoryEntity.toMap(),
-        where: 'id = ?', whereArgs: [subCategoryEntity.id]);
-    return res;
-  }
-
-  deleteSubCategories() async {
-    final db = await database;
-    db.delete('tenger_subcategory');
-  }
-
   // ====================== PARTNER  =========================
 
   Future<List<PartnerEntity>> getPartner() async {
@@ -345,30 +341,36 @@ class DBProvider {
             .map((partneritems) => PartnerEntity.fromMap(partneritems))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    // return null;
     return partnerItem;
   }
 
-  newPartner(PartnerEntity partner) async {
+  Future<void> batchInsertPartner(List<PartnerEntity> partnerList) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final partner in partnerList) {
+      batch.insert('tenger_partner', partner.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newPartner(PartnerEntity partner) async {
     final db = await database;
     var res = await db.insert('tenger_partner', partner.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updatePartner(PartnerEntity partnerEntity) async {
+  Future<int> updatePartner(PartnerEntity partnerEntity) async {
     final db = await database;
     var res = await db.update('tenger_partner', partnerEntity.toMap(),
         where: 'id = ?', whereArgs: [partnerEntity.id]);
     return res;
   }
 
-  deletePartner() async {
+  Future<void> deletePartner() async {
     final db = await database;
-    db.delete('tenger_partner');
+    await db.delete('tenger_partner');
   }
 
   // ====================== PRODUCT REGISTER =========================
@@ -382,23 +384,30 @@ class DBProvider {
                 StockProductRegisterEntity.fromMap(productRegisterItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    print('resiig hevlej bn ${productRegisterItems}');
     return productRegisterItems;
-    // return null;
   }
 
-  newProductRegister(StockProductRegisterEntity productRegisterEntity) async {
+  Future<void> batchInsertProductRegister(
+      List<StockProductRegisterEntity> productRegisterList) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final productRegister in productRegisterList) {
+      batch.insert('tenger_product_register', productRegister.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newProductRegister(
+      StockProductRegisterEntity productRegisterEntity) async {
     final db = await database;
     var res = await db.insert(
         'tenger_product_register', productRegisterEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateProductRegister(
+  Future<int> updateProductRegister(
       StockProductRegisterEntity productRegisterEntity) async {
     final db = await database;
     var res = await db.update(
@@ -407,9 +416,9 @@ class DBProvider {
     return res;
   }
 
-  deleteProductRegister() async {
+  Future<void> deleteProductRegister() async {
     final db = await database;
-    db.delete('tenger_product_register');
+    await db.delete('tenger_product_register');
   }
 
   // ====================== STOCK LOCATION =========================
@@ -423,22 +432,31 @@ class DBProvider {
                 StockLocationEntity.fromMap(stockLocationItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    // return null;
     return stockLocationItems;
   }
 
-  newStockLocation(StockLocationEntity stockLocationEntity) async {
+  Future<void> batchUpsertStockLocations(
+      List<StockLocationEntity> stockLocations) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final stockLocation in stockLocations) {
+      batch.insert('tenger_stock_location', stockLocation.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newStockLocation(StockLocationEntity stockLocationEntity) async {
     final db = await database;
     var res =
         await db.insert('tenger_stock_location', stockLocationEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateStockLocation(StockLocationEntity stockLocationEntity) async {
+  Future<int> updateStockLocation(
+      StockLocationEntity stockLocationEntity) async {
     final db = await database;
     var res = await db.update(
         'tenger_stock_location', stockLocationEntity.toMap(),
@@ -446,9 +464,9 @@ class DBProvider {
     return res;
   }
 
-  deleteStockLocation() async {
+  Future<void> deleteStockLocation() async {
     final db = await database;
-    db.delete('tenger_stock_location');
+    await db.delete('tenger_stock_location');
   }
 
   // ====================== STOCK MEASURE =========================
@@ -462,22 +480,29 @@ class DBProvider {
                 StockMeasureEntity.fromMap(stockMeasureItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    // return null;
     return stockMeasureItems;
   }
 
-  newStockMeasure(StockMeasureEntity stockMeasureEntity) async {
+  Future<void> batchInsertStockMeasure(
+      List<StockMeasureEntity> stockMeasureList) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final stockMeasure in stockMeasureList) {
+      batch.insert('tenger_stock_measure', stockMeasure.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newStockMeasure(StockMeasureEntity stockMeasureEntity) async {
     final db = await database;
     var res =
         await db.insert('tenger_stock_measure', stockMeasureEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateStockMeasure(StockMeasureEntity stockMeasureEntity) async {
+  Future<int> updateStockMeasure(StockMeasureEntity stockMeasureEntity) async {
     final db = await database;
     var res = await db.update(
         'tenger_stock_measure', stockMeasureEntity.toMap(),
@@ -485,9 +510,9 @@ class DBProvider {
     return res;
   }
 
-  deleteStockMeasure() async {
+  Future<void> deleteStockMeasure() async {
     final db = await database;
-    db.delete('tenger_stock_measure');
+    await db.delete('tenger_stock_measure');
   }
 
   // ====================== COMPANY  =========================
@@ -534,35 +559,41 @@ class DBProvider {
             .map((resUserListItem) => ResUserEntity.fromMap(resUserListItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    // return null;
     return resUserItems;
   }
 
-  newResUser(ResUserEntity resUserEntity) async {
+  Future<void> batchInsertResUser(List<ResUserEntity> resUserList) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final resUser in resUserList) {
+      batch.insert('tenger_res_user', resUser.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newResUser(ResUserEntity resUserEntity) async {
     final db = await database;
     var res = await db.insert('tenger_res_user', resUserEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateResUser(ResUserEntity resUserEntity) async {
+  Future<int> updateResUser(ResUserEntity resUserEntity) async {
     final db = await database;
     var res = await db.update('tenger_res_user', resUserEntity.toMap(),
         where: 'id = ?', whereArgs: [resUserEntity.id]);
     return res;
   }
 
-  deleteResUser() async {
+  Future<void> deleteResUser() async {
     final db = await database;
-    db.delete('tenger_res_user');
+    await db.delete('tenger_res_user');
   }
 
-  deleteAccountPaymentTerm() async {
+  Future<void> deleteAccountPaymentTerm() async {
     final db = await database;
-    db.delete('tenger_res_user');
+    await db.delete('tenger_res_user');
   }
 
   // ====================== STOCK PICKING  =========================
@@ -571,53 +602,65 @@ class DBProvider {
     final db = await database;
     var res =
         await db.query('tenger_stock_picking', orderBy: "scheduled_date DESC");
-    List<StockPickingEntity> stockMeasureItems = res.isNotEmpty
+    List<StockPickingEntity> stockPickingItems = res.isNotEmpty
         ? res
-            .map((stockMeasureItem) =>
-                StockPickingEntity.fromMap(stockMeasureItem))
+            .map((stockPickingItem) =>
+                StockPickingEntity.fromMap(stockPickingItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
-    print('end picking hevlene  ${res}');
-    return stockMeasureItems;
-    // return null;
+    return stockPickingItems;
   }
 
-  newStockPicking(StockPickingEntity stockPickingEntity) async {
+  Future<void> batchInsertStockPickings(
+      List<StockPickingEntity> stockPickings) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final stockPicking in stockPickings) {
+      batch.insert('tenger_stock_picking', stockPicking.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newStockPicking(StockPickingEntity stockPickingEntity) async {
     final db = await database;
     var res =
         await db.insert('tenger_stock_picking', stockPickingEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateStockPicking(StockPickingEntity stockPickingEntity) async {
+  Future<int> updateStockPicking(StockPickingEntity stockPickingEntity) async {
     final db = await database;
     var res = await db.update(
-        'tenger_stock_picking', stockPickingEntity.toMap(),
-        where: 'id = ?', whereArgs: [stockPickingEntity.id]);
+      'tenger_stock_picking',
+      stockPickingEntity.toMap(),
+      where: 'id = ?',
+      whereArgs: [stockPickingEntity.id],
+    );
     return res;
   }
 
-  deliteStockPicking(StockPickingEntity stockPickingEntity) async {
+  Future<int> deleteStockPicking(StockPickingEntity stockPickingEntity) async {
     final db = await database;
-    var res = await db.delete('tenger_stock_picking',
-        where: 'id = ?', whereArgs: [stockPickingEntity.id]);
+    var res = await db.delete(
+      'tenger_stock_picking',
+      where: 'id = ?',
+      whereArgs: [stockPickingEntity.id],
+    );
     return res;
   }
 
-  deleteStockPicking() async {
+  Future<void> deleteAllStockPicking() async {
     final db = await database;
-    db.delete('tenger_stock_picking');
+    await db.delete('tenger_stock_picking');
   }
 
   // ====================== STOCK MOVE LINE  =========================
 
   Future<List<StockMoveLineEntity>> getStockMoveLine() async {
     final db = await database;
-    var butch = db.batch();
     var res =
         await db.query('tenger_stock_move_line', orderBy: "check_qty ASC");
     List<StockMoveLineEntity> stockMoveLineItems = res.isNotEmpty
@@ -626,34 +669,41 @@ class DBProvider {
                 StockMoveLineEntity.fromMap(stockMoveLineItems))
             .toList()
         : [];
-    // print('end ymr neg yum hevlene ${res}');
-    // print('end ymr neg yum hevlene ${stockMoveLineItems}');
-    await butch.commit(noResult: true);
     return stockMoveLineItems;
-    // return null;
   }
 
-  newStockMoveLine(StockMoveLineEntity stockMoveLineEntity) async {
+  Future<void> batchInsertStockMoveLines(
+      List<StockMoveLineEntity> stockMoveLines) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final stockMoveLine in stockMoveLines) {
+      batch.insert('tenger_stock_move_line', stockMoveLine.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newStockMoveLine(StockMoveLineEntity stockMoveLineEntity) async {
     final db = await database;
     var res =
         await db.insert('tenger_stock_move_line', stockMoveLineEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateStockMoveLine(StockMoveLineEntity stockMoveLineEntity) async {
+  Future<int> updateStockMoveLine(
+      StockMoveLineEntity stockMoveLineEntity) async {
     final db = await database;
     var res = await db.update(
         'tenger_stock_move_line', stockMoveLineEntity.toMap(),
         where: 'id = ?', whereArgs: [stockMoveLineEntity.id]);
-    print('end yu bolj bn hary ${res}');
     return res;
   }
 
-  deleteStockMoveLine() async {
+  Future<void> deleteStockMoveLine() async {
     final db = await database;
-    db.delete('tenger_stock_move_line');
+    await db.delete('tenger_stock_move_line');
   }
 
   // ====================== STOCK PICKING TYPE LINE  =========================
@@ -662,43 +712,55 @@ class DBProvider {
     var res = await db.query('tenger_stock_picking_type');
     List<StockPickingTypeEntity> stockPickingTypeItems = res.isNotEmpty
         ? res
-            .map((stockPickingTypeItems) =>
-                StockPickingTypeEntity.fromMap(stockPickingTypeItems))
+            .map((stockPickingTypeItem) =>
+                StockPickingTypeEntity.fromMap(stockPickingTypeItem))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return stockPickingTypeItems;
-    // return null;
   }
 
-  newStockPickingType(StockPickingTypeEntity stockMoveLineEntity) async {
+  Future<void> batchInsertStockPickingTypes(
+      List<StockPickingTypeEntity> stockPickingTypes) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final stockPickingType in stockPickingTypes) {
+      batch.insert('tenger_stock_picking_type', stockPickingType.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newStockPickingType(
+      StockPickingTypeEntity stockPickingTypeEntity) async {
     final db = await database;
     var res = await db.insert(
-        'tenger_stock_picking_type', stockMoveLineEntity.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
+        'tenger_stock_picking_type', stockPickingTypeEntity.toMap());
     return res;
   }
 
-  updateStockPickingType(StockPickingTypeEntity stockMoveLineEntity) async {
+  Future<int> updateStockPickingType(
+      StockPickingTypeEntity stockPickingTypeEntity) async {
     final db = await database;
     var res = await db.update(
-        'tenger_stock_picking_type', stockMoveLineEntity.toMap(),
-        where: 'id = ?', whereArgs: [stockMoveLineEntity.id]);
+      'tenger_stock_picking_type',
+      stockPickingTypeEntity.toMap(),
+      where: 'id = ?',
+      whereArgs: [stockPickingTypeEntity.id],
+    );
     return res;
   }
 
-  deleteStockPickingType() async {
+  Future<void> deleteStockPickingType() async {
     final db = await database;
-    db.delete('tenger_stock_picking_type');
+    await db.delete('tenger_stock_picking_type');
   }
 
   // ====================== INVENTORY  =========================
 
   Future<List<StockInventoryEntity>> getInventory() async {
     final db = await database;
-
     var res = await db.query('tenger_inventory', orderBy: "id DESC");
     List<StockInventoryEntity> inventoryItem = res.isNotEmpty
         ? res
@@ -706,37 +768,44 @@ class DBProvider {
                 StockInventoryEntity.fromMap(inventoryItems))
             .toList()
         : [];
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return inventoryItem;
-    // return null;
   }
 
-  newInventory(StockInventoryEntity inventory) async {
+  Future<void> batchInsertInventory(
+      List<StockInventoryEntity> inventoryList) async {
     final db = await database;
-    var butch = db.batch();
+    final batch = db.batch();
+
+    for (final inventory in inventoryList) {
+      batch.insert('tenger_inventory', inventory.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newInventory(StockInventoryEntity inventory) async {
+    final db = await database;
     var res = await db.insert('tenger_inventory', inventory.toMap());
-    await butch.commit(noResult: true);
     return res;
   }
 
-  updateInventory(StockInventoryEntity inventoryResponseEntity) async {
+  Future<int> updateInventory(
+      StockInventoryEntity inventoryResponseEntity) async {
     final db = await database;
     var res = await db.update(
         'tenger_inventory', inventoryResponseEntity.toMap(),
-        where: 'id = ?', whereArgs: [inventoryResponseEntity]);
+        where: 'id = ?', whereArgs: [inventoryResponseEntity.id]);
     return res;
   }
 
-  deleteInventory() async {
+  Future<void> deleteInventory() async {
     final db = await database;
-    db.delete('tenger_inventory');
+    await db.delete('tenger_inventory');
   }
   // ====================== INVENTORY LINE  =========================
 
   Future<List<StockInventoryLineEntity>> getInventoryLine() async {
     final db = await database;
-    var butch = db.batch();
     var res =
         await db.query('tenger_inventory_line', orderBy: "product_qty ASC");
     List<StockInventoryLineEntity> inventoryLineItem = res.isNotEmpty
@@ -745,20 +814,29 @@ class DBProvider {
                 StockInventoryLineEntity.fromMap(inventoryLineItems))
             .toList()
         : [];
-    await butch.commit(noResult: true);
     return inventoryLineItem;
-    // return null;
   }
 
-  newInventoryLine(StockInventoryLineEntity inventoryLine) async {
+  Future<void> batchInsertInventoryLines(
+      List<StockInventoryLineEntity> inventoryLines) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (final line in inventoryLines) {
+      batch.insert('tenger_inventory_line', line.toMap());
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<int> newInventoryLine(StockInventoryLineEntity inventoryLine) async {
     final db = await database;
     var res = await db.insert('tenger_inventory_line', inventoryLine.toMap());
-    var batch = db.batch();
-    await batch.commit(noResult: true);
     return res;
   }
 
-  updateInventoryLine(StockInventoryLineEntity inventoryLineEntity) async {
+  Future<int> updateInventoryLine(
+      StockInventoryLineEntity inventoryLineEntity) async {
     final db = await database;
     var res = await db.update(
         'tenger_inventory_line', inventoryLineEntity.toMap(),
@@ -766,9 +844,9 @@ class DBProvider {
     return res;
   }
 
-  deleteInventoryLine() async {
+  Future<void> deleteInventoryLine() async {
     final db = await database;
-    db.delete('tenger_inventory_line');
+    await db.delete('tenger_inventory_line');
   }
 
 //====================== RELATION FUNCTIONS =========================

@@ -1,15 +1,15 @@
-// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, deprecated_member_use, equal_keys_in_map, avoid_print, missing_return, depend_on_referenced_packages
+// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, deprecated_member_use, equal_keys_in_map, avoid_print, missing_return
 
 import 'dart:convert';
 
 import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/components/tenger_notif_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:abico_warehouse/componenets/tenger_notif_tile.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
 import 'package:abico_warehouse/models/screen%20args/barcode_args.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BarcodeDetailScreen extends StatefulWidget {
   @override
@@ -54,7 +54,6 @@ class _BarcodeDetailScreenState extends State<BarcodeDetailScreen> {
 
 //relation hiisen talbar duudj bga hesg
   Future<String> getMeasureName(int id) async {
-    // ignore: no_leading_underscores_for_local_identifiers
     final DBProvider _databaseService = DBProvider();
     final measureName = await _databaseService.measureName(id);
     return measureName.name;

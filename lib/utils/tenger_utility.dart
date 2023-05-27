@@ -1,8 +1,8 @@
 // ignore_for_file: unnecessary_null_comparison, lines_longer_than_80_chars, unused_import, avoid_print, prefer_is_empty, directives_ordering
 
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
 import 'package:flutter/material.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
+import 'package:abico_warehouse/exceptions/exception_manager.dart';
 
 import '../language.dart';
 

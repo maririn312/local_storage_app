@@ -11,10 +11,6 @@ class StockPickingIsActivePutRepository {
   Future<StockPickingPutResponseDto> getStockPickingIsActivePutList({
     String id,
   }) async {
-    // await DBProvider.db.deleteUserAttendOff();
-    // await DBProvider.db.newUserAttendOff(
-    //     UserAttendOffEntity(id: 0, sendTime: DateTime.now().toString()));
-
     return stockPickingIsActivePutApiClient.getStockPickingIsActivePutList(
       id,
     );

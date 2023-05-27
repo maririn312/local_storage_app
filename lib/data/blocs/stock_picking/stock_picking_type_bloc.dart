@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, depend_on_referenced_packages
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +11,11 @@ abstract class StockPickingTypeEvent extends Equatable {}
 
 // ====================== StockPickingType LIST EVENT ========================= //
 class StockPickingType extends StockPickingTypeEvent {
-  StockPickingType();
+  final String ip;
+  StockPickingType({this.ip});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [ip];
 }
 
 // ====================== StockPickingLine LIST STATE ========================= //
@@ -64,7 +65,9 @@ class StockPickingTypeListBloc
       yield StockPickingTypeLoading();
       try {
         StockPickingTypeResponseDto responseDto =
-            await stockPickingTypeRepository.getStockPickingTypeList();
+            await stockPickingTypeRepository.getStockPickingTypeList(
+          ip: event.ip,
+        );
         yield StockPickingTypeLoaded(responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

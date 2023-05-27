@@ -2,76 +2,28 @@
   "configVersion": 2,
   "packages": [
     {
-      "name": "animate_do",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/animate_do-2.1.0",
+      "name": "api_cache_manager",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/api_cache_manager-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "archive",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/archive-3.3.7",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/archive-3.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/args-2.4.1",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/args-2.3.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.12"
     },
     {
       "name": "async",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/async-2.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
-    },
-    {
-      "name": "audioplayers",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers-3.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_android-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_darwin",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_darwin-3.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_linux",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_linux-1.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_platform_interface-4.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_web-2.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "audioplayers_windows",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/audioplayers_windows-1.1.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "badges",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/badges-3.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
     },
     {
       "name": "bloc",
@@ -86,38 +38,8 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "cached_network_image",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/cached_network_image-3.2.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "cached_network_image_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/cached_network_image_platform_interface-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "cached_network_image_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/cached_network_image_web-1.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
       "name": "characters",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/characters-1.2.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "checked_yaml",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/checked_yaml-2.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
-    },
-    {
-      "name": "cli_util",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/cli_util-0.3.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -134,28 +56,10 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "contacts_service",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/contacts_service-0.6.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "convert",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/convert-3.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "cross_file",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/cross_file-0.3.3+4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "crypto",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/crypto-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "2.14"
     },
     {
       "name": "cupertino_icons",
@@ -164,20 +68,8 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "currency_text_input_formatter",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/currency_text_input_formatter-2.1.8",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "device_info",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/device_info-2.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "device_info_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/device_info_platform_interface-2.0.1",
+      "name": "dio",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/dio-4.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -195,7 +87,7 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/ffi-2.0.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/ffi-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -212,12 +104,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_app_badger",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_app_badger-1.5.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_barcode_scanner",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_barcode_scanner-2.0.0",
       "packageUri": "lib/",
@@ -230,106 +116,34 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_blurhash",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_blurhash-0.7.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "flutter_cache_manager",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "flutter_countdown_timer",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_countdown_timer-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "flutter_hooks",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_hooks-0.18.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "flutter_icons",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_icons-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
-      "name": "flutter_image_compress",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_image_compress-1.1.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_launcher_icons",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.11.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.9.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_lints-1.0.4",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "flutter_map",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_map-3.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "flutter_page_indicator",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_page_indicator-0.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.14",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "flutter_socket_io",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_socket_io-0.6.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
-      "name": "flutter_sound",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_sound-9.2.13",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_sound_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_sound_platform_interface-9.2.13",
+      "name": "flutter_restart",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_restart-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "flutter_staggered_grid_view",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_staggered_grid_view-0.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "flutter_sound_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_sound_web-9.2.13",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "flutter_spinkit",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_spinkit-4.1.2+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.5"
-    },
-    {
-      "name": "flutter_swiper",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/flutter_swiper-1.1.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
     },
     {
       "name": "flutter_test",
@@ -350,8 +164,44 @@
       "languageVersion": "2.7"
     },
     {
-      "name": "html_unescape",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/html_unescape-2.0.0",
+      "name": "geolocator",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator-8.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "geolocator_android",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator_android-3.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "geolocator_apple",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_platform_interface",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator_platform_interface-4.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_web",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator_web-2.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "geolocator_windows",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/geolocator_windows-0.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "helpers",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/helpers-1.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -363,55 +213,19 @@
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/http_parser-4.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image-3.3.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
-      "name": "image_picker",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image_picker-0.8.7+5",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "image_picker_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+14",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "image_picker_for_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.12",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "image_picker_ios",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.6.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "intl",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/intl-0.17.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "intl_phone_number_input",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/intl_phone_number_input-0.7.3+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -422,68 +236,14 @@
       "languageVersion": "2.16"
     },
     {
-      "name": "json_annotation",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
-    },
-    {
-      "name": "latlong2",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/latlong2-0.8.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "libphonenumber_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/libphonenumber_platform_interface-0.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "libphonenumber_plugin",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/libphonenumber_plugin-0.3.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "libphonenumber_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/libphonenumber_web-0.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "lints",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/lints-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "lists",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/lists-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "location",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/location-4.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "location_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/location_platform_interface-2.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "location_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/location_web-3.1.1",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/lints-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "logger",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/logger-1.3.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/logger-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -506,38 +266,8 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "mgrs_dart",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/mgrs_dart-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "nanoid",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/nanoid-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "nested",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/nested-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "octo_image",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/octo_image-1.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "package_info_plus",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/package_info_plus-3.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "package_info_plus_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -549,99 +279,39 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider-2.0.11",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "path_provider_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "path_provider_ios",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_ios-2.0.11",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.10",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.7",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
       "name": "path_provider_macos",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_macos-2.0.7",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_macos-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
-      "name": "pedantic",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/pedantic-1.11.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "permission_handler",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/permission_handler-10.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "permission_handler_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "permission_handler_apple",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "permission_handler_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.9.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "permission_handler_windows",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "petitparser",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/petitparser-5.1.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/petitparser-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "pin_code_fields",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/pin_code_fields-7.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "pin_code_text_field",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/pin_code_text_field-1.8.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.16"
     },
     {
       "name": "platform",
@@ -651,25 +321,7 @@
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "pointycastle",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "polylabel",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/polylabel-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.13"
-    },
-    {
-      "name": "positioned_tap_detector_2",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/positioned_tap_detector_2-1.0.4",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -680,80 +332,38 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "proj4dart",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/proj4dart-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "provider",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/provider-6.0.5",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/provider-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
-      "name": "qr",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/qr-3.0.1",
+      "name": "rename",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/rename-2.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
-      "name": "qr_flutter",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/qr_flutter-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
-    },
-    {
-      "name": "quiver",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/quiver-3.2.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "recase",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/recase-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "rxdart",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/rxdart-0.27.7",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "scoped_model",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/scoped_model-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "sentry",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sentry-6.22.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "sentry_flutter",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sentry_flutter-6.22.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sentry-6.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -782,12 +392,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "simple_html_css",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/simple_html_css-4.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "sky_engine",
       "rootUri": "file:///usr/local/Caskroom/flutter/3.7.12/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -801,33 +405,21 @@
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sqflite-2.2.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sqflite-2.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.12"
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sqflite_common-2.4.5",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/sqflite_common-2.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.16"
     },
     {
       "name": "stack_trace",
       "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
-    },
-    {
-      "name": "step_progress_indicator",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/step_progress_indicator-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "stomp_dart_client",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/stomp_dart_client-0.4.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
@@ -843,9 +435,9 @@
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/synchronized-3.1.0",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/synchronized-3.0.0+3",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.14"
     },
     {
       "name": "term_glyph",
@@ -860,80 +452,14 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "transformer_page_view",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/transformer_page_view-0.1.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
-      "name": "tuple",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/tuple-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
       "name": "typed_data",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "unicode",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/unicode-0.3.1",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/typed_data-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "url_launcher",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher-6.1.7",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "url_launcher_android",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.33",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "url_launcher_ios",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "url_launcher_linux",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "url_launcher_macos",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "url_launcher_platform_interface",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_platform_interface-2.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "url_launcher_web",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_web-2.0.16",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "url_launcher_windows",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/uuid-3.0.7",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/uuid-3.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -944,40 +470,28 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "web_socket_channel",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
       "name": "win32",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/win32-4.1.4",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/win32-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
-      "name": "wkt_parser",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/wkt_parser-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+3",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "xml",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/xml-6.2.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/xml-6.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.17"
     },
     {
       "name": "yaml",
-      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/yaml-3.1.2",
+      "rootUri": "file:///Users/amanemaririn/.pub-cache/hosted/pub.dev/yaml-3.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "2.12"
     },
     {
       "name": "abico_warehouse",
@@ -986,7 +500,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2023-05-20T14:58:35.489203Z",
+  "generated": "2023-05-27T18:20:07.454615Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

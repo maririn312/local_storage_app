@@ -1,14 +1,14 @@
-// ignore_for_file: avoid_print, empty_catches, use_build_context_synchronously, depend_on_referenced_packages
+// ignore_for_file: avoid_print, empty_catches
 
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/screen/dashboard/tabs/category_tab.dart';
-import 'package:abico_warehouse/screen/dashboard/tabs/settings_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:abico_warehouse/app_types.dart';
+import 'package:abico_warehouse/models/screen%20args/barcode_args.dart';
+import 'package:abico_warehouse/screen/dashboard/tabs/category_tab.dart';
+import 'package:abico_warehouse/screen/dashboard/tabs/settings_tab.dart';
 
 import '../../language.dart';
-import '../../models/screen args/barcode_args.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key key}) : super(key: key);
@@ -30,26 +30,31 @@ class _DashboardScreenState extends State<DashboardScreen>
     color: const Color(0xff6669f1),
     width: 30,
   );
+
   final Image _homeInactive = Image.asset(
     'assets/images/icons/home_active.webp',
     color: Colors.black,
     width: 30,
   );
+
   final Image _barcodeActive = Image.asset(
     'assets/images/icons/scan.webp',
     color: const Color(0xff6669f1),
     width: 30,
   );
+
   final Image _barcodeInactive = Image.asset(
     'assets/images/icons/scan.webp',
     color: Colors.black,
     width: 30,
   );
+
   final Image _settingsActive = Image.asset(
     'assets/images/icons/menu.webp',
     color: const Color(0xff6669f1),
     width: 30,
   );
+
   final Image _settingsInactive = Image.asset(
     'assets/images/icons/menu.webp',
     color: Colors.black,
@@ -66,48 +71,43 @@ class _DashboardScreenState extends State<DashboardScreen>
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2);
-    _navPages = const [
-      CategoryTab(),
+    _navPages = [
+      const CategoryTab(),
       SettingsTab(),
     ];
   }
 
-  Future scanBarcode() async {
-    try {
-      _scan();
-    } on PlatformException {}
-  }
-
-  Future<void> _scan() async {
+  Future<void> scanBarcode(BuildContext context) async {
     String barcodeScanRes;
 
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      print('barcode data  : $barcodeScanRes');
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,
+      );
+      print('barcode data: $barcodeScanRes');
 
-      if (barcodeScanRes == '-1') {
-      } else {
-        Navigator.pushNamed(context, AppTypes.SCREEN_BAR_DETAIL,
-            arguments: BarcodeArgs(barcodeScanRes));
+      if (barcodeScanRes != '-1') {
+        Navigator.pushNamed(
+          context,
+          AppTypes.SCREEN_BAR_DETAIL,
+          arguments: BarcodeArgs(barcodeScanRes),
+        );
       }
-
-      print(barcodeScanRes);
     } on PlatformException catch (e) {
       if (e.code == 'USER_CANCELLED') {
-        // Handle barcode scanning cancelled by user
         print('Barcode scanning cancelled by user');
-        // Navigate to the home screen
         Navigator.pushReplacementNamed(context, AppTypes.SCREEN_HOME);
       } else {
-        // Handle other platform exceptions
         print('Failed to scan barcode: ${e.message}');
       }
     }
+  }
 
-    if (!mounted) return;
-
-    setState(() {});
+  void _scan() async {
+    await scanBarcode(context);
   }
 
   /* ================================================================================== */

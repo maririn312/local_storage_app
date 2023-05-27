@@ -1,12 +1,12 @@
-// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, unused_element, avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_string_interpolations, depend_on_referenced_packages
+// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, unused_element, avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_string_interpolations
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/screen%20args/product_register_detail_args.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductRegisterDetailScreen extends StatefulWidget {
   @override
@@ -34,14 +34,14 @@ class _ProductRegisterDetailScreenState
 
 // db relation hiij bga function uud
   Future<String> getMeasureName(int id) async {
-    final DBProvider databaseService = DBProvider();
-    final measureName = await databaseService.measureName(id);
+    final DBProvider _databaseService = DBProvider();
+    final measureName = await _databaseService.measureName(id);
     return measureName.name;
   }
 
   Future<String> getCompanyName(int id) async {
-    final DBProvider databaseService = DBProvider();
-    final companyName = await databaseService.companyName(id);
+    final DBProvider _databaseService = DBProvider();
+    final companyName = await _databaseService.companyName(id);
     return companyName.name;
   }
 

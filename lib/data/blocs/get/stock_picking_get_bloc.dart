@@ -1,5 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +65,7 @@ class StockPickingGetListBloc
       yield StockPickingGetLoading();
       try {
         StockPickingGetResult responseDto = await stockPickingGetRepository
-            .getStockPickingGetList(id: event.id);
+            .getStockPickingGetList(id: event.id, checkUser: '');
         yield StockPickingGetLoaded(responseDto);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

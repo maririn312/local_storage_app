@@ -1,14 +1,14 @@
-// ignore_for_file: avoid_print, depend_on_referenced_packages
+// ignore_for_file: avoid_print
 
 import 'dart:async';
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
 import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
 import 'package:abico_warehouse/models/dto/auth/auth_response_dto.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
-import 'package:http/http.dart' as http;
 
 import '../language.dart';
 
@@ -16,10 +16,10 @@ class ApiUtility {
   /* ============================================================================ */
   /* ============================================================================ */
   static Future<AuthResponseDto> getToken(
-      {String login, String password, String ip}) async {
+      {String login, String db, String password, String ip}) async {
     http.Response response;
     UserEntity user = await DBProvider.db.getUser();
-    String url = 'http://${user.ip}/api/auth/get_tokens';
+    String url = 'http://$ip/api/auth/get_tokens';
     print('ip bn uu $url');
 
     try {
@@ -45,7 +45,7 @@ class ApiUtility {
       try {
         response = await http.post(
           Uri.parse(
-              'http://${user.ip}/api/auth/refresh_token?refresh_token=${user.refresh_token}'),
+              'http://49.0.129.18:9393/api/auth/refresh_token?refresh_token=${user.refresh_token}'),
         );
       } on SocketException {
         throw RequestTimeoutException(url);

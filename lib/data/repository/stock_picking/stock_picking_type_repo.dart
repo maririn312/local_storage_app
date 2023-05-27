@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names, unused_local_variable
-
 import 'package:flutter/cupertino.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/data/service/stock_picking/stock_picking_type_api_client.dart';
@@ -11,24 +9,24 @@ class StockPickingTypeRepository {
 
   StockPickingTypeRepository({@required this.stockPickingTypeApiClient});
 
-  Future<StockPickingTypeResponseDto> getStockPickingTypeList({
-    String ip,
-  }) async {
-    StockPickingTypeResponseDto stockPickingLineDto =
+  Future<StockPickingTypeResponseDto> getStockPickingTypeList(
+      {String ip}) async {
+    StockPickingTypeResponseDto stockPickingTypeDto =
         await stockPickingTypeApiClient.getStockPickingTypeList(ip);
 
-    if (stockPickingLineDto != null) {
-      await DBProvider.db.deleteStockPickingType();
-      for (int i = 0; i < stockPickingLineDto.results.length; i++) {
-        await DBProvider.db.newStockPickingType(StockPickingTypeEntity(
-          id: stockPickingLineDto.results[i].id,
-          name: stockPickingLineDto.results[i].name,
-          code: stockPickingLineDto.results[i].code,
-        ));
-      }
+    if (stockPickingTypeDto != null) {
+      List<StockPickingTypeEntity> stockPickingTypes =
+          stockPickingTypeDto.results
+              .map((result) => StockPickingTypeEntity(
+                    id: result.id,
+                    name: result.name,
+                    code: result.code,
+                  ))
+              .toList();
+
+      await DBProvider.db.batchInsertStockPickingTypes(stockPickingTypes);
     }
-    return stockPickingTypeApiClient.getStockPickingTypeList(
-      ip,
-    );
+
+    return stockPickingTypeDto;
   }
 }

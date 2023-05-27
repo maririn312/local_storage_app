@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, non_constant_identifier_names, file_names
 
 import 'dart:async';
 import 'dart:convert';

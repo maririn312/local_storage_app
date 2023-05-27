@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names, unused_local_variable, missing_return
-
 import 'package:flutter/cupertino.dart';
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/data/service/inventory/stock_inventory_line_api_client.dart';
@@ -19,18 +17,19 @@ class StockInventoryLineRepository {
 
     if (stockPickingLineDto != null) {
       await DBProvider.db.deleteInventoryLine();
-      for (int i = 0; i < stockPickingLineDto.results.length; i++) {
-        await DBProvider.db.newInventoryLine(StockInventoryLineEntity(
-          id: stockPickingLineDto.results[i].id,
-          theoreticalQty:
-              stockPickingLineDto.results[i].theoreticalQty.toDouble(),
-          barcode: stockPickingLineDto.results[i].barcode,
-          productName: stockPickingLineDto.results[i].productName,
-        ));
-      }
+
+      List<StockInventoryLineEntity> entities = stockPickingLineDto.results
+          .map((result) => StockInventoryLineEntity(
+                id: result.id,
+                theoreticalQty: result.theoreticalQty.toDouble(),
+                barcode: result.barcode,
+                productName: result.productName,
+              ))
+          .toList();
+
+      await DBProvider.db.batchInsertInventoryLines(entities);
     }
-    return stockInventoryLineApiClient.getStockInventoryLineList(
-      ip,
-    );
+
+    return stockPickingLineDto;
   }
 }

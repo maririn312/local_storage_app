@@ -1,10 +1,9 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:convert';
 
 import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/components/tenger_error.dart';
-import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
+import 'package:abico_warehouse/componenets/tenger_error.dart';
+import 'package:abico_warehouse/componenets/tenger_loading_indicator.dart';
+
 import 'package:abico_warehouse/data/blocs/category/category_bloc.dart';
 import 'package:abico_warehouse/utils/tenger_global.dart';
 import 'package:flutter/foundation.dart';
@@ -58,31 +57,31 @@ class _CategoryTabState extends State<CategoryTab> {
     return BlocBuilder<CategoryBloc, CategoryState>(
       bloc: _categoryBloc,
       builder: (context, state) {
-        switch (state.runtimeType) {
-          case CategoryListLoading:
-            return const TengerLoadingIndicator();
-          case CategoryListLoaded:
-            final loadedState = state as CategoryListLoaded;
-            return ListView.builder(
-              key:
-                  const Key('categoryList'), // Add a key to improve performance
-              itemCount: loadedState.categoryResult.length -
-                  1, // Exclude the first item
-              itemBuilder: (_, index) {
-                final category = loadedState.categoryResult[index + 1];
-                return _buildFeaturedCard(
-                  title: category.name, // Add "+ 1" to adjust the index
-                  image: category.icon,
-                  className:
-                      category.className, // Add "+ 1" to adjust the index
-                );
-              },
-            );
-          case CategoryListError:
-            final errorState = state as CategoryListError;
-            return TengerError(error: errorState.error);
-          default:
-            return Container();
+        if (state is CategoryListLoading) {
+          return Center(
+            child: TengerLoadingIndicator(),
+          );
+        } else if (state is CategoryListLoaded) {
+          final loadedState = state;
+          return ListView.builder(
+            key: const Key('categoryList'),
+            itemCount: loadedState.categoryResult.length -
+                1, // Exclude the first index
+            itemBuilder: (_, index) {
+              final category = loadedState
+                  .categoryResult[index + 1]; // Add "+ 1" to adjust the index
+              return _buildFeaturedCard(
+                title: category.name,
+                image: category.icon,
+                className: category.className,
+              );
+            },
+          );
+        } else if (state is CategoryListError) {
+          final errorState = state;
+          return TengerError(error: errorState.error);
+        } else {
+          return Container();
         }
       },
     );

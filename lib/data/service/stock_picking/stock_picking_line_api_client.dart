@@ -1,8 +1,9 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 import 'package:abico_warehouse/data/db_provider.dart';
 import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
 import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
@@ -10,7 +11,6 @@ import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/dto/stock_picking/stock_picking_line_dto.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
-import 'package:http/http.dart' as http;
 
 class StockPickingLineApiClient {
   Future<StockPickingLineResponseDto> getStockPickingLineList(

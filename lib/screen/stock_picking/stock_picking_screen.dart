@@ -1,25 +1,13 @@
-// // ignore_for_file: avoid_print
+// ignore_for_file: avoid_print
 
-// ignore_for_file: depend_on_referenced_packages
-
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/components/alert_dialog/stock_picking_bloc_dialog.dart';
-import 'package:abico_warehouse/components/search_widget.dart';
-import 'package:abico_warehouse/components/tenger_loading_indicator.dart';
-import 'package:abico_warehouse/data/blocs/stock_picking/stock_location_bloc.dart';
-import 'package:abico_warehouse/data/blocs/stock_picking/stock_partner_bloc.dart';
-import 'package:abico_warehouse/data/blocs/stock_picking/stock_picking_bloc.dart';
-import 'package:abico_warehouse/data/blocs/stock_picking/stock_picking_type_bloc.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/stock_picking/stock_location_response_dto.dart';
-import 'package:abico_warehouse/models/dto/stock_picking/stock_picking_dto.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../models/dto/stock_picking/stock_partner_response_dto.dart';
-import '../../models/dto/stock_picking/stock_picking_type_dto.dart';
-import '../../models/screen args/stock_picking_args.dart';
+import 'package:abico_warehouse/app_types.dart';
+import 'package:abico_warehouse/componenets/search_widget.dart';
+// import 'package:abico_warehouse/data/blocs/stock_picking/stock_picking_bloc.dart';
+import 'package:abico_warehouse/data/db_provider.dart';
+import 'package:abico_warehouse/language.dart';
+import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
+import 'package:abico_warehouse/models/screen%20args/stock_picking_args.dart';
 
 class StockPickingScreen extends StatefulWidget {
   const StockPickingScreen({Key key}) : super(key: key);
@@ -29,71 +17,137 @@ class StockPickingScreen extends StatefulWidget {
 }
 
 class StockPickingScreenState extends State<StockPickingScreen> {
-  final TextEditingController controller = TextEditingController();
-  StockPickingListBloc _stockPickingListBloc;
-  StockLocationBloc _stockLocationBloc;
-  StockPartnerBloc _stockPartnerBloc;
-  StockPickingTypeListBloc _stockPickingTypeListBloc;
+  final controller = TextEditingController();
+  List<StockPickingEntity> stockPickingData = [];
+  List<StockPickingEntity> testEntity = [];
 
-  List<StockPickingResult> stockResult = [];
-  List<StockPickingResult> stockPickingData = [];
-  List<StockLocationResult> location = [];
-  List<StockPartnerResult> partner = [];
-  List<StockPickingTypeResult> pickingType = [];
+  // final StockPickingListBloc _stockPickingBloc = StockPickingListBloc();
+  bool isLoading = false;
+  bool value = false;
   String query = '';
 
   @override
   void initState() {
-    super.initState();
-    _stockPickingListBloc = StockPickingListBloc();
-    _stockLocationBloc = StockLocationBloc();
-    _stockPartnerBloc = StockPartnerBloc();
-    _stockPickingTypeListBloc = StockPickingTypeListBloc();
-
-    // Populate stockResult and stockPickingData with all the data initially
+    // refreshNotes();
+    changeData();
     getStockPicking();
-    getLocation();
-    getPartner();
-    getPickingType();
-    stockResult = []; // Initialize stockResult as an empty list
-    stockPickingData = []; // Initialize stockPickingData as an empty list
+
+    // getStockPicking();
+    super.initState();
   }
 
   @override
   void dispose() {
-    _stockPickingListBloc.close();
-    _stockLocationBloc.close();
-    _stockPartnerBloc.close();
-    _stockPickingTypeListBloc.close();
     super.dispose();
   }
 
-  void getStockPicking() {
-    _stockPickingListBloc.add(StockPicking());
+//herggu yum bh shig bno
+  void changeData() {
+    value = true;
+    setState(() {
+      value = true;
+    });
   }
 
-  void getLocation() {
-    _stockLocationBloc.add(StockLocation());
+//ene uul n db deer bga zuiliig omnh screen deer refresh hiihd ashgildag ghde ashiglaagu bj magdgu bn sain medehgu bno
+  Future refreshForm() async {
+    setState(() => isLoading = true);
+
+    stockPickingData = await DBProvider.db.getStockPicking();
+
+    if (testEntity.isEmpty) {
+      for (int i = 0; i < stockPickingData.length; i++) {
+        setState(() {
+          testEntity.add(stockPickingData[i]);
+        });
+      }
+    } else {
+      testEntity.clear();
+      for (int i = 0; i < stockPickingData.length; i++) {
+        setState(() {
+          testEntity.add(stockPickingData[i]);
+        });
+      }
+    }
+    setState(() => isLoading = false);
+  }
+  // Future refreshNotes() async {
+  //   setState(() => isLoading = true);
+
+  //   stockPickingData = await DBProvider.db.getStockPicking();
+
+  //   setState(() => isLoading = false);
+  // }
+//relation hiij bga function uudl bnda
+  Future<String> getPartnerName(int id) async {
+    final DBProvider _databaseService = DBProvider();
+    final partner = await _databaseService.partnerName(id);
+    return partner.name;
   }
 
-  void getPartner() {
-    _stockPartnerBloc.add(StockPartnerList());
+  Future<String> getLocationName(int id) async {
+    final DBProvider _databaseService = DBProvider();
+    final location = await _databaseService.stockLoacationName(id);
+    return location.name;
   }
 
-  void getPickingType() {
-    _stockPickingTypeListBloc.add(StockPickingType());
+  Future<String> getPickingTypeName(int id) async {
+    final DBProvider _databaseService = DBProvider();
+    final location = await _databaseService.pickingTypeName(id);
+    return location.name;
   }
 
-  void searchData(String query) {
-    if (query.isEmpty) {
+//db geed ogogdol tataj bgan
+  getStockPicking() async {
+    List<StockPickingEntity> stockPicking =
+        await DBProvider.db.getStockPicking();
+    setState(() {
+      stockPickingData.addAll(stockPicking);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.black),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildSearch(),
+              _buildListBoxGroup(),
+            ],
+          ),
+        ));
+  }
+
+//screeniig deerees n 10px avj bga function
+  Widget _buildListBoxGroup() {
+    double height = MediaQuery.of(context).size.height - 160;
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      height: height,
+      child: _buildScreen(),
+    );
+  }
+
+//db gees search hiij bga function
+  void searchData(String query) async {
+    List<StockPickingEntity> testEntity = await DBProvider.db.getStockPicking();
+    print('stock entity $testEntity');
+
+    if (query == null || query.isEmpty) {
       setState(() {
         this.query = query;
-        stockPickingData = List.from(stockResult);
+        stockPickingData = testEntity;
       });
       return;
     }
 
-    final List<StockPickingResult> data = stockResult.where((datas) {
+    final data = testEntity.where((datas) {
       if (datas.origin == null) {
         return false;
       }
@@ -105,118 +159,59 @@ class StockPickingScreenState extends State<StockPickingScreen> {
 
     setState(() {
       this.query = query;
-      stockPickingData = data.isNotEmpty ? data : List.from(stockResult);
+      stockPickingData = data;
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildSearch(),
-            MultiBlocListener(
-              listeners: [
-                BlocListener<StockPickingListBloc, StockPickingState>(
-                  bloc: _stockPickingListBloc,
-                  listener: (_, state) {
-                    if (state is StockPickingLoaded) {
-                      setState(() {
-                        stockResult.addAll(state.resultStockPicking.results);
-                      });
-                    }
-                  },
-                ),
-                BlocListener<StockLocationBloc, StockLocationState>(
-                  bloc: _stockLocationBloc,
-                  listener: (_, state) {
-                    if (state is StockLocationLoaded) {
-                      setState(() {
-                        location.addAll(state.stockLocationResult);
-                      });
-                    }
-                  },
-                ),
-                BlocListener<StockPartnerBloc, StockPartnerState>(
-                  bloc: _stockPartnerBloc,
-                  listener: (_, state) {
-                    if (state is StockPartnerListLoaded) {
-                      setState(() {
-                        partner.addAll(state.partnerResult);
-                      });
-                    }
-                  },
-                ),
-                BlocListener<StockPickingTypeListBloc, StockPickingTypeState>(
-                  bloc: _stockPickingTypeListBloc,
-                  listener: (_, state) {
-                    if (state is StockPickingTypeLoaded) {
-                      setState(() {
-                        pickingType.addAll(state.resultStockPickingType);
-                      });
-                    }
-                  },
-                ),
-              ],
-              child: Container(),
-            ),
-            _buildListBoxGroup(),
-          ],
-        ),
-      ),
-    );
-  }
+  // void searchData(String query) async {
+  //   List<StockPickingEntity> testEntity = await DBProvider.db.getStockPicking();
+  //   print('stock entity ${testEntity}');
+  //   final data = testEntity.where((datas) {
+  //     final titleLower = datas.origin.toLowerCase() ?? "";
+  //     final searchLower = query.toLowerCase();
 
-  Widget _buildListBoxGroup() {
-    final height = MediaQuery.of(context).size.height - 160;
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      height: height,
-      child: stockPickingData.isEmpty // Check if stockPickingData is empty
-          ? stockResult
-                  .isEmpty // Show loading indicator if stockResult is empty
-              ? const SizedBox(
-                  height: 25,
-                  width: 30,
-                  child: TengerLoadingIndicator(),
-                )
-              : _buildAllData() // Show all the data if stockResult is not empty
-          : ListView.separated(
-              itemCount: stockPickingData.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, index) {
-                final stockPicking = stockPickingData[index];
-                final matchingLocation = location.firstWhere(
-                  (loc) => loc.locationId == stockPicking.locationId,
-                  orElse: () => null,
-                );
-                final matchingPartners = partner.firstWhere(
-                  (part) => part.id == stockPicking.partnerId,
-                  orElse: () => null,
-                );
-                final matchingPickingType = pickingType.firstWhere(
-                  (pick) => pick.id == stockPicking.pickingTypeId,
-                  orElse: () => null,
-                );
+  //     return titleLower.contains(searchLower);
+  //   }).toList();
 
-                return GestureDetector(
-                  onTap: () async {
-                    await Navigator.pushNamed(
-                      context,
-                      AppTypes.SCREEN_STOCK_PICKING_LINE,
-                      arguments: StockLocationDetailArg(stockPickingData),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    padding: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
+  //   setState(() {
+  //     this.query = query;
+  //     stockPickingData = data;
+  //   });
+  // }
+
+//search hiij bga zuiliig iim widgeteer haruulj bga belen widget
+  Widget _buildSearch() => SearchWidget(
+        text: query,
+        hintText: Language.LABEL_SEARCH,
+        onChanged: searchData,
+      );
+
+//ui screen zurj haruulj bga hesg
+  Widget _buildScreen() {
+    if (testEntity.isEmpty) {
+      testEntity.addAll(stockPickingData);
+    } else {
+      testEntity.clear();
+      testEntity.addAll(stockPickingData);
+    }
+    return ListView.builder(
+        itemCount: testEntity.length,
+        itemBuilder: (_, index) {
+          return GestureDetector(
+            onTap: () async {
+              await Navigator.pushNamed(
+                  context, AppTypes.SCREEN_STOCK_PICKING_LINE,
+                  arguments: StockLocationDetailArg(testEntity[index]));
+              refreshForm();
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.only(top: 10),
+                  // padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
@@ -225,203 +220,102 @@ class StockPickingScreenState extends State<StockPickingScreen> {
                           Color.fromRGBO(104, 26, 81, 0.9),
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildRow(
-                          _buildText('Хүргэлтийн нэр'),
-                          _buildResult(stockPicking.name),
-                        ),
-                        _buildRow(
-                          _buildText('Хүргэлтийн хаяг'),
-                          _buildResult(matchingPartners?.name),
-                        ),
-                        _buildRow(
-                          _buildText('Агуулахын баримтын төрөл'),
-                          _buildResult(matchingPickingType?.name),
-                        ),
-                        _buildRow(
-                          _buildText('Эх байрлал'),
-                          _buildResult(matchingLocation?.completeName),
-                        ),
-                        _buildRow(
-                          _buildText('Товлосон огноо'),
-                          _buildResult(
-                            stockPicking.scheduledDate
-                                .toString()
-                                .substring(0, 10),
-                          ),
-                        ),
-                        _buildRow(
-                          _buildText('Эх баримт'),
-                          _buildResult(stockPicking.origin),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: (stockPicking.isChecked == 'not_checked')
-                                  ? Colors.grey
-                                  : (stockPicking.isChecked) == 'half_checked'
-                                      ? Colors.blue
-                                      : (stockPicking.state) == 'done'
-                                          ? Colors.green
-                                          : Colors.green,
-                              borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10))),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    stockPicking.isChecked == 'not_checked'
-                                        ? 'Шалгаагүй'
-                                        : stockPicking.isChecked ==
-                                                'half_checked'
-                                            ? 'Хагас шалгасан'
-                                            : stockPicking.state == 'done'
-                                                ? 'Батлагдсан'
-                                                : 'Бүрэн шалгасан',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-    );
-  }
-
-  Widget _buildAllData() {
-    return ListView.separated(
-      itemCount: stockResult.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
-      itemBuilder: (_, index) {
-        final stockPicking = stockResult[index];
-        final matchingLocation = location.firstWhere(
-          (loc) => loc.locationId == stockPicking.locationId,
-          orElse: () => null,
-        );
-        final matchingPartners = partner.firstWhere(
-          (part) => part.id == stockPicking.partnerId,
-          orElse: () => null,
-        );
-        final matchingPickingType = pickingType.firstWhere(
-          (pick) => pick.id == stockPicking.pickingTypeId,
-          orElse: () => null,
-        );
-
-        return GestureDetector(
-          onTap: () async {
-            await Navigator.pushNamed(
-              context,
-              AppTypes.SCREEN_STOCK_PICKING_LINE,
-              arguments: StockLocationDetailArg(stockPickingData),
-            );
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            padding: const EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(206, 226, 105, 145),
-                  Color.fromRGBO(104, 26, 81, 0.9),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildRow(
-                  _buildText('Хүргэлтийн нэр'),
-                  _buildResult(stockPicking.name),
-                ),
-                _buildRow(
-                  _buildText('Хүргэлтийн хаяг'),
-                  _buildResult(matchingPartners?.name),
-                ),
-                _buildRow(
-                  _buildText('Агуулахын баримтын төрөл'),
-                  _buildResult(matchingPickingType?.name),
-                ),
-                _buildRow(
-                  _buildText('Эх байрлал'),
-                  _buildResult(matchingLocation?.completeName),
-                ),
-                _buildRow(
-                  _buildText('Товлосон огноо'),
-                  _buildResult(
-                    stockPicking.scheduledDate.toString().substring(0, 10),
-                  ),
-                ),
-                _buildRow(
-                  _buildText('Эх баримт'),
-                  _buildResult(stockPicking.origin),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                      color: (stockPicking.isChecked == 'not_checked')
-                          ? Colors.grey
-                          : (stockPicking.isChecked) == 'half_checked'
-                              ? Colors.blue
-                              : (stockPicking.state) == 'done'
-                                  ? Colors.green
-                                  : Colors.green,
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            stockPicking.isChecked == 'not_checked'
-                                ? 'Шалгаагүй'
-                                : stockPicking.isChecked == 'half_checked'
-                                    ? 'Хагас шалгасан'
-                                    : stockPicking.state == 'done'
-                                        ? 'Батлагдсан'
-                                        : 'Бүрэн шалгасан',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      _buildRow(_buildText('Хүргэлтийн нэр'),
+                          _buildResult(testEntity[index].name)),
+                      _buildRow(
+                        _buildText('Хүргэлтийн хаяг'),
+                        FutureBuilder<String>(
+                          future: getPartnerName(testEntity[index].partnerId),
+                          builder: (context, partnerName) {
+                            return _buildResult(partnerName.data);
+                          },
+                        ),
+                      ),
+                      _buildRow(
+                        _buildText('Агуулахын баримтын төрөл'),
+                        FutureBuilder<String>(
+                          future: getPickingTypeName(
+                              testEntity[index].pickingTypeId),
+                          builder: (context, partnerName) {
+                            return _buildResult(partnerName.data);
+                          },
+                        ),
+                      ),
+                      _buildRow(
+                        _buildText('Эх байрлал'),
+                        FutureBuilder<String>(
+                          future: getLocationName(testEntity[index].locationId),
+                          builder: (context, locationName) {
+                            return _buildResult(locationName.data);
+                          },
+                        ),
+                      ),
+                      _buildRow(
+                          _buildText('Товлосон огноо'),
+                          _buildResult(testEntity[index]
+                              .scheduledDate
+                              .toString()
+                              .substring(0, 10))),
+                      _buildRow(_buildText('Эх баримт'),
+                          _buildResult(testEntity[index].origin)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color:
+                                (testEntity[index].isChecked == 'not_checked')
+                                    ? Colors.grey
+                                    : (testEntity[index].isChecked) ==
+                                            'half_checked'
+                                        ? Colors.blue
+                                        : (testEntity[index].state) == 'done'
+                                            ? Colors.green
+                                            : Colors.green,
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  testEntity[index].isChecked == 'not_checked'
+                                      ? 'Шалгаагүй'
+                                      : testEntity[index].isChecked ==
+                                              'half_checked'
+                                          ? 'Хагас шалгасан'
+                                          : testEntity[index].state == 'done'
+                                              ? 'Батлагдсан'
+                                              : 'Бүрэн шалгасан',
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
               ],
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 
-  Widget _buildSearch() => SearchWidget(
-        text: query,
-        hintText: Language.LABEL_SEARCH,
-        onChanged: searchData,
-      );
-
+//row dotr 2utg avh function
   Widget _buildRow(Widget text, Widget hoinoosAvhUtga) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -433,36 +327,31 @@ class StockPickingScreenState extends State<StockPickingScreen> {
     );
   }
 
+//deer bga functiond ehnii utg bolj ordg function
   Widget _buildText(String text) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text(
-          text ?? 'Хоосон',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.start,
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            text ?? 'Хоосон',
+            style: const TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.start,
+          )),
     );
   }
 
+//deer bga functiond suuliin utg bolj ordg function
   Widget _buildResult(String text) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text(
-          text ?? '',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-          ),
-          textAlign: TextAlign.start,
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            text ?? 'Хоосон',
+            style: const TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.end,
+          )),
     );
   }
 }

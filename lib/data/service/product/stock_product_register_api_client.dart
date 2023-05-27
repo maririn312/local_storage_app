@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:io';
@@ -20,8 +20,9 @@ class StockProductRegisterApiClient {
     http.Response response;
 
     UserEntity user = await DBProvider.db.getUser();
+    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
-    String url = 'http://${user.ip}/api/product.product';
+    String url = 'http://${userDetailEntity.ip}/api/product.product';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {

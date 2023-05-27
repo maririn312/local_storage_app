@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps, depend_on_referenced_packages
+// ignore_for_file: avoid_print, unused_import, unused_local_variable, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:io';
@@ -21,7 +21,7 @@ class StockMoveLineApiClient {
     UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
 
     String url =
-        'http://${user.ip}/api/stock.move?filters=[["picking_id", "!=", False],["state", "not in", ["cancel","done"]]]';
+        'http://${userDetailEntity.ip}/api/stock.move?filters=[["picking_id", "!=", False],["state", "not in", ["cancel","done"]]]';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {
