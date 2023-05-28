@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../app_types.dart';
-import '../../../componenets/search_widget.dart';
-import '../../../data/db_provider.dart';
-import '../../../language.dart';
-import '../../../models/entity/company_entity/company_entity.dart';
-import '../../../models/entity/stock_entity/inventory/stock_inventory_entity.dart';
-import '../../../models/entity/stock_entity/stock_location_entity.dart';
-import '../../../models/screen args/stock_inventory_detail_args.dart';
+import '../../app_types.dart';
+import '../../componenets/search_widget.dart';
+import '../../data/db_provider.dart';
+import '../../language.dart';
+import '../../models/entity/company_entity/company_entity.dart';
+import '../../models/entity/stock_entity/inventory/stock_inventory_entity.dart';
+import '../../models/entity/stock_entity/stock_location_entity.dart';
+import '../../models/screen args/stock_inventory_detail_args.dart';
 
 class StockInventoryScreen extends StatefulWidget {
   const StockInventoryScreen({Key key}) : super(key: key);

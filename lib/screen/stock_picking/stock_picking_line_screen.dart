@@ -50,6 +50,9 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _buildLineCardList();
+    });
     getStockPicking();
     refreshForm();
   }
