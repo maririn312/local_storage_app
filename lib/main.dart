@@ -17,9 +17,8 @@ import 'package:abico_warehouse/screen/product/product_register_screen.dart';
 import 'package:abico_warehouse/screen/stock_picking/stock_picking_line_screen.dart';
 import 'package:abico_warehouse/screen/stock_picking/stock_picking_screen.dart';
 import 'package:abico_warehouse/exceptions/exception_manager.dart';
-// import 'package:abico_warehouse/screen/dashboard/tabs/category/sub_category_screen.dart';
-import 'package:abico_warehouse/screen/inventory/stock_inventory/stock_inventory_detail_screen.dart';
-import 'package:abico_warehouse/screen/inventory/stock_inventory/stock_inventory_screen.dart';
+import 'package:abico_warehouse/screen/inventory/stock_inventory_screen.dart';
+import 'package:abico_warehouse/screen/inventory/stock_inventory_detail_screen.dart';
 
 class AbicoBlocObserver extends BlocObserver {
   Logger logger = Logger(printer: PrettyPrinter(methodCount: 0));
@@ -103,7 +102,7 @@ class AbicoApp extends StatelessWidget {
           AppTypes.SCREEN_INVENTORY_DETAIL: (context) =>
               StockInventoryDetailScreen(),
           // Тооллого бүртгэл
-          AppTypes.SCREEN_INVENTORY: (context) => StockInventoryScreen(),
+          AppTypes.SCREEN_INVENTORY: (context) => const StockInventoryScreen(),
           AppTypes.SCREEN_INVENTORY_PRODUCTQTY: (context) =>
               const InventoryProductqtyDialog(),
           AppTypes.SCREEN_INVENTORY_DIALOG: (context) =>
