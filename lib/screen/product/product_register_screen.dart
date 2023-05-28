@@ -53,6 +53,7 @@ class _ProductRegisterScreenState extends State<ProductRegisterScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(),
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Column(
           children: [

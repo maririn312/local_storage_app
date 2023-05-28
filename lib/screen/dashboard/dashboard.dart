@@ -114,34 +114,41 @@ class _DashboardScreenState extends State<DashboardScreen>
   /* ================================================================================== */
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.surface,
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
-          TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _tabController,
-            children: _navPages.map<Widget>((Widget page) {
-              return SafeArea(
-                top: false,
-                bottom: false,
-                child: Container(
-                    color: Theme.of(context).colorScheme.surface,
-                    key: ObjectKey(page),
-                    child: page),
-              );
-            }).toList(),
+    return WillPopScope(
+        onWillPop: () async {
+          int count = 0;
+          Navigator.of(context).popUntil((_) => count++ >= 4);
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          resizeToAvoidBottomInset: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            foregroundColor: Theme.of(context).colorScheme.surface,
+            centerTitle: true,
+            elevation: 0,
           ),
-          Positioned(bottom: 0, child: _buildMenu())
-        ],
-      ),
-    );
+          body: Stack(
+            children: [
+              TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _tabController,
+                children: _navPages.map<Widget>((Widget page) {
+                  return SafeArea(
+                    top: false,
+                    bottom: false,
+                    child: Container(
+                        color: Theme.of(context).colorScheme.surface,
+                        key: ObjectKey(page),
+                        child: page),
+                  );
+                }).toList(),
+              ),
+              Positioned(bottom: 0, child: _buildMenu())
+            ],
+          ),
+        ));
   }
 
   /* ================================================================================== */

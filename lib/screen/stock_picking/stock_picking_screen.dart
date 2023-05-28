@@ -109,6 +109,7 @@ class StockPickingScreenState extends State<StockPickingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(0, 255, 255, 255),
           elevation: 0,

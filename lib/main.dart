@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:abico_warehouse/app_theme.dart';
@@ -59,8 +60,10 @@ void main() async {
   Bloc.observer = AbicoBlocObserver();
   ExceptionManager.xMan.debugMode = true;
   WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const AbicoApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const AbicoApp());
+  });
 }
 
 class AbicoApp extends StatelessWidget {

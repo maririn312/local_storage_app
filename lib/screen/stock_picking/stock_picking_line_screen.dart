@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../componenets/alert_dialog/stock_picking_dialog.dart';
 import '../../componenets/tenger_error.dart';
@@ -374,6 +375,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
   }
 
 //barcode unshij olonoor buyu oor alert luu oruulj too oruulhasd eniig ashgilj bga
+
   Future<void> _scan() async {
     String barcodeScanRes;
     try {
@@ -401,13 +403,12 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
             refreshForm();
           }
         } else {
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(const SnackBar(
-                content: Text(
-              'Бараа олдсоггүй',
-              textAlign: TextAlign.center,
-            )));
+          Fluttertoast.showToast(
+            msg: 'Бараа олдсоггүй',
+            backgroundColor: Colors.red,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+          );
         }
       });
     } on PlatformException {
@@ -456,34 +457,31 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                     time: too.toString(),
                   ),
                 );
-                ScaffoldMessenger.of(context)
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(const SnackBar(
-                      content: Text(
-                    'Амжилттай',
-                    textAlign: TextAlign.center,
-                  )));
+                Fluttertoast.showToast(
+                  msg: 'Барааг амжилттай нэмэгдлээ',
+                  backgroundColor: Colors.green,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                );
               } else {
-                ScaffoldMessenger.of(context)
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(const SnackBar(
-                      content: Text(
-                    'Барааг нэгээр нэмэх боломжгүй байна',
-                    textAlign: TextAlign.center,
-                  )));
+                Fluttertoast.showToast(
+                  msg: 'Барааг нэгээр нэмэх боломжгүй байна',
+                  backgroundColor: Colors.red,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                );
               }
             }
 
             refreshForm();
           }
         } else {
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(const SnackBar(
-                content: Text(
-              'Бараа олдсоггүй',
-              textAlign: TextAlign.center,
-            )));
+          Fluttertoast.showToast(
+            msg: 'Бараа олдсоггүй',
+            backgroundColor: Colors.red,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+          );
         }
       });
     } on PlatformException {

@@ -54,8 +54,9 @@ class _ProductRegisterDetailScreenState
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          backgroundColor:
-              Colors.white, // Theme.of(context).colorScheme.surface,
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: true,
+          // Theme.of(context).colorScheme.surface,
           appBar: _buildAppBar(),
           body: SingleChildScrollView(
             child: Column(children: [_buildCardBox()]),

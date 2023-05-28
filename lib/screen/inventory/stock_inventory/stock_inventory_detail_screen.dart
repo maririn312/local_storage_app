@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, unused_element, avoid_unnecessary_containers, sized_box_for_whitespace, missing_return, avoid_print, curly_braces_in_flow_control_structures, unrelated_type_equality_checks
 
+import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
 import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
 import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_entity.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,10 @@ class _StockInventoryDetailScreenState
   static List<StockInventoryLineResult> inventoryBlocDto = [];
   List<StockInventoryLineResult> searchInventory = inventoryBlocDto;
   List<StockInventoryLineResult> testsearch = [];
+  List<StockInventoryLineResult> line = [];
 
   // String value;
+  String ip;
   String query = '';
   Map<int, String> someMap = {};
   bool isLoading = false;
@@ -97,6 +100,13 @@ class _StockInventoryDetailScreenState
     return stockLocation.completeName;
   }
 
+  Future<void> getUserEntity() async {
+    UserDetailEntity userDetailEntity = await DBProvider.db.getUserDetail();
+    setState(() {
+      ip = userDetailEntity.ip.toString();
+    });
+  }
+
   Future<void> getUpdate(int id) async {
     await DBProvider.db.updateInventoryLine(StockInventoryLineEntity());
   }
@@ -120,6 +130,7 @@ class _StockInventoryDetailScreenState
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
+        resizeToAvoidBottomInset: true,
         appBar: _buildAppBar(),
         body: Column(children: [
           _buildCardBox(),
@@ -326,180 +337,189 @@ class _StockInventoryDetailScreenState
         ModalRoute.of(context).settings.arguments;
 
     return SizedBox(
-        height: height,
-        child: BlocBuilder(
-            bloc: _inventoryLineListBloc,
-            builder: (_, state) {
-              if (state is StockInventoryLineLoading) {
-                return // const Text('loading ');
-                    Center(
-                        child: SizedBox(
-                            height: 70,
-                            width: 70,
-                            child: TengerLoadingIndicator()));
-              } else if (state is StockInventoryLineError) {
-                return Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    child: TengerError(
-                      error: state.error,
-                    ),
+      height: height,
+      child: BlocBuilder(
+        bloc: _inventoryLineListBloc,
+        builder: (_, state) {
+          if (state is StockInventoryLineLoading) {
+            return Center(
+              child: SizedBox(
+                height: 70,
+                width: 70,
+                child: TengerLoadingIndicator(),
+              ),
+            );
+          } else if (state is StockInventoryLineError) {
+            return Center(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: TengerError(
+                  error: state.error,
+                ),
+              ),
+            );
+          } else if (state is StockInventoryLineLoaded) {
+            inventoryBlocDto.clear();
+            someMap.clear();
+            inventoryBlocDto.addAll(state.resultStockInventoryLine);
+            for (var item in state.resultStockInventoryLine) {
+              someMap[item.id] = item.barcode;
+            }
+            print(
+                'inventory line id bn uu    ${state.resultStockInventoryLine.first.id}');
+            print(
+                '/////////////////////////////////////////////////////////////////');
+            print('searchInventory length ${searchInventory.length}');
+            print('inventoryBlocDto length ${inventoryBlocDto.length}');
+            print(
+                'state.resultStockInventoryLine length ${state.resultStockInventoryLine.length}');
+            testsearch.addAll(state.resultStockInventoryLine);
+
+            // Filter the stock inventory lines based on the condition
+// Filter the stock inventory lines based on the condition
+            List<StockInventoryLine> filteredLines = state
+                .resultStockInventoryLine
+                .where(
+                    (line) => line.inventoryId == stockInventoryArg.result.id)
+                .map((result) => StockInventoryLine(
+                      ip: ip, // Replace `ip` with the actual property name from your database
+                      inventory_id: stockInventoryArg.result.id.toString(),
+                    ))
+                .toList();
+
+            return ListView.builder(
+              itemCount: filteredLines.length,
+              itemBuilder: (_, index) {
+                StockInventoryLine line = filteredLines[index];
+
+                return Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  decoration: const BoxDecoration(
+                    border: Border(top: BorderSide()),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                state.resultStockInventoryLine[index]
+                                        .productName ??
+                                    'Хоосон',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(right: BorderSide()),
+                              ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                state.resultStockInventoryLine[index]
+                                        .theoreticalQty
+                                        .toString() ??
+                                    'Хоосон',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.end,
+                              ),
+                            ),
+                          ),
+                          if (state
+                                  .resultStockInventoryLine[index].productQty ==
+                              state.resultStockInventoryLine[index]
+                                  .theoreticalQty)
+                            Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  state.resultStockInventoryLine[index]
+                                          .productQty
+                                          .toString() ??
+                                      'Хоосон',
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            )
+                          else if (state
+                                  .resultStockInventoryLine[index].productQty >
+                              state.resultStockInventoryLine[index]
+                                  .theoreticalQty)
+                            Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  state.resultStockInventoryLine[index]
+                                          .productQty
+                                          .toString() ??
+                                      'Хоосон',
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            )
+                          else
+                            Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  state.resultStockInventoryLine[index]
+                                          .productQty
+                                          .toString() ??
+                                      'Хоосон',
+                                  style: const TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
-              } else if (state is StockInventoryLineLoaded) {
-                if (inventoryBlocDto.isEmpty) {
-                  for (int s = 0;
-                      s < state.resultStockInventoryLine.length;
-                      s++) {
-                    // setState(() {
-                    inventoryBlocDto.add(state.resultStockInventoryLine[s]);
-                    // searchInventory = inventoryBlocDto;
-                    someMap[state.resultStockInventoryLine[s].id] =
-                        state.resultStockInventoryLine[s].barcode;
-                    // });
-                  }
-                } else {
-                  inventoryBlocDto.clear();
-                  // searchInventory.clear();
-                  for (int s = 0;
-                      s < state.resultStockInventoryLine.length;
-                      s++) {
-                    inventoryBlocDto.add(state.resultStockInventoryLine[s]);
-                    // searchInventory = inventoryBlocDto;
-                    someMap[state.resultStockInventoryLine[s].id] =
-                        state.resultStockInventoryLine[s].barcode;
-                  }
-                }
-                print(
-                    '/////////////////////////////////////////////////////////////////');
-                print('searchInventory length ${searchInventory.length}');
-                print('inventoryBlocDto length ${inventoryBlocDto.length}');
-                print(
-                    'state.resultStockInventoryLine length ${state.resultStockInventoryLine.length}');
-                testsearch.addAll(state.resultStockInventoryLine);
-                return ListView.builder(
-                    itemCount: searchInventory.length,
-                    itemBuilder: (_, index) {
-                      return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 5),
-                          decoration: const BoxDecoration(
-                            border: Border(top: BorderSide()),
-                          ),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    // Text(searchInventory.first.productName),
-                                    Expanded(
-                                      child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Text(
-                                            searchInventory[index]
-                                                    .productName ??
-                                                'Хоосон',
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.start,
-                                          )),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                          decoration: const BoxDecoration(
-                                            border: Border(right: BorderSide()),
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Text(
-                                            searchInventory[index]
-                                                    .theoreticalQty
-                                                    .toString() ??
-                                                'Хоосон',
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.end,
-                                          )),
-                                    ),
-                                    // _buildText(
-                                    //     inventoryLine[index].theoreticalQty.toString() ??
-                                    //         'null'),
-                                    (searchInventory[index].productQty ==
-                                            searchInventory[index]
-                                                .theoreticalQty)
-                                        ? Expanded(
-                                            child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10),
-                                                child: Text(
-                                                  inventoryBlocDto[index]
-                                                          .productQty
-                                                          .toString() ??
-                                                      'Хоосон',
-                                                  style: const TextStyle(
-                                                      color: Colors.green,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                  textAlign: TextAlign.end,
-                                                )),
-                                          )
-                                        : (searchInventory[index].productQty >
-                                                searchInventory[index]
-                                                    .theoreticalQty)
-                                            ? Expanded(
-                                                child: Container(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    child: Text(
-                                                      searchInventory[index]
-                                                              .productQty
-                                                              .toString() ??
-                                                          'Хоосон',
-                                                      style: const TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                      textAlign: TextAlign.end,
-                                                    )),
-                                              )
-                                            : Expanded(
-                                                child: Container(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    child: Text(
-                                                      searchInventory[index]
-                                                              .productQty
-                                                              .toString() ??
-                                                          'Хоосон',
-                                                      style: const TextStyle(
-                                                          color: Colors.blue,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                      textAlign: TextAlign.end,
-                                                    )),
-                                              )
-                                  ],
-                                ),
-                              ]));
-                    });
-              }
-            }));
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 
   Widget _buildLeftTextStyle(String text) {
@@ -584,7 +604,7 @@ class _StockInventoryDetailScreenState
       );
 
       final matchingInventory = inventoryBlocDto.firstWhere(
-        (note) => note.id == someMap[barcodeScanRes],
+        (note) => note.barcode == barcodeScanRes,
         orElse: () => null,
       );
 
@@ -627,7 +647,7 @@ class _StockInventoryDetailScreenState
       );
 
       final matchingInventory = inventoryBlocDto.firstWhere(
-        (note) => note.id == someMap[barcodeScanRes],
+        (note) => note.barcode == barcodeScanRes,
         orElse: () => null,
       );
 

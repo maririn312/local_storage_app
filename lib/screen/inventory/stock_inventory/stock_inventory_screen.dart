@@ -10,6 +10,8 @@ import '../../../models/entity/stock_entity/stock_location_entity.dart';
 import '../../../models/screen args/stock_inventory_detail_args.dart';
 
 class StockInventoryScreen extends StatefulWidget {
+  const StockInventoryScreen({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _StockInventoryScreenState();
@@ -90,6 +92,7 @@ class _StockInventoryScreenState extends State<StockInventoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      resizeToAvoidBottomInset: true,
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Column(

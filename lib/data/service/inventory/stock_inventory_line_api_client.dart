@@ -15,6 +15,7 @@ import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
 
 class StockInventoryLineApiClient {
   Future<StockInventoryLineResponseDto> getStockInventoryLineList(
+    String inventory_id,
     String ip,
   ) async {
     http.Response response;
@@ -24,7 +25,7 @@ class StockInventoryLineApiClient {
     // String url =
     //     'http://${userDetailEntity.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"]]';
     String url =
-        'http://${userDetailEntity.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"]]';
+        'http://${userDetailEntity.ip}/api/stock.inventory.line?filters=[["state", "=", "confirm"],["inventory_id","=",$inventory_id]]';
     print(' url :  $url ');
     try {
       response = await http.get(Uri.parse(url), headers: {
@@ -39,9 +40,7 @@ class StockInventoryLineApiClient {
     if (response.statusCode == 200 || response.statusCode == 202) {
       return StockInventoryLineResponseDto.fromRawJson(response.body);
     } else if (response.statusCode == 401) {
-      return getStockInventoryLineList(
-        ip,
-      );
+      return getStockInventoryLineList(ip, inventory_id);
     }
     throw BadResponseException(Language.EXCEPTION_BAD_RESPONSE);
   }

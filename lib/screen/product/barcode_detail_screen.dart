@@ -65,6 +65,7 @@ class _BarcodeDetailScreenState extends State<BarcodeDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      resizeToAvoidBottomInset: true,
       appBar: _buildAppBar(),
       body: _buildListBoxGroup(),
     );

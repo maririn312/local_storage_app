@@ -10,10 +10,12 @@ class StockInventoryLineRepository {
   StockInventoryLineRepository({@required this.stockInventoryLineApiClient});
 
   Future<StockInventoryLineResponseDto> getStockInventoryLineList({
+    String inventory_id,
     String ip,
   }) async {
     StockInventoryLineResponseDto stockPickingLineDto =
-        await stockInventoryLineApiClient.getStockInventoryLineList(ip);
+        await stockInventoryLineApiClient.getStockInventoryLineList(
+            ip, inventory_id);
 
     if (stockPickingLineDto != null) {
       await DBProvider.db.deleteInventoryLine();

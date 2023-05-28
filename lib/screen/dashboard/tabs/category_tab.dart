@@ -37,11 +37,18 @@ class _CategoryTabState extends State<CategoryTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _buildAppBar(),
-      body: _buildCategories(),
-    );
+    return WillPopScope(
+        onWillPop: () async {
+          int count = 0;
+          Navigator.of(context).popUntil((_) => count++ >= 4);
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          resizeToAvoidBottomInset: true,
+          appBar: _buildAppBar(),
+          body: _buildCategories(),
+        ));
   }
 
   Widget _buildAppBar() {

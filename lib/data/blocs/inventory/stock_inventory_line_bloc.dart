@@ -11,11 +11,12 @@ abstract class StockInventoryLineEvent extends Equatable {}
 
 // ====================== StockInventoryLine LIST EVENT ========================= //
 class StockInventoryLine extends StockInventoryLineEvent {
+  final String inventory_id;
   final String ip;
-  StockInventoryLine({this.ip});
+  StockInventoryLine({this.ip, this.inventory_id});
 
   @override
-  List<Object> get props => [ip];
+  List<Object> get props => [ip, inventory_id];
 }
 
 // ====================== StockInventoryLine LIST STATE ========================= //
@@ -66,8 +67,7 @@ class StockInventoryLineListBloc
       try {
         StockInventoryLineResponseDto responseDto =
             await stockInventoryLineRepository.getStockInventoryLineList(
-          ip: event.ip,
-        );
+                ip: event.ip, inventory_id: event.inventory_id);
         yield StockInventoryLineLoaded(responseDto.results);
       } catch (ex, stacktrace) {
         ExceptionManager.xMan.captureException(ex, stacktrace);

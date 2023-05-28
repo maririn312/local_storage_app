@@ -204,6 +204,7 @@ class _SettingsTabState extends State<SettingsTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
