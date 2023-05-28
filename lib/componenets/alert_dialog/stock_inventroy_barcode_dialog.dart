@@ -6,11 +6,10 @@ import 'package:abico_warehouse/models/dto/inventory/stock_inventory_line_respon
 
 class StockInventoryBarCodeDialog extends StatefulWidget {
   final StockInventoryLineResult note;
+  final dynamic data;
 
-  const StockInventoryBarCodeDialog({
-    Key key,
-    this.note,
-  }) : super(key: key);
+  const StockInventoryBarCodeDialog({Key key, this.note, this.data})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _StockInventoryBarCodeDialogState();

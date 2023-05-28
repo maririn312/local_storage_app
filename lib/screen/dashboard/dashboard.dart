@@ -11,7 +11,8 @@ import 'package:abico_warehouse/screen/dashboard/tabs/settings_tab.dart';
 import '../../language.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key key}) : super(key: key);
+  final dynamic data;
+  const DashboardScreen({Key key, this.data}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

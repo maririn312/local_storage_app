@@ -9,6 +9,9 @@ import 'package:abico_warehouse/language.dart';
 import 'package:abico_warehouse/models/screen%20args/product_register_detail_args.dart';
 
 class ProductRegisterDetailScreen extends StatefulWidget {
+  final dynamic data;
+  const ProductRegisterDetailScreen({Key key, this.data}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ProductRegisterDetailScreenState();

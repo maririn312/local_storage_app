@@ -12,6 +12,9 @@ import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_
 import 'package:abico_warehouse/models/screen%20args/barcode_args.dart';
 
 class BarcodeDetailScreen extends StatefulWidget {
+  final dynamic data;
+  const BarcodeDetailScreen({Key key, this.data}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _BarcodeDetailScreenState();

@@ -10,7 +10,9 @@ import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/
 import 'package:abico_warehouse/models/screen%20args/stock_picking_args.dart';
 
 class StockPickingScreen extends StatefulWidget {
-  const StockPickingScreen({Key key}) : super(key: key);
+  final dynamic data;
+
+  const StockPickingScreen({Key key, this.data}) : super(key: key);
 
   @override
   State<StockPickingScreen> createState() => StockPickingScreenState();

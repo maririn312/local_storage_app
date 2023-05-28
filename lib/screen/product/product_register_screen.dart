@@ -13,6 +13,9 @@ import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_
 import 'package:abico_warehouse/models/screen%20args/product_register_detail_args.dart';
 
 class ProductRegisterScreen extends StatefulWidget {
+  final dynamic data;
+  const ProductRegisterScreen({Key key, this.data}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ProductRegisterScreenState();

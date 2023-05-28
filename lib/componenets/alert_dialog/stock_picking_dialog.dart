@@ -7,11 +7,9 @@ import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/
 
 class StockPickingDialog extends StatefulWidget {
   final StockMoveLineEntity note;
+  final dynamic data;
 
-  const StockPickingDialog({
-    Key key,
-    this.note,
-  }) : super(key: key);
+  const StockPickingDialog({Key key, this.note, this.data}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

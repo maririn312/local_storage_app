@@ -1,9 +1,24 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:abico_warehouse/data/hive_data/barcode_detail_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/dashboard_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/inventory_productqty_dialog_data.dart';
+import 'package:abico_warehouse/data/hive_data/login_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/product_register_detail_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/stock_inventory_barcode_dialog_data.dart';
+import 'package:abico_warehouse/data/hive_data/stock_inventory_detail_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/stock_inventory_screen_data.dart';
+import 'package:abico_warehouse/data/hive_data/stock_picking_dialog_data.dart';
+import 'package:abico_warehouse/data/hive_data/stock_picking_line_screen_data.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:abico_warehouse/app_theme.dart';
 import 'package:abico_warehouse/app_types.dart';
 import 'package:abico_warehouse/componenets/alert_dialog/inventory_productqty_dialog.dart';
@@ -54,15 +69,60 @@ class AbicoHttpOverrides extends HttpOverrides {
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
+Future<bool> checkInternetConnection() async {
+  var connectivityResult = await Connectivity().checkConnectivity();
+  return connectivityResult != ConnectivityResult.none;
+}
+
 void main() async {
   HttpOverrides.global = AbicoHttpOverrides();
   Bloc.observer = AbicoBlocObserver();
   ExceptionManager.xMan.debugMode = true;
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  // Open the Hive box for data caching
+  await Hive.openBox('cache');
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const AbicoApp());
   });
+
+  bool isConnected = await checkInternetConnection();
+  if (kDebugMode) {
+    print('Internet connection status: $isConnected');
+  }
+
+  // Save screen data to the cache
+  saveScreenDataToCache();
+  // You can retrieve the cached data using 'retrieveScreenDataFromCache' method when needed.
+}
+
+void saveScreenDataToCache() {
+  // Retrieve the Hive box for data caching
+  var box = Hive.box('cache');
+
+  // Save screen data to the cache
+  box.put('dashboard', DashboardScreenData());
+  box.put('login', LoginScreenData());
+  box.put('stockPickingLine', StockPickingLineScreenData());
+  box.put('stockPickingDialog', StockPickingDialogData());
+  box.put('productRegisterDetail', ProductRegisterDetailScreenData());
+  box.put('productRegister', ProductRegisterDetailScreenData());
+  box.put('barCodeDetail', BarcodeDetailScreenData());
+  box.put('stockInventoryDetail', StockInventoryDetailScreenData());
+  box.put('stockInventory', StockInventoryScreenData());
+  box.put('inventoryProductqtyDialog', InventoryProductqtyDialogData());
+  box.put('stockInventoryBarCodeDialog', StockInventoryBarcodeDialogData());
+}
+
+dynamic retrieveScreenDataFromCache(String screenName) {
+  // Retrieve the Hive box for data caching
+  var box = Hive.box('cache');
+
+  // Retrieve the screen data from the cache based on the screen name
+  return box.get(screenName);
 }
 
 class AbicoApp extends StatelessWidget {
@@ -70,6 +130,25 @@ class AbicoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the cached data for the screens
+    var dashboardData = retrieveScreenDataFromCache('dashboard');
+    var loginData = retrieveScreenDataFromCache('login');
+    var stockPickingData = retrieveScreenDataFromCache('stockPicking');
+    var stockPickingLineData = retrieveScreenDataFromCache('stockPickingLine');
+    var stockPickingDialogData =
+        retrieveScreenDataFromCache('stockPickingDialog');
+    var productRegisterDetailData =
+        retrieveScreenDataFromCache('productRegisterDetail');
+    var productRegisterData = retrieveScreenDataFromCache('productRegister');
+    var barCodeDetailData = retrieveScreenDataFromCache('barCodeDetail');
+    var stockInventoryDetailData =
+        retrieveScreenDataFromCache('stockInventoryDetail');
+    var stockInventoryData = retrieveScreenDataFromCache('stockInventory');
+    var inventoryProductqtyDialogData =
+        retrieveScreenDataFromCache('inventoryProductqtyDialog');
+    var stockInventoryBarCodeDialogData =
+        retrieveScreenDataFromCache('stockInventoryBarCodeDialog');
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -80,33 +159,71 @@ class AbicoApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Tenger Attendance Mobile Application',
         theme: AppTheme.themeData,
-        home: const LoginScreen(),
+        home: loginData != null
+            ? LoginScreen(data: loginData)
+            : const LoginScreen(),
         debugShowCheckedModeBanner: true,
         navigatorObservers: [routeObserver],
         routes: {
-          AppTypes.SCREEN_HOME: (context) => const DashboardScreen(),
-          AppTypes.SCREEN_LOGIN: (context) => const LoginScreen(),
+          AppTypes.SCREEN_HOME: (context) => dashboardData != null
+              ? DashboardScreen(data: dashboardData)
+              : const DashboardScreen(),
+          AppTypes.SCREEN_LOGIN: (context) => loginData != null
+              ? LoginScreen(data: loginData)
+              : const LoginScreen(),
           // Агуулахын хөдөлгөөн
-          AppTypes.SCREEN_STOCK_PICKING: (context) =>
-              const StockPickingScreen(),
+          AppTypes.SCREEN_STOCK_PICKING: (context) => stockPickingData != null
+              ? StockPickingScreen(data: stockPickingData)
+              : const StockPickingScreen(),
           AppTypes.SCREEN_STOCK_PICKING_LINE: (context) =>
-              const StockPickingLineScreen(),
+              stockPickingLineData != null
+                  ? StockPickingLineScreen(
+                      data: stockPickingLineData,
+                    )
+                  : const StockPickingLineScreen(),
           AppTypes.SCREEN_STOCK_PICKING_DIALOG: (context) =>
-              const StockPickingDialog(),
+              stockPickingDialogData != null
+                  ? StockPickingDialog(data: stockPickingDialogData)
+                  : const StockPickingDialog(),
           AppTypes.SCREEN_PRODUCT_REGISTER_DETAIL: (context) =>
-              ProductRegisterDetailScreen(),
+              productRegisterDetailData != null
+                  ? ProductRegisterDetailScreen(
+                      data: productRegisterDetailData,
+                    )
+                  : const ProductRegisterDetailScreen(),
           // Барааны бүртгэл
           AppTypes.SCREEN_PRODUCT_REGISTER: (context) =>
-              ProductRegisterScreen(),
-          AppTypes.SCREEN_BAR_DETAIL: (context) => BarcodeDetailScreen(),
+              productRegisterData != null
+                  ? ProductRegisterScreen(
+                      data: productRegisterDetailData,
+                    )
+                  : const ProductRegisterScreen(),
+          AppTypes.SCREEN_BAR_DETAIL: (context) => barCodeDetailData != null
+              ? BarcodeDetailScreen(data: barCodeDetailData)
+              : const BarcodeDetailScreen(),
           AppTypes.SCREEN_INVENTORY_DETAIL: (context) =>
-              StockInventoryDetailScreen(),
+              stockInventoryDetailData != null
+                  ? StockInventoryDetailScreen(
+                      data: stockInventoryDetailData,
+                    )
+                  : const StockInventoryDetailScreen(),
           // Тооллого бүртгэл
-          AppTypes.SCREEN_INVENTORY: (context) => const StockInventoryScreen(),
+          AppTypes.SCREEN_INVENTORY: (context) => stockInventoryData != null
+              ? StockInventoryScreen(
+                  data: stockInventoryData,
+                )
+              : const StockInventoryScreen(),
           AppTypes.SCREEN_INVENTORY_PRODUCTQTY: (context) =>
-              const InventoryProductqtyDialog(),
+              inventoryProductqtyDialogData != null
+                  ? InventoryProductqtyDialog(
+                      data: inventoryProductqtyDialogData)
+                  : const InventoryProductqtyDialog(),
           AppTypes.SCREEN_INVENTORY_DIALOG: (context) =>
-              const StockInventoryBarCodeDialog(),
+              stockInventoryBarCodeDialogData != null
+                  ? StockInventoryBarCodeDialog(
+                      data: stockInventoryBarCodeDialogData)
+                  : const StockInventoryBarCodeDialog(),
+          // Add more screen routes
         },
       ),
     );

@@ -29,6 +29,9 @@ import 'package:abico_warehouse/models/screen%20args/stock_inventory_line_args.d
 import 'package:abico_warehouse/models/screen%20args/stock_picking_detail_args.dart';
 
 class StockInventoryDetailScreen extends StatefulWidget {
+  final dynamic data;
+  const StockInventoryDetailScreen({Key key, this.data}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _StockInventoryDetailScreenState();
@@ -561,36 +564,51 @@ class _StockInventoryDetailScreenState
   }
 
   Widget _buildButton() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              print('end map irnee $someMap');
-              _scan();
-            },
-            child: const Text(
-              'Тоо ширхэг',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
+    return BlocBuilder(
+      bloc: _inventoryLineListBloc,
+      builder: (_, state) {
+        final bool isLoading = state is StockInventoryLineLoading;
+
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton(
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        print('end map irnee $someMap');
+                        _scan();
+                      },
+                child: const Text(
+                  'Тоо ширхэг',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        print('end map irnee $someMap');
+                        _scanPlus();
+                      },
+                child: const Text(
+                  'Хайрцаг',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              print('end map irnee $someMap');
-              _scanPlus();
-            },
-            child: const Text(
-              'Хайрцаг',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

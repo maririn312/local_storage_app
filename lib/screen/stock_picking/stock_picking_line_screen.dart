@@ -19,8 +19,10 @@ import '../../data/blocs/put/stock_picking_is_checked_put_bloc.dart';
 
 class StockPickingLineScreen extends StatefulWidget {
   final StockPickingEntity picking;
+  final dynamic data;
 
-  const StockPickingLineScreen({Key key, this.picking}) : super(key: key);
+  const StockPickingLineScreen({Key key, this.picking, this.data})
+      : super(key: key);
 
   @override
   State<StockPickingLineScreen> createState() => StockPickingLineScreenState();
@@ -50,9 +52,9 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _buildLineCardList();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   _buildLineCardList();
+    // });
     getStockPicking();
     refreshForm();
   }
@@ -294,6 +296,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         ElevatedButton(
           onPressed: () {
             setState(() {
+              isLoading = true;
               final StockLocationDetailArg stockpickingArg =
                   ModalRoute.of(context).settings.arguments;
               _stockPickingPutBloc.add(
@@ -311,10 +314,12 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   builder: (_, state) {
                     if (state is StockPickingIsActivePutLoading) {
                       return Center(
-                          child: SizedBox(
-                              height: 70,
-                              width: 70,
-                              child: TengerLoadingIndicator()));
+                        child: SizedBox(
+                          height: 70,
+                          width: 70,
+                          child: TengerLoadingIndicator(),
+                        ),
+                      );
                     } else if (state is StockPickingIsActivePutLoaded) {
                       stateUtgaAvn = state.responseDto.isChecked;
                       return (state.responseDto.isChecked == 'half_checked')
@@ -348,11 +353,27 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                   ),
                 ],
               ),
-            );
+            ).whenComplete(() {
+              setState(() {
+                isLoading = false;
+              });
+            });
           },
           child: const Text(
             Language.CHECK,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          // Disable the button when loading
+          // or use 'ElevatedButton.icon' and customize the icon based on the loading status
+          // by checking the 'isLoading' variable
+          // Example: icon: isLoading ? CircularProgressIndicator() : Icon(Icons.check),
+          // You can also set 'style: ElevatedButton.styleFrom(enableFeedback: isLoading ? false : true),'
+          // to disable the button feedback when loading
+          style: ElevatedButton.styleFrom(
+            enableFeedback: !isLoading,
           ),
         ),
         ElevatedButton(
@@ -361,7 +382,15 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
           },
           child: const Text(
             'Нэгээр',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          // Disable the button when loading
+          // style: ElevatedButton.styleFrom(enableFeedback: isLoading ? false : true),
+          style: ElevatedButton.styleFrom(
+            enableFeedback: !isLoading,
           ),
         ),
         ElevatedButton(
@@ -370,7 +399,15 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
           },
           child: const Text(
             'Олноор',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          // Disable the button when loading
+          // style: ElevatedButton.styleFrom(enableFeedback: isLoading ? false : true),
+          style: ElevatedButton.styleFrom(
+            enableFeedback: !isLoading,
           ),
         ),
       ],
@@ -381,39 +418,35 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
 
   Future<void> _scan() async {
     String barcodeScanRes;
+    bool barcodeFound = false; // Flag to track if the barcode is found
+
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      for (var v in someMap.values) {
-        print('end mapiin urt irnee ${someMap.keys.first}');
-        print('end mapiin urt irnee ${someMap.length}');
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,
+      );
 
-        print('end barcode irnee $barcodeScanRes');
-        print('barcode hevlene $v');
-        print('end urt hevlene ${stockMoveLine.length}');
+      final foundLine = stockMoveLine.firstWhere(
+        (line) =>
+            line.id ==
+            someMap.keys.firstWhere(
+              (key) => someMap[key] == barcodeScanRes,
+              orElse: () => null,
+            ),
+        orElse: () => null,
+      );
+
+      if (foundLine != null) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return StockPickingDialog(note: foundLine);
+          },
+        );
+        barcodeFound = true; // Set the flag to true if barcode is found
       }
-      someMap.forEach((i, value) async {
-        if (barcodeScanRes == value) {
-          for (int z = 0; z < stockMoveLine.length; z++) {
-            if (stockMoveLine[z].id == i) {
-              await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return StockPickingDialog(note: stockMoveLine[z]);
-                  });
-            }
-
-            refreshForm();
-          }
-        } else {
-          Fluttertoast.showToast(
-            msg: 'Бараа олдсоггүй',
-            backgroundColor: Colors.red,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-          );
-        }
-      });
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -421,6 +454,15 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
     if (!mounted) return;
 
     setState(() {});
+
+    if (!barcodeFound) {
+      Fluttertoast.showToast(
+        msg: 'Бараа олдсоггүй',
+        backgroundColor: Colors.red,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
   }
 
 //bar code unshuulj negeer nemhed eniig ashgiulnaa
@@ -428,65 +470,73 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
     String barcodeScanRes;
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      // for (var v in someMap.values) {
-      //   print(v);
-      // }
-      someMap.forEach((i, value) async {
-        if (barcodeScanRes == value) {
-          for (int z = 0; z < stockMoveLine.length; z++) {
-            if (stockMoveLine[z].id == i) {
-              int checkQty = stockMoveLine[z].checkQty.toInt();
-              int too = checkQty + 1;
-              if (stockMoveLine[z].productUomQty >= too) {
-                await DBProvider.db.updateStockMoveLine(StockMoveLineEntity(
-                  id: stockMoveLine[z].id,
-                  productId: stockMoveLine[z].productId,
-                  descriptionPicking: stockMoveLine[z].descriptionPicking,
-                  dateExpected: stockMoveLine[z].dateExpected,
-                  quantityDone: stockMoveLine[z].quantityDone,
-                  productUom: stockMoveLine[z].productUom,
-                  productUomQty: stockMoveLine[z].productUomQty,
-                  pickingId: stockMoveLine[z].pickingId,
-                  checkQty: too.toDouble(),
-                  diffQty: stockMoveLine[z].diffQty,
-                  barcode: stockMoveLine[z].barcode,
-                  productName: stockMoveLine[z].productName,
-                ));
-                _stockMovePutBloc.add(
-                  StockMovePut(
-                    ip: '49.0.129.18:9393',
-                    id: stockMoveLine[z].id.toString(),
-                    time: too.toString(),
-                  ),
-                );
-                Fluttertoast.showToast(
-                  msg: 'Барааг амжилттай нэмэгдлээ',
-                  backgroundColor: Colors.green,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                );
-              } else {
-                Fluttertoast.showToast(
-                  msg: 'Барааг нэгээр нэмэх боломжгүй байна',
-                  backgroundColor: Colors.red,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                );
-              }
-            }
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,
+      );
 
-            refreshForm();
-          }
+      final foundLine = stockMoveLine.firstWhere(
+        (line) =>
+            line.id ==
+            someMap.keys.firstWhere(
+              (key) => someMap[key] == barcodeScanRes,
+              orElse: () => null,
+            ),
+        orElse: () => null,
+      );
+
+      if (foundLine != null) {
+        int checkQty = foundLine.checkQty.toInt();
+        int too = checkQty + 1;
+        if (foundLine.productUomQty >= too) {
+          await DBProvider.db.updateStockMoveLine(
+            StockMoveLineEntity(
+              id: foundLine.id,
+              productId: foundLine.productId,
+              descriptionPicking: foundLine.descriptionPicking,
+              dateExpected: foundLine.dateExpected,
+              quantityDone: foundLine.quantityDone,
+              productUom: foundLine.productUom,
+              productUomQty: foundLine.productUomQty,
+              pickingId: foundLine.pickingId,
+              checkQty: too.toDouble(),
+              diffQty: foundLine.diffQty,
+              barcode: foundLine.barcode,
+              productName: foundLine.productName,
+            ),
+          );
+
+          _stockMovePutBloc.add(
+            StockMovePut(
+              ip: '49.0.129.18:9393',
+              id: foundLine.id.toString(),
+              time: too.toString(),
+            ),
+          );
+
+          Fluttertoast.showToast(
+            msg: 'Барааг амжилттай нэмэгдлээ',
+            backgroundColor: Colors.green,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+          );
         } else {
           Fluttertoast.showToast(
-            msg: 'Бараа олдсоггүй',
+            msg: 'Барааг нэгээр нэмэх боломжгүй байна',
             backgroundColor: Colors.red,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
           );
         }
-      });
+      } else {
+        Fluttertoast.showToast(
+          msg: 'Бараа олдсоггүй',
+          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+        );
+      }
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -501,6 +551,7 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
     double height = MediaQuery.of(context).size.height - 385;
     final StockLocationDetailArg stockpickingArg =
         ModalRoute.of(context).settings.arguments;
+
     if (stockMoveLine.isEmpty) {
       for (int i = 0; i < stockMoveLineData.length; i++) {
         if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
@@ -514,82 +565,99 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
         }
       }
     } else {
-      stockMoveLine.clear();
-      for (int i = 0; i < stockMoveLineData.length; i++) {
-        if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
-          setState(() {
+      setState(() {
+        stockMoveLine.clear();
+        for (int i = 0; i < stockMoveLineData.length; i++) {
+          if (stockpickingArg.result.id == stockMoveLineData[i].pickingId) {
             stockMoveLine.add(stockMoveLineData[i]);
             for (int s = 0; s < stockMoveLine.length; s++) {
               someMap[stockMoveLine[s].id] = stockMoveLine[s].barcode;
             }
-          });
+          }
         }
-      }
+      });
     }
 
     return SingleChildScrollView(
       child: SizedBox(
         height: height,
         child: ListView.builder(
-            itemCount: searchMoveLine.length,
-            itemBuilder: (_, index) {
-              return Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(),
-                  ),
+          itemCount: searchMoveLine.length,
+          itemBuilder: (_, index) {
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(right: BorderSide()),
-                              ),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                searchMoveLine[index].productName.toString() ??
-                                    'Хоосон',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.start,
-                              )),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(right: BorderSide()),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            searchMoveLine[index].productName.toString() ??
+                                'Хоосон',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
                         ),
-                        Expanded(
-                          child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(right: BorderSide()),
-                              ),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                searchMoveLine[index]
-                                        .productUomQty
-                                        .toString() ??
-                                    'Хоосон',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.end,
-                              )),
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(right: BorderSide()),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            searchMoveLine[index].productUomQty.toString() ??
+                                'Хоосон',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
                         ),
-                        (searchMoveLine[index].checkQty ==
-                                searchMoveLine[index].productUomQty)
-                            ? Expanded(
-                                child: Container(
+                      ),
+                      (searchMoveLine[index].checkQty ==
+                              searchMoveLine[index].productUomQty)
+                          ? Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  searchMoveLine[index].checkQty.toString() ??
+                                      'Хоосон',
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            )
+                          : (searchMoveLine[index].checkQty <=
+                                  searchMoveLine[index].productUomQty)
+                              ? Expanded(
+                                  child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     child: Text(
@@ -598,52 +666,39 @@ class StockPickingLineScreenState extends State<StockPickingLineScreen> {
                                               .toString() ??
                                           'Хоосон',
                                       style: const TextStyle(
-                                          color: Colors.green,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
+                                        color: Colors.blue,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       textAlign: TextAlign.end,
-                                    )),
-                              )
-                            : (searchMoveLine[index].checkQty <=
-                                    searchMoveLine[index].productUomQty)
-                                ? Expanded(
-                                    child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Text(
-                                          searchMoveLine[index]
-                                                  .checkQty
-                                                  .toString() ??
-                                              'Хоосон',
-                                          style: const TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.end,
-                                        )),
-                                  )
-                                : Expanded(
-                                    child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Text(
-                                          searchMoveLine[index]
-                                                  .checkQty
-                                                  .toString() ??
-                                              'Хоосон',
-                                          style: const TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.end,
-                                        )),
+                                    ),
                                   ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }),
+                                )
+                              : Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Text(
+                                      searchMoveLine[index]
+                                              .checkQty
+                                              .toString() ??
+                                          'Хоосон',
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                    ),
+                                  ),
+                                ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

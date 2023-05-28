@@ -7,7 +7,8 @@ import 'package:abico_warehouse/models/screen%20args/stock_inventory_line_args.d
 import 'package:fluttertoast/fluttertoast.dart';
 
 class InventoryProductqtyDialog extends StatefulWidget {
-  const InventoryProductqtyDialog({Key key}) : super(key: key);
+  final dynamic data;
+  const InventoryProductqtyDialog({Key key, this.data}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
