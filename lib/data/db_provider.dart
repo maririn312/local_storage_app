@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_entity.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';

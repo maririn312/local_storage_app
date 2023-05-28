@@ -1,7 +1,7 @@
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/partner/partner_api_client.dart';
-import 'package:abico_warehouse/models/dto/partner/partner_response_dto.dart';
-import 'package:abico_warehouse/models/entity/partner_entity/partner_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/partner/partner_api_client.dart';
+import 'package:local_storage_app/models/dto/partner/partner_response_dto.dart';
+import 'package:local_storage_app/models/entity/partner_entity/partner_entity.dart';
 import 'package:flutter/foundation.dart';
 
 class PartnerRepository {

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/stock_picking/stock_picking_api_client.dart';
-import 'package:abico_warehouse/models/dto/stock_picking/stock_picking_dto.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/stock_picking/stock_picking_api_client.dart';
+import 'package:local_storage_app/models/dto/stock_picking/stock_picking_dto.dart';
+import 'package:local_storage_app/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
 
 class StockPickingRepository {
   final StockPickingApiClient stockPickingApiClient;

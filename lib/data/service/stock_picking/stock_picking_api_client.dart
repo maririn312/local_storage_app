@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:abico_warehouse/models/dto/stock_picking/stock_picking_dto.dart';
+import 'package:local_storage_app/models/dto/stock_picking/stock_picking_dto.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../exceptions/bad_response_exception.dart';

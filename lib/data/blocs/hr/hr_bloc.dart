@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/hr/hr_repo.dart';
-import 'package:abico_warehouse/data/service/hr/hr_api_client.dart';
+import 'package:local_storage_app/data/repository/hr/hr_repo.dart';
+import 'package:local_storage_app/data/service/hr/hr_api_client.dart';
 
 import '../../../exceptions/exception_manager.dart';
 import '../../../models/dto/hr/hr_response_dto.dart';

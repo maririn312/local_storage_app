@@ -2,12 +2,12 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/category/category_repo.dart';
-import 'package:abico_warehouse/data/service/category/category_api_client.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/category/category_response_dto.dart';
+import 'package:local_storage_app/data/repository/category/category_repo.dart';
+import 'package:local_storage_app/data/service/category/category_api_client.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/exceptions/request_timeout_exception.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/dto/category/category_response_dto.dart';
 
 // ====================== GIFT EVENT ========================= //
 abstract class CategoryEvent extends Equatable {}

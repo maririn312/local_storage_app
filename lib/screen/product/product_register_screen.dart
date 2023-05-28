@@ -5,12 +5,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/componenets/search_widget.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
-import 'package:abico_warehouse/models/screen%20args/product_register_detail_args.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/componenets/search_widget.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
+import 'package:local_storage_app/models/screen%20args/product_register_detail_args.dart';
 
 class ProductRegisterScreen extends StatefulWidget {
   final dynamic data;

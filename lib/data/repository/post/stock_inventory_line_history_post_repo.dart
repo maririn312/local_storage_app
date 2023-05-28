@@ -2,8 +2,8 @@
 // ignore_for_file: file_names, duplicate_ignore
 
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/service/post/stock_inventory_line_history_post_client.dart';
-import 'package:abico_warehouse/models/dto/put/message_response_dto.dart';
+import 'package:local_storage_app/data/service/post/stock_inventory_line_history_post_client.dart';
+import 'package:local_storage_app/models/dto/put/message_response_dto.dart';
 
 class StockInventoryLineHistoryPostRepository {
   final StockInventoryLineHistoryPostApiClient

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/componenets/tenger_error.dart';
-import 'package:abico_warehouse/componenets/tenger_loading_indicator.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/componenets/tenger_error.dart';
+import 'package:local_storage_app/componenets/tenger_loading_indicator.dart';
 
-import 'package:abico_warehouse/data/blocs/category/category_bloc.dart';
-import 'package:abico_warehouse/utils/tenger_global.dart';
+import 'package:local_storage_app/data/blocs/category/category_bloc.dart';
+import 'package:local_storage_app/utils/tenger_global.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

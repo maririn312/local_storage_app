@@ -2,10 +2,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/comapny/res_company_repo.dart';
-import 'package:abico_warehouse/data/service/comapny/res_company_api_client_detail.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/models/dto/company/res_company_dto.dart';
+import 'package:local_storage_app/data/repository/comapny/res_company_repo.dart';
+import 'package:local_storage_app/data/service/comapny/res_company_api_client_detail.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/models/dto/company/res_company_dto.dart';
 
 abstract class ResCompanyEvent extends Equatable {}
 

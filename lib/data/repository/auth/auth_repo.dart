@@ -1,10 +1,10 @@
 // ignore_for_file: unnecessary_parenthesis, unused_local_variable, non_constant_identifier_names, avoid_print, deprecated_member_use
 
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/auth/auth_api_client.dart';
-import 'package:abico_warehouse/models/dto/auth/auth_response_dto.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
-import 'package:abico_warehouse/utils/api_utility.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/auth/auth_api_client.dart';
+import 'package:local_storage_app/models/dto/auth/auth_response_dto.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_entity.dart';
+import 'package:local_storage_app/utils/api_utility.dart';
 
 class AuthRepository {
   final AuthApiClient authApiClient;

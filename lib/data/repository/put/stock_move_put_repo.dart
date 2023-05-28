@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/service/put/stock_move_put_api_client.dart';
-import 'package:abico_warehouse/models/dto/put/message_response_dto.dart';
+import 'package:local_storage_app/data/service/put/stock_move_put_api_client.dart';
+import 'package:local_storage_app/models/dto/put/message_response_dto.dart';
 
 class StockMovePutRepository {
   final StockMovePutApiClient stockMovePutApiClient;

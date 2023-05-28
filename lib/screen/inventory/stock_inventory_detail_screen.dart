@@ -1,32 +1,32 @@
 // ignore_for_file: use_key_in_widget_constructors, unused_local_variable, unused_import, unused_element, avoid_unnecessary_containers, sized_box_for_whitespace, missing_return, avoid_print, curly_braces_in_flow_control_structures, unrelated_type_equality_checks
 
-import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_entity.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_detail_entity.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_entity.dart';
+import 'package:local_storage_app/models/entity/stock_entity/inventory/stock_inventory_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:abico_warehouse/models/dto/inventory/stock_inventory_line_response_dto.dart';
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/componenets/alert_dialog/stock_inventroy_barcode_dialog.dart';
-import 'package:abico_warehouse/componenets/alert_dialog/stock_inventroy_barcode_multiply_dialog.dart';
-import 'package:abico_warehouse/componenets/search_widget.dart';
-import 'package:abico_warehouse/componenets/tenger_error.dart';
-import 'package:abico_warehouse/componenets/tenger_loading_indicator.dart';
-import 'package:abico_warehouse/componenets/tenger_notif_tile.dart';
-import 'package:abico_warehouse/componenets/tenger_outline_button.dart';
-import 'package:abico_warehouse/data/blocs/inventory/stock_inventory_bloc.dart';
-import 'package:abico_warehouse/data/blocs/inventory/stock_inventory_line_bloc.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
-import 'package:abico_warehouse/models/screen%20args/stock_inventory_detail_args.dart';
-import 'package:abico_warehouse/models/screen%20args/stock_inventory_line_args.dart';
-import 'package:abico_warehouse/models/screen%20args/stock_picking_detail_args.dart';
+import 'package:local_storage_app/models/dto/inventory/stock_inventory_line_response_dto.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/componenets/alert_dialog/stock_inventroy_barcode_dialog.dart';
+import 'package:local_storage_app/componenets/alert_dialog/stock_inventroy_barcode_multiply_dialog.dart';
+import 'package:local_storage_app/componenets/search_widget.dart';
+import 'package:local_storage_app/componenets/tenger_error.dart';
+import 'package:local_storage_app/componenets/tenger_loading_indicator.dart';
+import 'package:local_storage_app/componenets/tenger_notif_tile.dart';
+import 'package:local_storage_app/componenets/tenger_outline_button.dart';
+import 'package:local_storage_app/data/blocs/inventory/stock_inventory_bloc.dart';
+import 'package:local_storage_app/data/blocs/inventory/stock_inventory_line_bloc.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
+import 'package:local_storage_app/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
+import 'package:local_storage_app/models/screen%20args/stock_inventory_detail_args.dart';
+import 'package:local_storage_app/models/screen%20args/stock_inventory_line_args.dart';
+import 'package:local_storage_app/models/screen%20args/stock_picking_detail_args.dart';
 
 class StockInventoryDetailScreen extends StatefulWidget {
   final dynamic data;

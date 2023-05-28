@@ -2,10 +2,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/auth/auth_repo.dart';
-import 'package:abico_warehouse/data/service/auth/auth_api_client.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/models/dto/auth/auth_response_dto.dart';
+import 'package:local_storage_app/data/repository/auth/auth_repo.dart';
+import 'package:local_storage_app/data/service/auth/auth_api_client.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/models/dto/auth/auth_response_dto.dart';
 
 // ====================== AUTH EVENT ========================= //
 abstract class AuthEvent extends Equatable {}

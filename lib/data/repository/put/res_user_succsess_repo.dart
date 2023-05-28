@@ -2,8 +2,8 @@
 // ignore_for_file: file_names, duplicate_ignore
 
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/service/put/res_user_succses_client.dart';
-import 'package:abico_warehouse/models/dto/put/message_response_dto.dart';
+import 'package:local_storage_app/data/service/put/res_user_succses_client.dart';
+import 'package:local_storage_app/models/dto/put/message_response_dto.dart';
 
 class ResUserSuccessfulPutRepository {
   final ResUserSuccessfulPutApiClient resUserSuccessfulPutApiClient;

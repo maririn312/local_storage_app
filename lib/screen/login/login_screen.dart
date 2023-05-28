@@ -1,15 +1,15 @@
 // ignore_for_file: avoid_print, prefer_final_fields, unused_field, unused_import, deprecated_member_use, prefer_const_literals_to_create_immutables, duplicate_ignore
 
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/componenets/tenger_input.dart';
-import 'package:abico_warehouse/componenets/tenger_outline_button.dart';
-import 'package:abico_warehouse/data/blocs/auth/auth_bloc.dart';
-import 'package:abico_warehouse/data/blocs/hr/hr_bloc.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
-import 'package:abico_warehouse/models/screen%20args/auth_args.dart';
-import 'package:abico_warehouse/utils/tenger_utility.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/componenets/tenger_input.dart';
+import 'package:local_storage_app/componenets/tenger_outline_button.dart';
+import 'package:local_storage_app/data/blocs/auth/auth_bloc.dart';
+import 'package:local_storage_app/data/blocs/hr/hr_bloc.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_detail_entity.dart';
+import 'package:local_storage_app/models/screen%20args/auth_args.dart';
+import 'package:local_storage_app/utils/tenger_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';

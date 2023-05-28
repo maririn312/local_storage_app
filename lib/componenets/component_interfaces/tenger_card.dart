@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:abico_warehouse/componenets/component_interfaces/tenger_card_interface.dart';
+import 'package:local_storage_app/componenets/component_interfaces/tenger_card_interface.dart';
 
 class TengerCard extends TengerCardInterface {
   const TengerCard({

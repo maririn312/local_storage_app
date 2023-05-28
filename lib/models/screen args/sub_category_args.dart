@@ -1,4 +1,4 @@
-import 'package:abico_warehouse/models/entity/category_entity/category_entity.dart';
+import 'package:local_storage_app/models/entity/category_entity/category_entity.dart';
 
 class SubCategoryArg {
   final String ip;

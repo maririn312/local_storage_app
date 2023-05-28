@@ -2,7 +2,7 @@
 // ignore_for_file: prefer_if_null_operators, duplicate_ignore
 
 import 'package:flutter/material.dart';
-import 'package:abico_warehouse/componenets/component_interfaces/tenger_message_interface.dart';
+import 'package:local_storage_app/componenets/component_interfaces/tenger_message_interface.dart';
 
 class TengerMessage extends TengerMessageInterface {
   final double fontSize;

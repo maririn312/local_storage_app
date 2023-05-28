@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/stock_picking/stock_location_repo.dart';
-import 'package:abico_warehouse/data/service/stock_picking/stock_location_api_client.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/stock_picking/stock_location_response_dto.dart';
+import 'package:local_storage_app/data/repository/stock_picking/stock_location_repo.dart';
+import 'package:local_storage_app/data/service/stock_picking/stock_location_api_client.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/exceptions/request_timeout_exception.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/dto/stock_picking/stock_location_response_dto.dart';
 
 abstract class StockLocationEvent extends Equatable {}
 

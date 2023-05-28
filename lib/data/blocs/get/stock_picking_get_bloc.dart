@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/get/stock_picking_get_repo.dart';
-import 'package:abico_warehouse/data/service/get/stock_picking_get_api_client%20.dart';
-import 'package:abico_warehouse/models/dto/get/stock_picking_get_dto_detail.dart';
+import 'package:local_storage_app/data/repository/get/stock_picking_get_repo.dart';
+import 'package:local_storage_app/data/service/get/stock_picking_get_api_client%20.dart';
+import 'package:local_storage_app/models/dto/get/stock_picking_get_dto_detail.dart';
 
 import '../../../exceptions/exception_manager.dart';
 

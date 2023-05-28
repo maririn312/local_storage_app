@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/componenets/search_widget.dart';
-// import 'package:abico_warehouse/data/blocs/stock_picking/stock_picking_bloc.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
-import 'package:abico_warehouse/models/screen%20args/stock_picking_args.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/componenets/search_widget.dart';
+// import 'package:local_storage_app/data/blocs/stock_picking/stock_picking_bloc.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
+import 'package:local_storage_app/models/screen%20args/stock_picking_args.dart';
 
 class StockPickingScreen extends StatefulWidget {
   final dynamic data;

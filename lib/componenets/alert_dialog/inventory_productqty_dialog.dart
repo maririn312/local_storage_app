@@ -1,9 +1,9 @@
 // ignore_for_file: unused_field, unused_local_variable, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
-import 'package:abico_warehouse/models/screen%20args/stock_inventory_line_args.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
+import 'package:local_storage_app/models/screen%20args/stock_inventory_line_args.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class InventoryProductqtyDialog extends StatefulWidget {

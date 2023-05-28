@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:abico_warehouse/app_types.dart';
-import 'package:abico_warehouse/models/screen%20args/barcode_args.dart';
-import 'package:abico_warehouse/screen/dashboard/tabs/category_tab.dart';
-import 'package:abico_warehouse/screen/dashboard/tabs/settings_tab.dart';
+import 'package:local_storage_app/app_types.dart';
+import 'package:local_storage_app/models/screen%20args/barcode_args.dart';
+import 'package:local_storage_app/screen/dashboard/tabs/category_tab.dart';
+import 'package:local_storage_app/screen/dashboard/tabs/settings_tab.dart';
 
 import '../../language.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/product/stock_product_register_api_client.dart';
-import 'package:abico_warehouse/models/dto/product/stock_product_register_response_dto.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/product/stock_product_register_api_client.dart';
+import 'package:local_storage_app/models/dto/product/stock_product_register_response_dto.dart';
+import 'package:local_storage_app/models/entity/stock_entity/product_entity/stock_product_register_entity.dart';
 
 class StockProductRegisterRepository {
   final StockProductRegisterApiClient stockProductRegisterApiClient;

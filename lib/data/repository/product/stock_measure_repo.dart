@@ -1,7 +1,7 @@
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/product/stock_measure_api_client.dart';
-import 'package:abico_warehouse/models/dto/product/stock_measure_response_dto.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_measure_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/product/stock_measure_api_client.dart';
+import 'package:local_storage_app/models/dto/product/stock_measure_response_dto.dart';
+import 'package:local_storage_app/models/entity/stock_entity/stock_measure_entity.dart';
 import 'package:flutter/foundation.dart';
 
 class StockMeasureRepository {

@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_if_null_operators, unnecessary_this, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:abico_warehouse/componenets/tenger_loading_indicator.dart';
+import 'package:local_storage_app/componenets/tenger_loading_indicator.dart';
 //import 'package:tenger_app/components/tenger_loading_indicator.dart';
 
 import 'component_interfaces/tenger_button_interface.dart';

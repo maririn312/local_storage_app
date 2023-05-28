@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
 
 import '../language.dart';
 

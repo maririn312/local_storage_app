@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/inventory/stock_inventory_line_api_client.dart';
-import 'package:abico_warehouse/models/dto/inventory/stock_inventory_line_response_dto.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/inventory/stock_inventory_line_api_client.dart';
+import 'package:local_storage_app/models/dto/inventory/stock_inventory_line_response_dto.dart';
+import 'package:local_storage_app/models/entity/stock_entity/inventory/stock_inventory_line_entity.dart';
 
 class StockInventoryLineRepository {
   final StockInventoryLineApiClient stockInventoryLineApiClient;

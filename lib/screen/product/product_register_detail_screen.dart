@@ -4,9 +4,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/screen%20args/product_register_detail_args.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/screen%20args/product_register_detail_args.dart';
 
 class ProductRegisterDetailScreen extends StatefulWidget {
   final dynamic data;

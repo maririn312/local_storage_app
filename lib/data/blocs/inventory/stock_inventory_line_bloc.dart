@@ -2,10 +2,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/inventory/stock_inventory_line_repo.dart';
-import 'package:abico_warehouse/data/service/inventory/stock_inventory_line_api_client.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/models/dto/inventory/stock_inventory_line_response_dto.dart';
+import 'package:local_storage_app/data/repository/inventory/stock_inventory_line_repo.dart';
+import 'package:local_storage_app/data/service/inventory/stock_inventory_line_api_client.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/models/dto/inventory/stock_inventory_line_response_dto.dart';
 
 abstract class StockInventoryLineEvent extends Equatable {}
 

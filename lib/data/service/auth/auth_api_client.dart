@@ -5,10 +5,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
-import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/auth/auth_response_dto.dart';
+import 'package:local_storage_app/exceptions/bad_response_exception.dart';
+import 'package:local_storage_app/exceptions/request_timeout_exception.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/dto/auth/auth_response_dto.dart';
 
 class AuthApiClient {
   /* ============================================================================ */

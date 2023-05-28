@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/data/repository/partner/res_user_repo.dart';
-import 'package:abico_warehouse/data/service/partner/res_user_api_client.dart';
-import 'package:abico_warehouse/exceptions/exception_manager.dart';
-import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/partner/res_user_dto.dart';
+import 'package:local_storage_app/data/repository/partner/res_user_repo.dart';
+import 'package:local_storage_app/data/service/partner/res_user_api_client.dart';
+import 'package:local_storage_app/exceptions/exception_manager.dart';
+import 'package:local_storage_app/exceptions/request_timeout_exception.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/dto/partner/res_user_dto.dart';
 
 // ====================== ResUser EVENT ========================= //
 abstract class ResUserEvent extends Equatable {}

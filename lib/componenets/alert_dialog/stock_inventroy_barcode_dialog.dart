@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:abico_warehouse/data/blocs/post/stock_inventory_line_history_post_bloc.dart';
-import 'package:abico_warehouse/data/blocs/put/stock_inventory_line_put_bloc.dart';
-import 'package:abico_warehouse/models/dto/inventory/stock_inventory_line_response_dto.dart';
+import 'package:local_storage_app/data/blocs/post/stock_inventory_line_history_post_bloc.dart';
+import 'package:local_storage_app/data/blocs/put/stock_inventory_line_put_bloc.dart';
+import 'package:local_storage_app/models/dto/inventory/stock_inventory_line_response_dto.dart';
 
 class StockInventoryBarCodeDialog extends StatefulWidget {
   final StockInventoryLineResult note;

@@ -1,7 +1,7 @@
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/data/service/comapny/res_company_api_client_detail.dart';
-import 'package:abico_warehouse/models/dto/company/res_company_dto.dart';
-import 'package:abico_warehouse/models/entity/company_entity/company_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/data/service/comapny/res_company_api_client_detail.dart';
+import 'package:local_storage_app/models/dto/company/res_company_dto.dart';
+import 'package:local_storage_app/models/entity/company_entity/company_entity.dart';
 import 'package:flutter/material.dart';
 
 class ResCompanyRepository {

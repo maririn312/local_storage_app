@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:abico_warehouse/componenets/tenger_error.dart';
-import 'package:abico_warehouse/componenets/tenger_loading_indicator.dart';
-import 'package:abico_warehouse/data/blocs/put/stock_move_put_bloc.dart';
-import 'package:abico_warehouse/data/blocs/put/stock_picking_is_checked_put_bloc.dart';
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_move_entity.dart';
-import 'package:abico_warehouse/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
+import 'package:local_storage_app/componenets/tenger_error.dart';
+import 'package:local_storage_app/componenets/tenger_loading_indicator.dart';
+import 'package:local_storage_app/data/blocs/put/stock_move_put_bloc.dart';
+import 'package:local_storage_app/data/blocs/put/stock_picking_is_checked_put_bloc.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/models/entity/stock_entity/stock_picking_entity/stock_move_entity.dart';
+import 'package:local_storage_app/models/entity/stock_entity/stock_picking_entity/stock_picking_entity.dart';
 
 class StockPickingBlocDialog extends StatefulWidget {
   final StockPickingEntity note;

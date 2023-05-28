@@ -5,14 +5,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'package:abico_warehouse/data/db_provider.dart';
-import 'package:abico_warehouse/exceptions/bad_response_exception.dart';
-import 'package:abico_warehouse/exceptions/request_timeout_exception.dart';
-import 'package:abico_warehouse/language.dart';
-import 'package:abico_warehouse/models/dto/get/stock_picking_get_dto_detail.dart';
-import 'package:abico_warehouse/models/dto/put/message_response_dto.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_detail_entity.dart';
-import 'package:abico_warehouse/models/entity/auth_entity/user_entity.dart';
+import 'package:local_storage_app/data/db_provider.dart';
+import 'package:local_storage_app/exceptions/bad_response_exception.dart';
+import 'package:local_storage_app/exceptions/request_timeout_exception.dart';
+import 'package:local_storage_app/language.dart';
+import 'package:local_storage_app/models/dto/get/stock_picking_get_dto_detail.dart';
+import 'package:local_storage_app/models/dto/put/message_response_dto.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_detail_entity.dart';
+import 'package:local_storage_app/models/entity/auth_entity/user_entity.dart';
 
 class StockPickingGetApiClient {
   Future<StockPickingGetResult> getStockPickingGetList(

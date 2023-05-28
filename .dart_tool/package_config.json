@@ -530,13 +530,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "abico_warehouse",
+      "name": "local_storage_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2023-05-28T17:57:10.790685Z",
+  "generated": "2023-05-28T18:28:32.213372Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
